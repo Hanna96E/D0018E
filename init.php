@@ -3,7 +3,7 @@ $servername = "utbweb.its.ltu.se";
 $username = "19970225";
 $password = "19970225";
 $databas = "db19970225";
- 
+
 // Create connection
 $conn = new mysqli($servername, $username, $password, $databas);
 
