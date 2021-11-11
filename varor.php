@@ -29,7 +29,7 @@ $('[data-toggle="tooltip"]').tooltip();
 <h2 class="pull-left">Products</h2>
 </div>
 <?php
-$host='localhost';
+$host='utbweb.its.ltu.se';
     $username='19970225';
     $password='19970225';
     $dbname = "db19970225";
