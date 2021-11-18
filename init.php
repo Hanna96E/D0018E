@@ -13,6 +13,4 @@ if ($conn->connect_error) {
 }
 echo "Connected successfully";
 
-?> 
-<p>We got it working</p>
-<p> mvh Bella </p>
+?>
