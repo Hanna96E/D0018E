@@ -26,8 +26,19 @@ $('[data-toggle="tooltip"]').tooltip();
 <div class="row">
 <div class="col-md-12">
 <div class="page-header clearfix">
-<h2 class="pull-left">Log in to account</h2>
+<h2 class="pull-left">Log in to account </h2>
+<h4><a href="index.html"><button> Home </button></a></h4>
 </div>
+
+
+
+<form action="/check_account.php" method="post">
+  <label for="email">Email: </label><br>
+  <input type="text" id="email" name="email"><br>
+  <label for="password">Password: </label><br>
+  <input type="password" id="password" name="password"><br><br>
+  <input type="submit" value="Enter">
+</form> 
 
 
 </div>
@@ -35,4 +46,5 @@ $('[data-toggle="tooltip"]').tooltip();
 </div>
 </div>
 </body>
+
 </html>

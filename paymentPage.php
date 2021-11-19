@@ -8,14 +8,15 @@
 
 <body>
 	<p>Test</p>
-<?php
-/*
+
+
 	<form action="paymentDone.php" method="get">
 	Adress: <input type="text" name="adress"><br>
 	E-mail: <input type="text" name="email"><br>
 	<input type="submit">
 	</form>
-*/
+
+<?php
 	$adressErr = $emailErr = "";
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
