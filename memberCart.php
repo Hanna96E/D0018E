@@ -42,6 +42,7 @@ switch(userType) {
     $sqlQueryResult = mysqli_query($conn,$sql);
     $row = mysqli_fetch_assoc($sqlQueryResult);
     $orderId = $row["orderId"];
+
    
 ?>
 
@@ -93,9 +94,10 @@ switch(userType) {
                             showDataInsideTableSpecificForMemberCart($conn,$userId,$orderId);
                         ?>
                         </table>
-                        <?php
-                            goToPayButton($conn);
-                        ?>
+                        
+                        <table>                
+                            <td><a href="/paymentPage.php"><button> payy </button></a></td>goToPayButton($conn);
+                        </table>
                     </div>
                 </div>
             </div>
