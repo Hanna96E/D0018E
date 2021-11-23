@@ -39,6 +39,8 @@ switch(userType) {
     $sqlQueryResult = mysqli_query($conn,$sql);
     $row = mysqli_fetch_assoc($sqlQueryResult);
     $orderId = $row["orderId"];
+
+    echo $orderId;
      
 ?>
 
