@@ -117,7 +117,7 @@ while($itemArray = mysqli_fetch_array($itemQuery)) {
 	$endResult = mysqli_query($conn, $sql);
 }
 
-	echo amountArray[2];
+	echo amountArray[1];
 
 
 // Update the users orderId to a new one
