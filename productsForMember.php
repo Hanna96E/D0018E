@@ -4,6 +4,7 @@
     ob_start();
 
     include "functions100.php";
+    include "init.php";
 
     $conn = connect();
     $userId = 1;
@@ -57,6 +58,6 @@
 
 
 <?php
-    disConnect($conn);
+    disconnect($conn);
     ob_end_flush();
 ?>

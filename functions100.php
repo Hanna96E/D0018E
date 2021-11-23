@@ -1,7 +1,7 @@
 <?php
 
 // connection start-----------------------------------------------------------------------------------------------------------
-
+/*
 function connect(){
     $servername = "localhost";
     $username = "gb";
@@ -20,7 +20,7 @@ function connect(){
 
 function disConnect($conn){
     mysqli_close($conn);
-}
+}*/
 
 
 // connection stop------------------------------------------------------------------------------
