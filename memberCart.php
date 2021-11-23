@@ -89,11 +89,7 @@ switch(userType) {
 </table><br><br>
 
                         </div>
-                        <table class='table table-bordered table-striped'>
-                        <?php
-                            showDataInsideTableSpecificForMemberCart($conn,$userId,$orderId);
-                        ?>
-                        </table>
+                        hej
                         
                         <table>                
                             <td><a href="/paymentPage.php"><button> payy </button></a></td>goToPayButton($conn);
