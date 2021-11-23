@@ -22,7 +22,7 @@ function connect(){
 }
 
 // Disconnet from database
-function disConnect($conn){
+function disconnect($conn){
   mysqli_close($conn);
 }
 

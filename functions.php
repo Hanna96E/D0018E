@@ -5,6 +5,7 @@ session_start();
 
 <?php
 
+/*
 function connect(){
     $servername = "localhost";
     $username = "";
@@ -19,11 +20,13 @@ function connect(){
     }
     return $conn;
 }
+*/
 
-
+/*
 function disconnect($conn){
     mysqli_close($conn);
 }
+*/
 
 function login($conn, $email, $password){
 

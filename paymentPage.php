@@ -107,6 +107,6 @@ while($row = mysqli_fetch_array($prodInfo)) {
 
 <?php
 // We are only looking for input on paymentpage
-disConnect($conn);
+disconnect($conn);
 ?>
 </body>

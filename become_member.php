@@ -59,6 +59,7 @@ $('[data-toggle="tooltip"]').tooltip();
 
 <?php
 	include "functions.php";
+	include "init.php";
 	$conn = connect();
 ?>
 
