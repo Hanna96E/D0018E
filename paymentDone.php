@@ -131,35 +131,6 @@ while($itemArray = mysqli_fetch_array($itemQuery)) {
 	echo $userId;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                if (empty($_POST["adress"])) {
-                        $adressErr = "Adress is required";
-			echo $adressErr;
-                } else {
-                        $name = test_input($_POST["adress"]);
-                }
-
-                if (empty($_POST["email"])) {
-                        $emailErr = "Email is required";
-			echo $emailErr;
-                } else {
-                        $email = test_input($_POST["email"]);
-                }
-}*/
 ?>
 
 <body>
