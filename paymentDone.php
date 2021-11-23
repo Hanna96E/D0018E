@@ -66,8 +66,6 @@ switch(userType) {
 	$adress = $_POST["adress"];
 	$email = $_POST["email"];
 
-	echo $adress;
-
 //Create an order table to store the order
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * Note:
@@ -109,24 +107,19 @@ while($itemArray = mysqli_fetch_array($itemQuery)) {
 		echo "Error: Missing product, can't buy that many ";
 	}
 
-//	$newAmount = "47";
-//	echo $newAmount;
-
 	// Updates the database
 	$sql = "UPDATE `products` SET `amount` = $newAmount WHERE `products`.`productId` = $itemArray[productId]";
 	$endResult = mysqli_query($conn, $sql);
 }
 
-	echo amountArray[1];
+	echo $amountArray[1];
 
 
 // Update the users orderId to a new one
 	$newOrderId = $orderId + 1;
-	echo $newOrderId;
 
 	$sqlOrderId = "UPDATE `users` SET `orderId` = $newOrderId WHERE `users`.`userId` = $userId";
 	$orderIdUpdate = mysqli_query($conn, $sqlOrderId);
-	echo $userId;
 }
 
 ?>
