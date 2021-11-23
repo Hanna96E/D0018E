@@ -111,8 +111,8 @@ if (mysqli_num_rows($prodInfo) > 0 && mysqli_num_rows($items) > 0 ) {
 
 <?php
 // Running through and printing the users shopping cart
-while($row = mysqli_fetch_array($prodInfo)) {
-	$amount = mysqli_fetch_array($items);
+while($amount = mysqli_fetch_array($items)) {
+	$row = mysqli_fetch_array($prodInfo);
 ?>	<tr>
 	<td><?php echo $row["name"]; ?></td> <td><?php echo $amount["amount"]; ?></td>
 	<td><img src="<?php echo $row['image']; ?>" style="width:50px;height:50px;"  >
