@@ -40,11 +40,8 @@ switch(userType) {
     $row = mysqli_fetch_assoc($sqlQueryResult);
     $orderId = $row["orderId"];
 
-    echo $orderId;
-     
+//    echo $orderId;     
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -63,10 +60,6 @@ switch(userType) {
 <td><a href="/memberCart.php"><button> View cart </button></a></td>
 <td><a href="/logout.php"><button> Log out </button></a></td>
 </tr>
-
-
-
-
 
 <?php
 
@@ -127,7 +120,12 @@ while($itemArray = mysqli_fetch_array($itemQuery)) {
 
 	$sql = "UPDATE `products` SET `amount` = $newAmount WHERE `products`.`productId` = $itemArray[productId]";
 	$endResult = mysqli_query($conn, $sql);
-}}
+}
+
+// Update the users orderId to a new one
+	$sqlOrderId = "UPDATE `users` SET `orderId` = $orderId+1 WHERE `users`.`userId` = $userId";
+
+}
 
 
 
