@@ -48,22 +48,6 @@ $('[data-toggle="tooltip"]').tooltip();
 });
 </script>
 
-
-<!--MEMBER MENUE BAR-->
-<table>
-<tr>
-<!---<td><?php// echo $row["id"]; ?></td>--->
-<td><a href="/member_start.php"><button> Home </button></a></td>
-<td><a href="/productsForMember.php"><button> View products </button></a></td>
-<td><a href="/memberCart.php"><button> View cart </button></a></td>
-<td><a href="/logout.php"><button> Log out </button></a></td>
-</tr>
-
-
-
-
-
-
 <?php 
 	include "init.php";
 	$conn = connect();
@@ -76,6 +60,18 @@ $('[data-toggle="tooltip"]').tooltip();
 <div class="col-md-12">
 <div class="page-header clearfix">
 <h2 class="pull-left">Payment Page</h2>
+<!--MEMBER MENUE BAR-->
+<table>
+<tr>
+<!---<td><?php// echo $row["id"]; ?></td>--->
+<td><a href="/member_start.php"><button> Home </button></a></td>
+<td><a href="/productsForMember.php"><button> View products </button></a></td>
+<td><a href="/memberCart.php"><button> View cart </button></a></td>
+<td><a href="/logout.php"><button> Log out </button></a></td>
+</tr>
+<br><br>
+
+
 </div>
 
 <?php
