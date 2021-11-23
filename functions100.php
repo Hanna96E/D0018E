@@ -1,26 +1,7 @@
 <?php
 
 // connection start-----------------------------------------------------------------------------------------------------------
-/*
-function connect(){
-    $servername = "localhost";
-    $username = "gb";
-    $password = "Arrug96.";
-    $dbname = "try1";
 
-    // Create connection
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
-    // Check connection
-    if (!$conn) {
-      die("Connection failed: " . mysqli_connect_error());
-    }
-    return $conn;
-}
-
-
-function disConnect($conn){
-    mysqli_close($conn);
-}*/
 
 
 // connection stop------------------------------------------------------------------------------
@@ -563,6 +544,8 @@ function showDataInsideTableSpecificForMemberCart($conn,$userId,$orderId){
 
 
 
+
+
 // specific functions for membersCart.php stop --------------------------------------------------
 
 
@@ -593,7 +576,8 @@ function goToMemberAcountButton($conn){
 
 
 
-// from cart side----------
+// from cart side---------- 
+/*
 function goToProductsForMemberButton($conn){
     $textOnButton = "Products";
     $redirectToString = "productsForMember.php";
@@ -609,7 +593,7 @@ function goToMemberOrderButton($conn){
     $redirectToString = "";
     goToButton($conn,$textOnButton,$redirectToString);
 }
-
+*/
 // specific functions stop-------------------------------------------------------------------------------------------------------------------------
 
 
@@ -679,7 +663,7 @@ function showOneTableInGodMod($conn,$tableName,$primaryKeyColumnNameArray){
     $columnNameToTreatAsImageArray = array("image");
     $columnFunctionName = "changeSimple";
     $additionalSpecificColumnFunctionArgument = "dummy";
-    $booleanRunRowFunction = false;
+    $booleanRunRowFunction = true;
     $rowFunctionName = "deleteRow";
     $additionalSpecificRowFunctionArgument = "dummy";
 

@@ -1,17 +1,52 @@
 
 
 <?php
+    session_start();
     ob_start();
-
-    include "functions100.php";
-    include "init.php";
-
-    $conn = connect();
-    $userId = 1;
-    $orderId = 1;
-   
-
 ?>
+<script>
+
+//check if user is not member
+var userType = '<?=$_SESSION["status"]?>';
+
+switch(userType) {
+    case "admin":
+        window.location.href = "/admin_start.php";
+        break;
+
+    case "distributer":
+        window.location.href = "/distributer_start.php";
+        break;
+
+    case "member":
+        //window.location.href = "/member_start.php";
+        break;
+
+    default:
+        window.location.replace("http://130.240.200.56");
+
+}
+
+</script>
+<?php
+    include "init.php";
+    include "functions100.php";
+    
+    $conn = connect();
+    $userId = $_SESSION["userId"];
+    $userName = $_SESSION["name"];
+    $userStatus = $_SESSION["status"];
+    
+
+    $sql = "SELECT orderId FROM users WHERE userId = $userId";
+    $sqlQueryResult = mysqli_query($conn,$sql);
+    $row = mysqli_fetch_assoc($sqlQueryResult);
+    $orderId = $row["orderId"];
+   
+?>
+
+
+
 
 
 <!DOCTYPE html>
@@ -31,10 +66,7 @@
     <body>
 
         
-        <?php
-            goToMemberCartButton($conn);
-            goToMemberAcountButton($conn);
-        ?>
+        
 
 
         <div class="bs-example">
@@ -43,6 +75,21 @@
                     <div class="col-md-12">
                         <div class="page-header clearfix">
                             <h2 class="pull-left">Products</h2>
+
+
+<!--MEMBER MENUE BAR-->
+<table>
+<tr>
+<!---<td><?php// echo $row["id"]; ?></td>--->
+<td><a href="/member_start.php"><button> Home </button></a></td>
+<td><a href="/productsForMember.php"><button> View products </button></a></td>
+<td><a href="/memberCart.php"><button> View cart </button></a></td>
+<td><a href="/logout.php"><button> Log out </button></a></td>
+</tr>
+</table><br><br>
+
+
+
                         </div>
                         <table class='table table-bordered table-striped'>
                         <?php
