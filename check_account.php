@@ -3,7 +3,6 @@
 session_start();
 ?>
 
-
 <!DOCTYPE html>
 <html>
 
@@ -12,49 +11,66 @@ session_start();
 <?php
 	include "functions.php";
 	$conn = connect();
-	$email = $_POST["email"];
-	$password = $_POST["password"];
+	$email = test_input($_POST["email"]);
+	$password = test_input($_POST["password"]);
 
 ?>
 
 <?php $userType = login($conn, $email, $password);
 
-	if ($userType == "admin"){
-		echo "This is the admin";
-	}
-	if ($userType == "member"){
-		echo "This is a member";
-	}
+	// set session variables, Name, UID and userType.
+	setSessionUser($conn, $email);
 
-	if ($userType == false){
-		echo "Wrong email or paassword";
-	}
-
-	if ($userType == "error"){
-		echo "Something is seriously wrong...";
-
-	}
-
-
-	$sql = "SELECT userId, name FROM users WHERE email = '$email'";
-	$result = mysqli_query($conn, $sql);
-
-	$row = mysqli_fetch_assoc($result);
-
-	$_SESSION["userId"] = $row["userId"];
-	$_SESSION["name"] = $row["name"];
+	disconnect($conn);
 	
-	echo $_SESSION["userId"], "!!!!!!!!!!!!!!!";
-	echo $_SESSION["name"], "YES";
-
-	session_unset();
-
 ?>
 
+
+<script>
+	//Check what type of user
+var userType = '<?=$_SESSION["status"]?>';
+
+switch(userType) {
+	case "admin":
+		window.location.href = "/admin_start.php";
+    	break;
+	
+	case "member":
+		window.location.href = "/member_start.php";
+    	break;
+
+    case "distributer":
+	   	break;
+
+    default:
+
+}
+</script>
 
 
 <?php
-	disconnect($conn);
+
+
+	if ($userType == false){
+		echo "Wrong email or password";
+		session_unset(); 
+		session_destroy();
+	}
+
+	if ($userType == "error"){
+		echo "An error has occured, please resturn to login-page and try again.";
+		session_unset(); 
+		session_destroy();
+
+	}
+
+	/* session unset for testing only */
+	//session_unset();
+
+
 ?>
+
+<br><br><br>
+<a href="login.php"><button> Return to login </button></a>
 
 </html>

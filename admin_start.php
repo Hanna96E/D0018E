@@ -4,24 +4,26 @@ session_start();
 ?>
 
 <script>
-	//check if already logged in
+
+//check if user is not member	
 var userType = '<?=$_SESSION["status"]?>';
 
 switch(userType) {
 	case "admin":
-		window.location.href = "/admin_start.php";
-    	break;
-	
-	case "member":
-		window.location.href = "/member_start.php";
     	break;
 
     case "distributer":
 	   	break;
 
+	case "member":
+		window.location.href = "/member_start.php";
+		break;
+
     default:
+    	window.location.replace("http://bestshop.com/");
 
 }
+
 </script>
 
 <!DOCTYPE html>
@@ -29,7 +31,7 @@ switch(userType) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Log in - bestshop</title>
+<title>ADMIN page - bestshop</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -52,20 +54,17 @@ $('[data-toggle="tooltip"]').tooltip();
 <div class="row">
 <div class="col-md-12">
 <div class="page-header clearfix">
-<h2 class="pull-left">Log in to account </h2>
-<h4><a href="index.html"><button> Home </button></a></h4>
+<h2 class="pull-left">Welcome <?=$_SESSION["name"]?>! </h2>
+
+<!--MEMBER MENUE BAR-->
+<table>
+<tr>
+<!---<td><?php// echo $row["id"]; ?></td>--->
+<td><a href="/admin_start.php"><button> Home </button></a></td>
+<td><a href="/varor.php"><button> View products </button></a></td>
+<td><a href="/logout.php"><button> Log out </button></a></td>
+</tr>
 </div>
-
-
-
-<form action="/check_account.php" method="post">
-  <label for="email">Email: </label><br>
-  <input type="email" id="email" name="email"><br>
-  <label for="password">Password: </label><br>
-  <input type="password" id="password" name="password"><br><br>
-  <input type="submit" value="Enter">
-</form> 
-
 
 </div>
 </div>

@@ -4,19 +4,26 @@
 	<title>Payment Page - bestshop</title>
 </head>
 
-<?php include 'init.php';?>
+<?php 
+	include "init.php";
+	$conn = connect();
+?>
 
 <body>
 	<p>Test</p>
 
 
-	<form action="paymentDone.php" method="get">
+	<form action="/paymentDone.php" method="post">
 	Adress: <input type="text" name="adress"><br>
 	E-mail: <input type="text" name="email"><br>
 	<input type="submit">
 	</form>
 
 <?php
+
+	
+
+
 	$adressErr = $emailErr = "";
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
