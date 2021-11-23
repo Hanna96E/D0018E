@@ -32,12 +32,6 @@ switch(userType) {
 	<title>Payment Page - bestshop</title>
 </head>
 
-<<<<<<< HEAD
-<?php 
-	include "init.php";
-	$conn = connect();
-?>
-=======
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -53,17 +47,12 @@ $(document).ready(function(){
 $('[data-toggle="tooltip"]').tooltip();
 });
 </script>
->>>>>>> e466b98a2974d8f055f1955a095596a26e1430a5
 
 <?php 
 	include "init.php";
 	$conn = connect();
 ?>
 <body>
-<<<<<<< HEAD
-	<p>Test</p>
-
-=======
 
 <div class="bs-example">
 <div class="container">
@@ -109,37 +98,12 @@ while($row = mysqli_fetch_array($prodInfo)) {
 }}
 ?>
 </table>
->>>>>>> e466b98a2974d8f055f1955a095596a26e1430a5
 
 	<form action="/paymentDone.php" method="post">
 	Adress: <input type="text" name="adress"><br>
 	E-mail: <input type="text" name="email"><br>
 	Buy: <input type="submit">
 	</form>
-<<<<<<< HEAD
-
-<?php
-
-	
-
-
-	$adressErr = $emailErr = "";
-
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		if (empty($_POST["adress"])) {
-			$adressErr = "Adress is required";
-		} else {
-			$name = test_input($_POST["adress"]);
-		}
-		
-		if (empty($_POST["email"])) {
-			$emailErr = "Email is required";
-		} else {
-			$email = test_input($_POST["email"]);
-		}
-?>
-=======
->>>>>>> e466b98a2974d8f055f1955a095596a26e1430a5
 
 <?php
 // We are only looking for input on paymentpage

@@ -6,18 +6,6 @@
 
 
 <?php
-<<<<<<< HEAD
-<<<<<<< HEAD
-	include "functions.php";
-	$conn = connect();
-	$adress = $_POST["adress"];
-	$email = $_POST["email"];
-	
-
-=======
-//
-=======
->>>>>>> 159fa7b303083d5188d41ab804181e38f7fbc3bf
 	include "init.php";
 	$conn = connect();
 	$userId = "2";
@@ -110,7 +98,6 @@ while($itemArray = mysqli_fetch_array($itemQuery)) {
                         $email = test_input($_POST["email"]);
                 }
 }*/
->>>>>>> e466b98a2974d8f055f1955a095596a26e1430a5
 ?>
 
 <body>
