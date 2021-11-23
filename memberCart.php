@@ -64,10 +64,7 @@ switch(userType) {
     <body>
 
         
-        <?php
-            goToProductsForMemberButton($conn);
-            goToMemberAcountButton($conn);
-        ?>
+        
 
 
         <div class="bs-example">
@@ -89,7 +86,11 @@ switch(userType) {
 </table><br><br>
 
                         </div>
-                        hej
+                        <table class='table table-bordered table-striped'>
+                        <?php
+                            showDataInsideTableSpecificForMemberCart($conn,$userId,$orderId);
+                        ?>
+                        </table>
                         
                         <table>                
                             <td><a href="/paymentPage.php"><button> payy </button></a></td>goToPayButton($conn);
