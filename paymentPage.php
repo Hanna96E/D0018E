@@ -39,7 +39,7 @@ switch(userType) {
     $sqlQueryResult = mysqli_query($conn,$sql);
     $row = mysqli_fetch_assoc($sqlQueryResult);
     $orderId = $row["orderId"];
-     
+
 ?>
 
 
@@ -89,8 +89,6 @@ $('[data-toggle="tooltip"]').tooltip();
 
 <?php
 // Welcome the user
-$userId = "2"; //member=2, admin=1
-$orderId = "1";
 
 $userName = "SELECT `name` FROM `users` WHERE `userId`=$userId";
 $userName = mysqli_query($conn,$userName);
