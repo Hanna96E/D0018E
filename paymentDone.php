@@ -123,7 +123,9 @@ while($itemArray = mysqli_fetch_array($itemQuery)) {
 }
 
 // Update the users orderId to a new one
-	$sqlOrderId = "UPDATE `users` SET `orderId` = $orderId+1 WHERE `users`.`userId` = $userId";
+	$newOrderId = $orderId + 1;
+	echo $newOrderId;
+	$sqlOrderId = "UPDATE `users` SET `orderId` = $newOrderId WHERE `users`.`userId` = $userId";
 
 }
 
