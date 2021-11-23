@@ -63,7 +63,7 @@ function checkIfEmailExists($conn, $email){
 }
 
 function createAccount($conn, $name, $password, $email, $userType){
-	$sql = "INSERT INTO users (name, pwd, email, userType) VALUES ('$name', '$password', '$email','$userType')";
+	$sql = "INSERT INTO users (orderId,name, pwd, email, userType) VALUES ('1','$name', '$password', '$email','$userType')";
 
 	if (mysqli_query($conn, $sql)) {
   		echo "<script>alert('Congratulations! Your account was successfully created.');</script>";
