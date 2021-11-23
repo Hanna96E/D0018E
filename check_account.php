@@ -10,6 +10,7 @@ session_start();
 
 <?php
 	include "functions.php";
+	include "init.php";
 	$conn = connect();
 	$email = test_input($_POST["email"]);
 	$password = test_input($_POST["password"]);
