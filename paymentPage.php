@@ -1,29 +1,46 @@
 <?php
-// Start the session
-session_start();
+    session_start();
 ?>
 <script>
+
 //check if user is not member
 var userType = '<?=$_SESSION["status"]?>';
 
 switch(userType) {
     case "admin":
-	window.location.href = "/admin_start.php";
+        window.location.href = "/admin_start.php";
         break;
 
     case "distributer":
-	window.location.href = "/distributerStart.php";
+        window.location.href = "/distributer_start.php";
         break;
 
     case "member":
+        //window.location.href = "/member_start.php";
         break;
 
     default:
-//       window.location.replace("http://130.240.200.56/paymentPage.php");
+        window.location.replace("http://130.240.200.56");
 
 }
 
 </script>
+<?php
+    include "init.php";
+    include "functions100.php";
+    
+    $conn = connect();
+    $userId = $_SESSION["userId"];
+    $userName = $_SESSION["name"];
+    $userStatus = $_SESSION["status"];
+    
+
+    $sql = "SELECT orderId FROM users WHERE userId = $userId";
+    $sqlQueryResult = mysqli_query($conn,$sql);
+    $row = mysqli_fetch_assoc($sqlQueryResult);
+    $orderId = $row["orderId"];
+     
+?>
 
 
 <!DOCTYPE html>
@@ -48,10 +65,6 @@ $('[data-toggle="tooltip"]').tooltip();
 });
 </script>
 
-<?php 
-	include "init.php";
-	$conn = connect();
-?>
 <body>
 
 <div class="bs-example">

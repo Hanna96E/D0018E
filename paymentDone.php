@@ -1,3 +1,49 @@
+<?php
+    session_start();
+?>
+<script>
+
+//check if user is not member
+var userType = '<?=$_SESSION["status"]?>';
+
+switch(userType) {
+    case "admin":
+        window.location.href = "/admin_start.php";
+        break;
+
+    case "distributer":
+        window.location.href = "/distributer_start.php";
+        break;
+
+    case "member":
+        //window.location.href = "/member_start.php";
+        break;
+
+    default:
+        window.location.replace("http://130.240.200.56");
+
+}
+
+</script>
+<?php
+    include "init.php";
+    include "functions100.php";
+    
+    $conn = connect();
+    $userId = $_SESSION["userId"];
+    $userName = $_SESSION["name"];
+    $userStatus = $_SESSION["status"];
+    
+
+    $sql = "SELECT orderId FROM users WHERE userId = $userId";
+    $sqlQueryResult = mysqli_query($conn,$sql);
+    $row = mysqli_fetch_assoc($sqlQueryResult);
+    $orderId = $row["orderId"];
+     
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,10 +67,6 @@
 
 
 <?php
-	include "init.php";
-	$conn = connect();
-	$userId = "2";
-	$orderId = "1";
 
 	$adress = $_POST["adress"];
 	$email = $_POST["email"];
