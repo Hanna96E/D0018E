@@ -7,6 +7,7 @@
 
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 	include "functions.php";
 	$conn = connect();
 	$adress = $_POST["adress"];
@@ -15,6 +16,8 @@
 
 =======
 //
+=======
+>>>>>>> 159fa7b303083d5188d41ab804181e38f7fbc3bf
 	include "init.php";
 	$conn = connect();
 	$userId = "2";
