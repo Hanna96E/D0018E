@@ -86,28 +86,19 @@ switch(userType) {
 
 
 //Alter the database to have the correct amount of products
-
-//	$sqlItems = "SELECT amount, productId FROM itemList WHERE orderId == $orderId AND userId == $userId";
-	// Gives productId and amount of the users "shopping cart"
+// Gives productId and amount of the users "shopping cart"
 	$sqlItems = "SELECT `productId`, `amount` FROM `itemList` WHERE `orderId`=$orderId AND `userId`=$userId";
 	$itemQuery = mysqli_query($conn, $sqlItems);
 
 if (mysqli_num_rows($itemQuery) > 0) {
 
-$array = array();
+$amountArray = array();
 while($itemArray = mysqli_fetch_array($itemQuery)) {
-//	echo $itemArray[amount];
-//	echo $itemArray[productId];
-
-	
-
-
 	// Gives the current amount of specifide product
 	$sqlProd  = "SELECT `amount` FROM `products` WHERE `productId`= $itemArray[productId] ";
 	$amountProd = mysqli_query($conn, $sqlProd);
 	$amountProd = mysqli_fetch_array($amountProd);
-//	echo $amountProd[amount];
-	$array[] = $amountProd;
+	$amountArray[] = $itemArray[amount];
 	
 	// Sets the new amount
 	$newAmount = $amountProd[amount]-$itemArray[amount];
@@ -121,9 +112,12 @@ while($itemArray = mysqli_fetch_array($itemQuery)) {
 //	$newAmount = "47";
 //	echo $newAmount;
 
+	// Updates the database
 	$sql = "UPDATE `products` SET `amount` = $newAmount WHERE `products`.`productId` = $itemArray[productId]";
 	$endResult = mysqli_query($conn, $sql);
 }
+
+	echo amountArray[2];
 
 
 // Update the users orderId to a new one
