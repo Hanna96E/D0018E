@@ -69,8 +69,8 @@ $('[data-toggle="tooltip"]').tooltip();
 <td><a href="/memberCart.php"><button> View cart </button></a></td>
 <td><a href="/logout.php"><button> Log out </button></a></td>
 </tr>
+</table>
 <br><br>
-
 
 </div>
 
