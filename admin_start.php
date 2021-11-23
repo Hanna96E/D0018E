@@ -56,14 +56,16 @@ $('[data-toggle="tooltip"]').tooltip();
 <div class="page-header clearfix">
 <h2 class="pull-left">Welcome <?=$_SESSION["name"]?>! </h2>
 
-<!--MEMBER MENUE BAR-->
+<!--ADMIN MENUE BAR-->
 <table>
 <tr>
 <!---<td><?php// echo $row["id"]; ?></td>--->
 <td><a href="/admin_start.php"><button> Home </button></a></td>
-<td><a href="/varor.php"><button> View products </button></a></td>
+<td><a href="/adminProducts.php"><button> View products </button></a></td>
 <td><a href="/logout.php"><button> Log out </button></a></td>
 </tr>
+</table>
+<br><br>
 </div>
 
 </div>
