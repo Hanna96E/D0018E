@@ -6,6 +6,7 @@
 
 
 <?php
+//
 	include "init.php";
 	$conn = connect();
 	$userId = "2";
