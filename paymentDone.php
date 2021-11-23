@@ -94,10 +94,12 @@ switch(userType) {
 
 if (mysqli_num_rows($itemQuery) > 0) {
 
-
+$array = array();
 while($itemArray = mysqli_fetch_array($itemQuery)) {
 //	echo $itemArray[amount];
 //	echo $itemArray[productId];
+
+	
 
 
 	// Gives the current amount of specifide product
@@ -105,7 +107,8 @@ while($itemArray = mysqli_fetch_array($itemQuery)) {
 	$amountProd = mysqli_query($conn, $sqlProd);
 	$amountProd = mysqli_fetch_array($amountProd);
 //	echo $amountProd[amount];
-
+	$array[] = $amountProd;
+	
 	// Sets the new amount
 	$newAmount = $amountProd[amount]-$itemArray[amount];
 	// Error check to make sure it's not negative
@@ -121,6 +124,7 @@ while($itemArray = mysqli_fetch_array($itemQuery)) {
 	$sql = "UPDATE `products` SET `amount` = $newAmount WHERE `products`.`productId` = $itemArray[productId]";
 	$endResult = mysqli_query($conn, $sql);
 }
+
 
 // Update the users orderId to a new one
 	$newOrderId = $orderId + 1;
