@@ -2,40 +2,43 @@
 
 <?php
     session_start();
-    ob_start();
 ?>
+
 <script>
 
-//check if user is not member
-var userType = '<?=$_SESSION["status"]?>';
+    //check if user is not member
+    var userType = '<?=$_SESSION["status"]?>';
 
-switch(userType) {
-    case "admin":
-        window.location.href = "/admin_start.php";
-        break;
+    switch(userType) {
+        case "admin":
+            window.location.href = "/admin_start.php";
+            break;
 
-    case "distributer":
-        window.location.href = "/distributer_start.php";
-        break;
+        case "distributer":
+            window.location.href = "/distributer_start.php";
+            break;
 
-    case "member":
-        //window.location.href = "/member_start.php";
-        break;
+        case "member":
+            //window.location.href = "/member_start.php";
+            break;
 
-    default:
-        window.location.replace("http://130.240.200.56");
+        default:
+            window.location.replace("http://130.240.200.56");
 
-}
+    }
 
 </script>
+
 <?php
     include "init.php";
-    include "functions100.php";
+    include "functions101.php";
     
     $conn = connect();
     $userId = $_SESSION["userId"];
+    
     $userName = $_SESSION["name"];
     $userStatus = $_SESSION["status"];
+
     
 
     $sql = "SELECT orderId FROM users WHERE userId = $userId";
@@ -43,8 +46,11 @@ switch(userType) {
     $row = mysqli_fetch_assoc($sqlQueryResult);
     $orderId = $row["orderId"];
 
-   
+    
 ?>
+
+
+
 
 
 <!DOCTYPE html>
@@ -52,7 +58,7 @@ switch(userType) {
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Cart - bestshop</title>
+        <title>Products - bestshop</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -72,7 +78,8 @@ switch(userType) {
                 <div class="row">
                     <div class="col-md-12">
                         <div class="page-header clearfix">
-                            <h2 class="pull-left">Cart</h2>
+                            <h2 class="pull-left">Member Cart</h2>
+
 
 <!--MEMBER MENUE BAR-->
 <table>
@@ -85,16 +92,14 @@ switch(userType) {
 </tr>
 </table><br><br>
 
+
+
                         </div>
-                        <table class='table table-bordered table-striped'>
-                        <?php
-                            showDataInsideTableSpecificForMemberCart($conn,$userId,$orderId);
-                        ?>
-                        </table>
                         
-                        <table>                
-                            <td><a href="/paymentPage.php"><button> payy </button></a></td>goToPayButton($conn);
-                        </table>
+                        <?php
+                            showMemberCart($conn,$userId,$orderId,'table table-bordered table-striped');
+                        ?>
+                        
                     </div>
                 </div>
             </div>
@@ -105,5 +110,4 @@ switch(userType) {
 
 <?php
     disconnect($conn);
-    ob_end_flush();
 ?>

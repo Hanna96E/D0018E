@@ -3,6 +3,7 @@
 <?php
     session_start();
 ?>
+
 <script>
 
     //check if user is not member
@@ -14,11 +15,11 @@
             break;
 
         case "distributer":
-            window.location.href = "/distributer_start.php";
+            //window.location.href = "/distributer_start.php";
             break;
 
         case "member":
-            //window.location.href = "/member_start.php";
+            window.location.href = "/member_start.php";
             break;
 
         default:
@@ -34,19 +35,15 @@
     
     $conn = connect();
     $userId = $_SESSION["userId"];
+    //$userName = $_SESSION["name"];
+    //$userStatus = $_SESSION["status"];
     
 
-    $userName = $_SESSION["name"];
-    $userStatus = $_SESSION["status"];
-
-    
-
-    $sql = "SELECT orderId FROM users WHERE userId = $userId";
-    $sqlQueryResult = mysqli_query($conn,$sql);
-    $row = mysqli_fetch_assoc($sqlQueryResult);
-    $orderId = $row["orderId"];
-
-    
+    //$sql = "SELECT orderId FROM users WHERE userId = $userId";
+    //$sqlQueryResult = mysqli_query($conn,$sql);
+    //$row = mysqli_fetch_assoc($sqlQueryResult);
+    //$orderId = $row["orderId"];
+   
 ?>
 
 
@@ -78,26 +75,14 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="page-header clearfix">
-                            <h2 class="pull-left">Products</h2>
+                            <h2 class="pull-left">Orders</h2>
 
-
-<!--MEMBER MENUE BAR-->
-<table>
-<tr>
-<!---<td><?php// echo $row["id"]; ?></td>--->
-<td><a href="/member_start.php"><button> Home </button></a></td>
-<td><a href="/productsForMember.php"><button> View products </button></a></td>
-<td><a href="/memberCart.php"><button> View cart </button></a></td>
-<td><a href="/logout.php"><button> Log out </button></a></td>
-</tr>
-</table><br><br>
 
 
 
                         </div>
-                        
                         <?php
-                            showProductsForMember($conn,$userId,$orderId,'table table-bordered table-striped');
+                            showForDistributer($conn, 'table table-bordered table-striped');
                         ?>
                         
                     </div>
