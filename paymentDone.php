@@ -77,7 +77,7 @@ switch(userType) {
 //	$sqlForColumns = "SHOW COLUMNS FROM products";
 $totalCost = 156;
 	// Creates the order table
-	$sqlOrder = "INSERT INTO `orders` (`orderId`, `userId`,`totalCost`, `adress`, `status`, `message`) VALUES ('$orderId', '$userId', '$adress', '1', '')";
+	$sqlOrder = "INSERT INTO `orders` (`orderId`, `userId`,`totalCost`, `adress`, `status`, `message`) VALUES ('$orderId', '$userId','$totalCost','$adress', '1', '')";
 
 	$result = mysqli_query($conn, $sqlOrder);
 
