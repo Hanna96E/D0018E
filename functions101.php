@@ -43,11 +43,11 @@ function showOrderStatus($status){
 function addOrRemove1ToCartForMember($conn,$redirectToString,$userId,$orderId,$row,$amountInCart){
 
     // options
-    $textOnAddButton = "add";
-    $textOnRemoveButton = "remove";
+    $textOnAddButton = "+";
+    $textOnRemoveButton = "-";
 
     $nameForNumberBox = "amountInNumberBox"; // do not change
-    $textOnNumberSubmitButton = "submit number";
+    $textOnNumberSubmitButton = "change";
     
     $productIdValue = $row["productId"];
 
@@ -71,7 +71,7 @@ function addOrRemove1ToCartForMember($conn,$redirectToString,$userId,$orderId,$r
       echo $textOnNumberSubmitButton;
       echo "\" value=\"".$textOnNumberSubmitButton."\">";
 
-      echo "<br>";
+
 
     echo "</form>";
 
@@ -178,7 +178,7 @@ function showProductsForMember($conn,$userId,$orderId,$tableClassName){
 
   echo "<tr>";
   showTableHeader(array("name","price","info","image"));
-  echo "<th></th>";
+  echo "<th></th><th></th>";
   echo "</tr>";
   
   $sqlQueryResult = mysqli_query($conn,$sql);
@@ -270,9 +270,6 @@ function showMemberCart($conn,$userId,$orderId,$tableClassName){
     foreach ($columnNameToShowArray as $columnName) {
         echo "<td>";
         showSimple($conn,$columnName,$row);
-        if($columnName = "price"){
-            $totalCost = $totalCost + $row["price"];
-        }  
         echo "</td>";
     }
 
@@ -283,10 +280,7 @@ function showMemberCart($conn,$userId,$orderId,$tableClassName){
     addOrRemove1ToCartForMember($conn,$redirectToString,$userId,$orderId,$row,$amountInCart);
     echo "</td>";
 
-    echo "<td>";
     
-    //$conn
-    //$redirectToString
     $tableName = "itemList";
     $primaryKeyColumnNameArray = array("listId");
     $row = $itemListRowArray[$i];
