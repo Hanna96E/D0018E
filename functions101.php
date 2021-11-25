@@ -140,7 +140,7 @@ function changeOrderMessage($conn,$orderId,$userId,$redirectToString,$message){
 // specific functions for productsForMembers.php start --------------------------------------------------------------------------------------------------
 
 
-
+// Added price to function
 function showProductsForMember($conn,$userId,$orderId,$tableClassName){
   
   $redirectToString = "productsForMember.php";
@@ -157,12 +157,12 @@ function showProductsForMember($conn,$userId,$orderId,$tableClassName){
 
 
   $sql = "SELECT * FROM products;";
-  $columnNameToShowArray = array("name","info","image");
+  $columnNameToShowArray = array("name","price", "info","image");
 
   echo "<table class='$tableClassName'>";
 
   echo "<tr>";
-  showTableHeader(array("name","info","image"));
+  showTableHeader(array("name","price","info","image"));
   echo "<th></th>";
   echo "</tr>";
   

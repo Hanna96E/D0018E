@@ -20,7 +20,7 @@ switch(userType) {
         break;
 
     default:
-        window.location.replace("http://130.240.200.56");
+        window.location.replace("/");
 
 }
 
@@ -76,7 +76,7 @@ $('[data-toggle="tooltip"]').tooltip();
 <!--MEMBER MENUE BAR-->
 <table>
 <tr>
-<!---<td><?php// echo $row["id"]; ?></td>--->
+
 <td><a href="/member_start.php"><button> Home </button></a></td>
 <td><a href="/productsForMember.php"><button> View products </button></a></td>
 <td><a href="/memberCart.php"><button> View cart </button></a></td>
@@ -89,7 +89,6 @@ $('[data-toggle="tooltip"]').tooltip();
 
 <?php
 // Welcome the user
-
 $userName = "SELECT `name` FROM `users` WHERE `userId`=$userId";
 $userName = mysqli_query($conn,$userName);
 $name = mysqli_fetch_array($userName);
@@ -100,25 +99,33 @@ $name = mysqli_fetch_array($userName);
 // Tell of what products are in the shoping cart
 $sqlItems = "SELECT `productId`, `amount` FROM `itemList` WHERE `orderId`=$orderId AND `userId`=$userId";
 $items = mysqli_query($conn,$sqlItems); //Items in cart
-$prodInfo = mysqli_query($conn,"SELECT `name`,`image` FROM products");
+$prodInfo = mysqli_query($conn,"SELECT `name`,`price`,`image` FROM products");
 
 ?>
 <?php
 if (mysqli_num_rows($prodInfo) > 0 && mysqli_num_rows($items) > 0 ) {
 ?>
 <table class='table table-bordered table-striped'>
-<tr> <td>Product</td> <td>Amount</td> <td></td> </tr>
+<tr> <td>Product</td> <td>Price</td> <td>Amount</td> <td></td> </tr>
 
 <?php
+$totalCost = "0";
 // Running through and printing the users shopping cart
 while($amount = mysqli_fetch_array($items)) {
 	$row = mysqli_fetch_array($prodInfo);
+
+	$totalCost = $totalCost + $row["price"]*$amount["amount"];
+
 ?>	<tr>
-	<td><?php echo $row["name"]; ?></td> <td><?php echo $amount["amount"]; ?></td>
+	<td><?php echo $row["name"]; ?></td>
+	<td><?php echo $row["price"]; ?></td>
+        <td><?php echo $amount["amount"]; ?></td>
 	<td><img src="<?php echo $row['image']; ?>" style="width:50px;height:50px;"  >
 	</tr>
 <?php
-}}
+}
+echo $totalCost;
+}
 ?>
 </table>
 
