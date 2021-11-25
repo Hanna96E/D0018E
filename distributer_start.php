@@ -71,14 +71,18 @@
 
 
         <div class="bs-example">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="page-header clearfix">
-                            <h2 class="pull-left">Orders</h2>
+        <div class="container">
+        <div class="row">
+        <div class="col-md-12">
+        <div class="page-header clearfix">
+        <h2 class="pull-left">Orders</h2>
 
-
-
+<!--MEMBER MENUE BAR-->
+<table><tr>
+<td><a href="/member_start.php"><button> Home </button></a></td>
+<td><a href="/products.php"><button> View products </button></a></td>
+<td><a href="/logout.php"><button> Log out </button></a></td>
+</tr></table><br><br>
 
                         </div>
                         <?php
