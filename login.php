@@ -17,6 +17,7 @@ switch(userType) {
     	break;
 
     case "distributer":
+    	window.location.href = "/distributer_start.php";
 	   	break;
 
     default:

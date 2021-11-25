@@ -13,6 +13,7 @@ switch(userType) {
     	break;
 
     case "distributer":
+    	window.location.href = "/distributer_start.php";
 	   	break;
 
 	case "member":
@@ -59,9 +60,9 @@ $('[data-toggle="tooltip"]').tooltip();
 <!--ADMIN MENUE BAR-->
 <table>
 <tr>
-<!---<td><?php// echo $row["id"]; ?></td>--->
 <td><a href="/admin_start.php"><button> Home </button></a></td>
-<td><a href="/adminProducts.php"><button> View products </button></a></td>
+<td><a href="/admin_products.php"><button> Manage products </button></a></td>
+<td><a href="/adminOrders.php"><button> Manage orders </button></a></td>
 <td><a href="/logout.php"><button> Log out </button></a></td>
 </tr>
 </table>

@@ -5,28 +5,6 @@ session_start();
 
 <?php
 
-/*
-function connect(){
-    $servername = "localhost";
-    $username = "";
-    $password = "";
-    $dbname = "";
-
-    // Create connection
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
-    // Check connection
-    if (!$conn) {
-      die("Connection failed: " . mysqli_connect_error());
-    }
-    return $conn;
-}
-*/
-
-/*
-function disconnect($conn){
-    mysqli_close($conn);
-}
-*/
 
 function login($conn, $email, $password){
 
@@ -66,7 +44,7 @@ function checkIfEmailExists($conn, $email){
 }
 
 function createAccount($conn, $name, $password, $email, $userType){
-	$sql = "INSERT INTO users (orderId,name, pwd, email, userType) VALUES ('1','$name', '$password', '$email','$userType')";
+	$sql = "INSERT INTO users (orderId, name, pwd, email, userType) VALUES ('1', '$name', '$password', '$email','$userType')";
 
 	if (mysqli_query($conn, $sql)) {
   		echo "<script>alert('Congratulations! Your account was successfully created.');</script>";
@@ -87,11 +65,91 @@ function setSessionUser($conn, $email){
 	$_SESSION["status"] = $row["userType"];
 }
 
+function addProduct($conn, $name, $price, $info, $amount, $image){
+	$sql = "INSERT INTO products (name, price, amount, info, image) VALUES ('$name', '$price', '$amount', '$info','$image')";
+
+	if (mysqli_query($conn, $sql)) {
+  		//echo "<script>alert('Your product was successfully added.');</script>";
+	} else {
+  		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	}
+}
+
+
+//////////////////////// CHANGE PRODUCT //////////////////////////////////////////
+
+function changeProduct($conn, $id, $name, $price, $info, $amount, $image){
+
+	$numOfcolumns = 0;
+	
+	$arguments = array();
+
+	$arguments['name'] = $name;
+	$arguments['price'] = $price;
+	$arguments['info'] = $info;
+	$arguments['amount'] = $amount;
+	$arguments['image'] = $image;
+	
+
+	$columnNames = array();
+	$columnItems = array();
+	foreach ($arguments as $key => $value) {
+		if($value != ""){
+			$numOfcolumns++;
+			$columnNames[] = $key;
+			$columnItems[] = $value;
+		}
+
+	}
+	
+	if ($numOfcolumns > 0){
+		switch ($numOfcolumns){
+			case 1:
+				$sql = "UPDATE products SET $columnNames[0]='$columnItems[0]' WHERE productId=$id";
+				break;
+
+			case 2:
+				$sql = "UPDATE products SET $columnNames[0]='$columnItems[0]', $columnNames[1]='$columnItems[1]' WHERE productId=$id";
+				break;
+
+			case 3:
+				$sql = "UPDATE products SET $columnNames[0]='$columnItems[0]', $columnNames[1]='$columnItems[1]', $columnNames[2]='$columnItems[2]' WHERE productId=$id";
+				break;
+
+			case 4:
+				$sql = "UPDATE products SET $columnNames[0]='$columnItems[0]', $columnNames[1]='$columnItems[1]', $columnNames[2]='$columnItems[2]', $columnNames[3]='$columnItems[3]' WHERE productId=$id";
+				break;
+
+			case 5:
+				$sql = "UPDATE products SET $columnNames[0]='$columnItems[0]', $columnNames[1]='$columnItems[1]', $columnNames[2]='$columnItems[2]', $columnNames[3]='$columnItems[3]', $columnNames[4]='$columnItems[4]' WHERE productId=$id";
+				break;
+		}
+
+
+		if (mysqli_query($conn, $sql)) {
+  		//echo "<script>alert('Your product was successfully changed.');</script>";
+		} else {
+  			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+		}
+
+	}
+}
+
+
+////////////////////////// END OF CHANGE PRODUCT //////////////////////////////////
 
 
 
+function removeProduct($conn, $id){
 
+		$sql = "DELETE FROM products WHERE productId = $id";
 
+		if (mysqli_query($conn, $sql)) {
+  		echo "<script>alert('Your product was successfully removed.');</script>";
+	} else {
+  		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	}
+}
 
 
 ?>

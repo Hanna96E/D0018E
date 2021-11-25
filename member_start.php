@@ -14,13 +14,14 @@ switch(userType) {
     	break;
 
     case "distributer":
+    	window.location.href = "/distributer_start.php";
 	   	break;
 
 	case "member":
 		break;
 
     default:
-    	window.location.replace("http://130.240.200.56/");
+    	window.location.replace("http://bestshop.com/");
 
 }
 
@@ -59,7 +60,6 @@ $('[data-toggle="tooltip"]').tooltip();
 <!--MEMBER MENUE BAR-->
 <table>
 <tr>
-<!---<td><?php// echo $row["id"]; ?></td>--->
 <td><a href="/member_start.php"><button> Home </button></a></td>
 <td><a href="/productsForMember.php"><button> View products </button></a></td>
 <td><a href="/memberCart.php"><button> View cart </button></a></td>

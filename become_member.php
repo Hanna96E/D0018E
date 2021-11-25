@@ -55,6 +55,7 @@ $('[data-toggle="tooltip"]').tooltip();
 <div class="col-md-12">
 <div class="page-header clearfix">
 <h2 class="pull-left">Become member</h2>
+<h4><a href="index.html"><button> Home </button></a></h4>
 </div>
 
 <?php

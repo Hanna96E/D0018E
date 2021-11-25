@@ -90,6 +90,7 @@ switch(userType) {
 
 if (mysqli_num_rows($itemQuery) > 0) {
 
+$prodIdArray = array();
 $amountArray = array();
 while($itemArray = mysqli_fetch_array($itemQuery)) {
 	// Gives the current amount of specifide product
