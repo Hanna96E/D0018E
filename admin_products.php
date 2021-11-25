@@ -21,7 +21,7 @@ switch(userType) {
 		break;
 
     default:
-    	window.location.replace("http://bestshop.com/");
+    	window.location.replace("http://130.240.200.56/");
 
 }
 </script>
