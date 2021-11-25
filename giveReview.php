@@ -51,7 +51,6 @@ switch(userType) {
 
 <!--MEMBER MENUE BAR-->
 <table>
-<tr>
 <td><a href="/member_start.php"><button> Home </button></a></td>
 <td><a href="/productsForMember.php"><button> View products </button></a></td>
 <td><a href="/memberCart.php"><button> View cart </button></a></td>
@@ -60,16 +59,77 @@ switch(userType) {
 
 <body>
 <p></p>
-
-<tr><p><span class="error">* required field</span></p>
+<!--
+<p class="error">* required field</p>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
-<textarea id="review" name="review" rows="10" cols="50"
+<label for="reviewText">Thoughts? </label><br><br> 
+
+<textarea id="reviewText" name="reviewText" rows="10" cols="50"
  placeholder="What did you think?"></textarea>
 
-</td>
-    <td><br><br>
+<br><span class="error"> <?php echo $reviewErr;?></span>
+
+    <br><br>
     <input type="submit" name="submit" value="Add product"> 
     </td></form></tr>
+-->
 
+
+<?php
+// Set error and Request Method == POST
+// So that when POST is sent we can handle it
+
+$userId = "2";
+$productId = "1";
+$reviewErr = "";
+
+// Runs after reviewText has been given
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+echo "Try me!";
+
+      if (empty($_POST["reviewText"])) {
+    $reviewErr = "Review is required";
+	echo $reviewErr;
+  } else {
+    $reviewText = $_POST["reviewText"];
+	echo $reviewText;
+	echo "testRe";
+  }
+
+   if($reviewErr == ""){
+   	insertReview($conn, $productId, $userId, $reviewText);
+  }
+}
+//Set the outlook of page
+?>
+
+<p class="error">* required field</p>
+	// So that we send the values to the same page
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+
+<label for="reviewText">Thoughts? </label><br><br>
+
+<textarea id="reviewText" name="reviewText" rows="10" cols="50"
+ placeholder="What did you think?"></textarea>
+
+<br><span class="error"> <?php echo $reviewErr;?></span>
+
+    <br><br>
+    <input type="submit" name="submit" value="Give Review">
+
+
+<?php
+// Sends a sql query to the database, so that the reviewText will be inserted
+function insertReview($conn, $productId, $userId, $reviewText){
+$sql = "INSERT INTO `reviews` (`productId`, `userId`, `reviewText`, `numStar`) VALUES ('$productId', '$userId', '$reviewText', '5') ";
+
+if (mysqli_query($conn, $sql)) {
+  		//echo "<script>alert('Your product was successfully added.');</script>";
+	} else {
+  		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	}
+}
+?>
 </body>
+
