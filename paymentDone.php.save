@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Thank you - bestshop</title>
+</head>
+
+
+<?php
+	include "init.php";
+	$conn = connect();
+	$userId = "2";
+	$orderId = "1";
+
+	$adress = $_POST["adress"];
+	$email = $_POST["email"];
+
+	echo $adress;
+
+//Create an order table to store the order
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* Note:
+*	OrderId and userId connect to an itemList for that specific order
+*	So to find the times of the order, use those and serch through itemList
+*
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+//	$sqlForTable = "SELECT * FROM products";
+//	$sqlForColumns = "SHOW COLUMNS FROM products";
+
+	// Creates the order table
+	$sqlOrder = "INSERT INTO `orders` (`orderId`, `userId`, `adress`, `status`, `message`) VALUES ('$orderId', '$userId', '$adress', '1', '')";
+
+	$result = mysqli_query($conn, $sqlOrder);
+
+
+
+//Alter the database to have the correct amount of products
+
+//	$sqlItems = "SELECT amount, productId FROM itemList WHERE orderId == $orderId AND userId == $userId";
+	// Gives productId and amount of the users "shopping cart"
+	$sqlItems = "SELECT `productId`, `amount` FROM `itemList` WHERE `orderId`=$orderId AND `userId`=$userId";
+	$amountItemQuery = mysqli_query($conn, $sqlItems);
+        $amountItem = mysqli_fetch_array($amountItemQuery);
+	echo $amountItem[amount];
+	echo $amountItem[productId];
+
+	$amountItem = mysqli_fetch_array($amountItemQuery);
+        echo $amountItem[amount];
+        echo $amountItem[productId];
+
+
+	// Gives the current amount of specifide product
+	$sqlProd  = "SELECT `amount` FROM `products` WHERE `productId`=1 ";
+	$amountProd = mysqli_query($conn, $sqlProd);
+	$amountProd = mysqli_fetch_array($amountProd);
+
+
+//	echo $amountProd[amount];
+
+	$newAmount = $amountProd[amount]-$amountItem[amount];
+	$newAmount = "47";
+	$productId = "1";
+
+//	echo $newAmount;
+
+	$sql = "UPDATE `products` SET `amount` = $newAmount WHERE `products`.`productId` = $productId";
+	$endResult = mysqli_query($conn, $sql);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if (empty($_POST["adress"])) {
+                        $adressErr = "Adress is required";
+			echo $adressErr;
+                } else {
+                        $name = test_input($_POST["adress"]);
+                }
+
+                if (empty($_POST["email"])) {
+                        $emailErr = "Email is required";
+			echo $emailErr;
+                } else {
+                        $email = test_input($_POST["email"]);
+                }
+}*/
+?>
+
+<body>
+	<p>Thank you for choosing best shop</p>
+
+
+
+</body>
+
