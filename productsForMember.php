@@ -4,6 +4,7 @@
     session_start();
 ?>
 
+
 <script>
 
     //check if user is not member
@@ -28,7 +29,6 @@
     }
 
 </script>
-
 <?php
     include "init.php";
     include "functions101.php";
