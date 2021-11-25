@@ -54,19 +54,20 @@ switch(userType) {
 <td><a href="/productsForMember.php"><button> View products </button></a></td>
 <td><a href="/memberCart.php"><button> View cart </button></a></td>
 <td><a href="/logout.php"><button> Log out </button></a></td>
-</tr></table><br><br>
+<?php //</tr></table><br><br>
+?>
 
 <?php
 // Check if user has product
 // If so give them acces to give a review
 $productId = "1";
+//$userId = "1";
 $sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `productId`=$productId";
         $sqlQueryHasProd = mysqli_query($conn,$sqlHasProd);
         $hasProd = mysqli_fetch_array($sqlQueryHasProd);
         if (($hasProd["userId"]==$userId)){
                 echo "Would you like to give a review?";
 ?>
-<p>test<p>
 	<td><a href="/giveReview.php"><button> Give a review </button></a></td>
 <?php
         }

@@ -61,8 +61,15 @@ switch(userType) {
 <body>
 <p></p>
 
-<textarea id="review" name="review" rows="10" cols="50" placeholder="What did you think?"></textarea>
+<tr><p><span class="error">* required field</span></p>
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
+<textarea id="review" name="review" rows="10" cols="50"
+ placeholder="What did you think?"></textarea>
 
+</td>
+    <td><br><br>
+    <input type="submit" name="submit" value="Add product"> 
+    </td></form></tr>
 
 </body>
