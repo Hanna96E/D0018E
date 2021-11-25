@@ -17,6 +17,7 @@ switch(userType) {
     	break;
 
     case "distributer":
+    window.location.href = "/distributer_start.php";
 	   	break;
 
     default:
@@ -66,6 +67,8 @@ $('[data-toggle="tooltip"]').tooltip();
 
 <?php
 // define variables and set to empty values
+$orderId = '1';
+$userType = "member";
 $nameErr = $passwordErr = $password2Err= $emailErr  = "";
 $name = $password = $password2 = $email = "";
 
@@ -101,6 +104,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } else {
     $email = test_input($_POST["email"]);
     // check if e-mail address is well-formed
+    $email_result = checkIfEmailExists($conn, $email);
+		if($email_result == $email){
+			$emailErr = "An account with this email already exists.";
+		}
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $emailErr = "Invalid email format";
     }
@@ -108,18 +115,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 //check if all boxen are filled correcyly
  if(($nameErr == "") && ($passwordErr == "") && ($password2Err == "") && ($emailErr == "")) {
-	$email_result = checkIfEmailExists($conn, $email);
+/*	$email_result = checkIfEmailExists($conn, $email);
 	if($email_result == $email){
 		disconnect($conn);
 		echo "<script>alert('An account with this email already exists. Please try again with a different email.');</script>";
-	}
+	}*/
 	//if the email does not exist in database, the account is created.
-	elseif($email_result == false){
-		createAccount($conn, $name, $password, $email, "member");
+	//elseif($email_result == false){
+		createAccount($conn, $orderId, $name, $password, $email, $userType);
 		setSessionUser($conn, $email);
 		disconnect($conn);
 		echo "<script>window.location.href = '/member_start.php';</script>";
-	}
+	//}
  }
     
 }

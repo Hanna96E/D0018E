@@ -43,17 +43,89 @@ function checkIfEmailExists($conn, $email){
     return $email;
 }
 
-function createAccount($conn, $name, $password, $email, $userType){
-	$sql = "INSERT INTO users (orderId, name, pwd, email, userType) VALUES ('1', '$name', '$password', '$email','$userType')";
+function createAccount($conn, $orderId, $name, $password, $email, $userType){
+	if($orderId == 1){
+		$sql = "INSERT INTO users (orderId, name, pwd, email, userType) VALUES ('$orderId', '$name', '$password', '$email','$userType')";
+	}
+	else{
+		$sql = "INSERT INTO users (name, pwd, email, userType) VALUES ('$name', '$password', '$email','$userType')";
+	}
 
 	if (mysqli_query($conn, $sql)) {
-  		echo "<script>alert('Congratulations! Your account was successfully created.');</script>";
+  		echo "<script>alert('Congratulations! The account was successfully created.');</script>";
 	} else {
   		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 	}
 
 }
 
+function removeAccount($conn, $id){
+	
+	$sql = "DELETE FROM users WHERE userId = $id";
+
+	if (mysqli_query($conn, $sql)) {
+  		echo "<script>alert('The account was successfully removed.');</script>";
+	} else {
+  		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	}
+
+}
+
+
+//////////////////////// CHANGE ACCOUNT //////////////////////////////////////////
+
+function changeAccount($conn, $id, $name, $password, $email){
+
+	$numOfcolumns = 0;
+	
+	$arguments = array();
+
+	$arguments['name'] = $name;
+	$arguments['pwd'] = $password;
+	$arguments['email'] = $email;
+
+	$columnNames = array();
+	$columnItems = array();
+	foreach ($arguments as $key => $value) {
+		if($value != ""){
+			$numOfcolumns++;
+			$columnNames[] = $key;
+			$columnItems[] = $value;
+		}
+
+	}
+	
+	if ($numOfcolumns > 0){
+		switch ($numOfcolumns){
+			case 1:
+				$sql = "UPDATE users SET $columnNames[0]='$columnItems[0]' WHERE userId=$id";
+				break;
+
+			case 2:
+				$sql = "UPDATE users SET $columnNames[0]='$columnItems[0]', $columnNames[1]='$columnItems[1]' WHERE userId=$id";
+				break;
+
+			case 3:
+				$sql = "UPDATE users SET $columnNames[0]='$columnItems[0]', $columnNames[1]='$columnItems[1]', $columnNames[2]='$columnItems[2]' WHERE userId=$id";
+				break;
+		}
+
+
+		if (mysqli_query($conn, $sql)) {
+  		//echo "<script>alert('The account was successfully changed.');</script>";
+		} else {
+  			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+		}
+
+	}
+}
+
+
+////////////////////////// END OF CHANGE ACCOUNT //////////////////////////////////
+
+
+
+//when member creates account, when user logs in.
 function setSessionUser($conn, $email){
 	$sql = "SELECT userId, name, userType FROM users WHERE email = '$email'";
 	$result = mysqli_query($conn, $sql);
@@ -62,14 +134,27 @@ function setSessionUser($conn, $email){
 
 	$_SESSION["userId"] = $row["userId"];
 	$_SESSION["name"] = $row["name"];
+	$_SESSION["email"] = $email;
 	$_SESSION["status"] = $row["userType"];
 }
+
 
 function addProduct($conn, $name, $price, $info, $amount, $image){
 	$sql = "INSERT INTO products (name, price, amount, info, image) VALUES ('$name', '$price', '$amount', '$info','$image')";
 
 	if (mysqli_query($conn, $sql)) {
   		//echo "<script>alert('Your product was successfully added.');</script>";
+	} else {
+  		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	}
+}
+
+function removeProduct($conn, $id){
+
+		$sql = "DELETE FROM products WHERE productId = $id";
+
+		if (mysqli_query($conn, $sql)) {
+  		echo "<script>alert('Your product was successfully removed.');</script>";
 	} else {
   		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 	}
@@ -137,19 +222,6 @@ function changeProduct($conn, $id, $name, $price, $info, $amount, $image){
 
 
 ////////////////////////// END OF CHANGE PRODUCT //////////////////////////////////
-
-
-
-function removeProduct($conn, $id){
-
-		$sql = "DELETE FROM products WHERE productId = $id";
-
-		if (mysqli_query($conn, $sql)) {
-  		echo "<script>alert('Your product was successfully removed.');</script>";
-	} else {
-  		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-	}
-}
 
 
 ?>

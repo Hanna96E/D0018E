@@ -43,7 +43,7 @@ switch(userType) {
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Manage products - bestshop</title>
+        <title>Manage accounts - bestshop</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -62,7 +62,7 @@ switch(userType) {
     <div class="row">
     <div class="col-md-12">
 	<div class="page-header clearfix">
-    <h2 class="pull-left">Manage products</h2>
+    <h2 class="pull-left">Manage accounts</h2>
 
     <!--ADMIN MENUE BAR-->
 <table>
@@ -81,97 +81,97 @@ switch(userType) {
 
 <?php
 
-$nameErr = $priceErr = $infoErr = $amountErr = $imageErr = "";
-$name = $price = $info = $amount = $image ="";
+$nameErr = $passwordErr = $emailErr = $userTypeErr = "";
+$name = $password = $email = $userType ="";
+$orderId = "";
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      if (empty($_POST["name"])) {
+    if (empty($_POST["name"])) {
     $nameErr = "Name is required";
   } else {
     $name = test_input($_POST["name"]);
   }
   
-  if (empty($_POST["price"])) {
-    $priceErr = "Price is required";
+  if (empty($_POST["password"])) {
+    $passwordErr = "Password is required";
   } else {
-    $price = test_input($_POST["price"]);
+    $password = test_input($_POST["password"]);
   }
 
-  if (empty($_POST["info"])) {
-    $infoErr = "Info is required";
+  if (empty($_POST["email"])) {
+    $emailErr = "Email is required";
   } else {
-    $info = test_input($_POST["info"]);
+    $email = test_input($_POST["email"]);
+    $email_result = checkIfEmailExists($conn, $email);
+	if($email_result == $email){
+		$emailErr = "An account with this email already exists.";
+	}
   }
 
-  if (empty($_POST["amount"])) {
-    $amountErr = "Amount is required";
+  if (empty($_POST["userType"])) {
+    $userTypeErr = "User type is required";
   } else {
-    $amount = test_input($_POST["amount"]);
+    $userType = test_input($_POST["userType"]);
+    if ($userType == 'member'){
+    	$orderId = '1';
+    }
   }
 
-  if (empty($_POST["image"])) {
-    $imageErr = "Image is required";
-  } else {
-    $image = test_input($_POST["image"]);
-  }
-
-//check if all boxen are filled correcyly
- if(($nameErr == "") && ($priceErr == "") && ($infoErr == "") && ($amountErr == "") && ($imageErr == "")) {
-    addProduct($conn, $name, $price, $info, $amount, $image);
+  //check if all boxen are filled correcyly
+  if(($nameErr == "") && ($passwordErr == "") && ($emailErr == "") && ($userTypeErr == "")) {
+		createAccount($conn, $orderId, $name, $password, $email, $userType);
+	}
  }
 
-}
+
 
 ?>
-
 
 
     <table class='table table-bordered table-striped'>
 
     <tr>
+    <td>User id</td>
     <td>Name</td>
-    <td>Price</td>
-    <td>Info</td>
-    <td>Amount</td>
-    <td>Image</td>
+    <td>Password</td>
+    <td>Email</td>
+    <td>User type</td>
     <td></td>
     </tr>
 
     <tr><p><span class="error">* required field</span></p>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <td></td>
     <td>    <label for="name">Name: * </label><br><br>  
             <input type="text" id = "name" name="name" style="width: 150px;">
             <br><span class="error"> <?php echo $nameErr;?></span>
     </td>
 
     <td>
-            <label for="price">Price: * </label><br><br>
-            <input type = "number" id = "price" name="price" min = "0" style="width: 80px;">
-            <br><span class="error"> <?php echo $priceErr;?></span>
+            <label for="password">Password: * </label><br><br>
+            <input type = "text" id = "password" name="password" min = "0" style="width: 100px;">
+            <br><span class="error"> <?php echo $passwordErr;?></span>
     </td>
 
-    <td>    <label for="info"> Info: * </label><br>
-            <textarea name="info" id = "info" rows="3" cols="20"></textarea>
-            <br><span class="error"> <?php echo $infoErr;?></span>
-
+    <td>
+            <label for="email">Email: * </label><br><br>
+            <input type = "email" id = "email" name="email" min = "0" style="width: 150px;">
+            <br><span class="error"> <?php echo $emailErr;?></span>
     </td>
     <td>
-            <label for="amount">Amount: * </label><br><br>
-            <input type = "number" id = "amount" name="amount" min = "0" style="width: 80px;">
-            <br><span class="error"> <?php echo $amountErr;?></span>
-    </td>
-    <td>
-            <label for="image">Image: * </label><br><br>
-            <input type="text" id = "image" name="image" style="width: 150px;">
-            <br><span class="error"> <?php echo $imageErr;?></span>
+            <label for="userType">User type: *</label><br><br>
+            <input type="radio" name="userType" <?php if (isset($userType) && $userType =="admin") echo "checked";?> value="admin">Admin
+  			<input type="radio" name="userType" <?php if (isset($userType) && $userType =="distributer") echo "checked";?> value="distributer">Distributer
+  			<input type="radio" name="userType" <?php if (isset($userType) && $userType =="member") echo "checked";?> value="member">Member  
+  			<br><span class="error"> <?php echo $userTypeErr;?></span>
     </td>
     <td><br><br>
-    <input type="submit" name="submit" value="Add product"> 
+    <input type="submit" name="submit" value="Add account"> 
     </td></form></tr>
 
 
-<?php $result = mysqli_query($conn,"SELECT * FROM products"); ?>
+<?php $result = mysqli_query($conn,"SELECT * FROM users"); ?>
 
 <?php
     disconnect($conn);
@@ -184,42 +184,39 @@ if (mysqli_num_rows($result) > 0) {
 <?php
 $i=0;
 while($row = mysqli_fetch_array($result)) {
-    $id = $row["productId"];
+    $id = $row["userId"];
     $name = $row["name"];
-    $price = $row["price"];
-    $info = $row["info"];
-    $amount = $row["amount"];
-    $image = $row["image"];
+    $password = $row["pwd"];
+    $email = $row["email"];
+    $userType = $row["userType"];
     ?>
 
-    <tr><form method="post" action="manage_products.php?action=change&id=<?=$id?>">
-    <td>    <label for="name"><?=$name?> </label><br><br>  
-            <input type="text" id = "name" name="name" style="width: 150px;">
+    <tr><form method="post" action="manage_accounts.php?action=change&id=<?=$id?>">
+    <td>    <br><br><label for="id"><?=$id?> </label><br><br>  
     </td>
 
     <td>
-            <label for="price"><?=$price?> </label><br><br>
-            <input type = "number" id = "price" name="price" min = "0" style="width: 80px;">
+            <label for="name"><?=$name?> </label><br><br>
+            <input type = "text" id = "name" name="name" style="width: 150px;">
     </td>
 
-    <td>    <label for="info"><?=$info?></label><br>
-            <textarea name="info" id = "info" rows="3" cols="20"></textarea>
+    <td>    <label for="password"><?=$password?></label><br><br>
+            <input type = "text" name="password" id = "password" style = "width: 100px"></textarea>
 
     </td>
     <td>
-            <label for="amount"><?=$amount?></label><br><br>
-            <input type = "number" id = "amount" name="amount" min = "0" style="width: 80px;">
+            <label for="email"><?=$email?></label><br><br>
+            <input type = "email" id = "email" name="email" style="width: 150px;">
     </td>
     <td>
-            <label for="image"><img src="<?=$image?>" style="width:39px;height:39px;"></label><br>
-            <input type="text" id = "image" name="image" style="width: 150px;">
+            <label for="userType"><?=$userType?></label><br><br>
     </td>
     <td>
     <input type="submit" name="submit" value="Submit changes">
     <br><br><br>
     </form>
-    <form method="post" action="manage_products.php?action=remove&id=<?=$id?>">
-    <input type="submit" name="submit" value="Remove product">
+    <form method="post" action="manage_accounts.php?action=remove&id=<?=$id?>">
+    <input type="submit" name="submit" value="Remove account">
     </td> </form>
     </tr>
 
