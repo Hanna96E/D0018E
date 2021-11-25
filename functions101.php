@@ -88,7 +88,50 @@ function addOrRemove1ToCartForMember($conn,$redirectToString,$userId,$orderId,$r
 
 
 
+function changeOrderStatus($conn,$orderId,$userId,$status,$redirectToString){
 
+    $textOnPreviousStatusButton = "change to previous status";
+    $uniqueNameStringPreviousStatusButton = $textOnPreviousStatusButton.$orderId.$userId."changeOrderStatus";
+
+    $textOnNextStatusButton = "change to next status";
+    $uniqueNameStringNextStatusButton = $textOnNextStatusButton.$orderId.$userId."changeOrderStatus";
+
+
+    echo "<form method=\"POST\" action=\"actionChangeOrderStatus.php?redirectToString=$redirectToString&orderId=$orderId&userId=$userId&status=$status&value=-1\">";
+        echo "<input type=\"submit\" name=\"";
+        echo $uniqueNameStringPreviousStatusButton; // unique name
+        echo "\" value=\"".$textOnPreviousStatusButton."\">";
+    echo "</form>";
+
+    echo "<form method=\"POST\" action=\"actionChangeOrderStatus.php?redirectToString=$redirectToString&orderId=$orderId&userId=$userId&status=$status&value=1\">";
+        echo "<input type=\"submit\" name=\"";
+        echo $uniqueNameStringNextStatusButton;  // unique name
+        echo "\" value=\"".$textOnNextStatusButton."\">";
+    echo "</form>";
+}
+
+
+
+
+function changeOrderMessage($conn,$orderId,$userId,$redirectToString,$message){
+
+    $textOnSubmitMessageButton = "submit message"; // do not change
+
+    echo "<form method=\"POST\" action=\"actionChangeOrderMessage.php?redirectToString=$redirectToString&orderId=$orderId&userId=$userId\">";
+        
+        
+        echo "<label for=\"message\">Message: </label><br><br>";
+        echo "<textarea name=\"message\" id = \"message\" rows=\"3\" cols=\"20\">$message</textarea>";
+
+        echo "<input type=\"submit\" name=\"";
+        echo $textOnSubmitMessageButton."message";
+        echo "\" value=\"".$textOnSubmitMessageButton."\">";
+        
+
+
+
+    echo "</form>";
+}
 
 // help functions stop-------------------------------------------------------------------------
 
@@ -238,27 +281,7 @@ function showMemberCart($conn,$userId,$orderId,$tableClassName){
 
 // specific functions for distributer_start.php start -------------------------------------------------------------------------------------------------
 
-function changeOrderStatus($conn,$orderId,$userId,$status,$redirectToString){
 
-    $textOnPreviousStatusButton = "change to previous status";
-    $uniqueNameStringPreviousStatusButton = $textOnPreviousStatusButton.$orderId.$userId."changeOrderStatus";
-
-    $textOnNextStatusButton = "change to next status";
-    $uniqueNameStringNextStatusButton = $textOnNextStatusButton.$orderId.$userId."changeOrderStatus";
-
-
-    echo "<form method=\"POST\" action=\"actionChangeOrderStatus.php?redirectToString=$redirectToString&orderId=$orderId&userId=$userId&status=$status&value=-1\">";
-        echo "<input type=\"submit\" name=\"";
-        echo $uniqueNameStringPreviousStatusButton; // unique name
-        echo "\" value=\"".$textOnPreviousStatusButton."\">";
-    echo "</form>";
-
-    echo "<form method=\"POST\" action=\"actionChangeOrderStatus.php?redirectToString=$redirectToString&orderId=$orderId&userId=$userId&status=$status&value=1\">";
-        echo "<input type=\"submit\" name=\"";
-        echo $uniqueNameStringNextStatusButton;  // unique name
-        echo "\" value=\"".$textOnNextStatusButton."\">";
-    echo "</form>";
-}
 
 
 function showForDistributer($conn, $tableClassForVisual){
@@ -356,7 +379,6 @@ function showForDistributer($conn, $tableClassForVisual){
         echo "</table>";
 
     }
-
 
 }
 
@@ -463,6 +485,112 @@ function showOrdersForUser($conn,$userId,$tableClassForVisual){
 // specific functions for memberOrders.php stop ------------------------------------------------------------------------------------------------
 
 
+// specific functions for admin_orders.php start -------------------------------------------------------------------------------------------------
+
+
+
+function showForAdmin_orders($conn, $tableClassForVisual){
+
+                 
+    $redirectToString = "admin_orders.php";
+
+
+    for($orderStatusIterator = 0;$orderStatusIterator<=5;$orderStatusIterator++){
+        $tmp = showOrderStatus($orderStatusIterator);
+        echo "order status: ".$tmp."<br>";
+        $sqlForOrders = "SELECT * FROM orders WHERE status = $orderStatusIterator;";
+        $sqlForOrdersQueryResult = mysqli_query($conn,$sqlForOrders);
+
+        //echo "<table class= '$tableClassForVisual'>";
+
+        while($orderRowWithSpecificStatus = mysqli_fetch_assoc($sqlForOrdersQueryResult)){
+
+            echo "<table class= '$tableClassForVisual'>";
+
+
+            $userId = $orderRowWithSpecificStatus["userId"];
+            $orderId = $orderRowWithSpecificStatus["orderId"];
+            $adress = $orderRowWithSpecificStatus["adress"];
+            $orderStatus = $orderRowWithSpecificStatus["status"]; // (unnecessarry for now, can use $orderStatusIterator)
+            $orderStatusText = showOrderStatus($orderStatus);
+            $message = $orderRowWithSpecificStatus["message"];
+
+            $sqlForUser = "SELECT * FROM users WHERE userId = $userId;";
+            $sqlForUserQueryResult = mysqli_query($conn,$sqlForUser);
+            $userRow = mysqli_fetch_assoc($sqlForUserQueryResult);
+
+            $userName = $userRow["name"];
+            $userEmail = $userRow["email"];
+
+
+
+            $boldText1 = "orderId: ".$orderId;
+            $boldText2 = "userId: ".$userId;
+            $boldText3 = "users name: ".$userName;
+            $boldText4 = "users email: ".$userEmail;
+            $boldText5 = "adress: ".$adress;
+            $boldText6 = "orders status: ".$orderStatusText;
+
+
+
+            echo "<tr>";
+                showTableHeader(array($boldText1,$boldText2,$boldText3,$boldText4,$boldText5,$boldText6)); // used to show in bold text etc, not as table header
+                echo "<th>";
+                    changeOrderStatus($conn,$orderId,$userId,$orderStatus,$redirectToString);
+                echo "</th>";
+                echo "<th>";
+                    changeOrderMessage($conn,$orderId,$userId,$redirectToString,$message);
+                echo "</th>";
+            echo "</tr>";
+            echo "<tr>";
+                echo "<th><b>";
+                    echo "products: ";
+                echo "</b></th>";
+                //echo "<td></td><td></td><td></td><td></td><td></td><td></td>";
+            echo "</tr>";
+            echo "<tr>";
+                echo "<td><b>";
+                    echo "productId";
+                echo "</b></td>";
+                echo "<td><b>";
+                    echo "product name";
+                echo "</b></td>";
+                echo "<td><b>";
+                    echo "amount";
+                echo "</b></td>";
+                //echo "<td></td><td></td><td></td><td></td>";
+            echo "</tr>";
+            $sqlForÍtemListForOneOrderAndForOneUser = "SELECT * FROM itemList WHERE userId = $userId AND orderId = $orderId;";
+            $sqlForÍtemListForOneOrderIdAndForOneUserIdQueryResult = mysqli_query($conn,$sqlForÍtemListForOneOrderAndForOneUser);
+            while($itemListRowWithOrderIdAndUserId = mysqli_fetch_assoc($sqlForÍtemListForOneOrderIdAndForOneUserIdQueryResult)){
+                $productId = $itemListRowWithOrderIdAndUserId["productId"];
+                $sqlForProductsForSpecificProductId = "SELECT * FROM products WHERE productId = $productId;";
+                $sqlForProductsForSpecificProductIdQueryResult = mysqli_query($conn,$sqlForProductsForSpecificProductId);
+                $productRow = mysqli_fetch_assoc($sqlForProductsForSpecificProductIdQueryResult);
+
+                echo "<tr>";
+                    echo "<td>";
+                        echo $productRow["productId"];
+                    echo "</td>";
+                    echo "<td>";
+                        echo $productRow["name"];
+                    echo "</td>";
+                    echo "<td>";
+                        echo $itemListRowWithOrderIdAndUserId["amount"];
+                    echo "</td>";
+                    //echo "<td></td><td></td><td></td><td></td>";
+
+                echo "</tr>";
+            }
+        }
+
+        echo "</table>";
+
+    }
+
+}
+
+// specific functions for admin_orders.php stop -------------------------------------------------------------------------------------------------
 
 
 
