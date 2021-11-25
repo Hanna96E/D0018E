@@ -133,6 +133,21 @@ function changeOrderMessage($conn,$orderId,$userId,$redirectToString,$message){
     echo "</form>";
 }
 
+function showReviews($conn,$productId){
+
+    $textOnShowReviewButton = "show review";
+    $Reviews = "productReviews.php";
+    echo "<form method=\"POST\" action=\"$Reviews?productId=$productId\">";
+        echo "<input type=\"submit\" name=\"";
+        echo $textOnShowReviewButton;
+        echo "\" value=\"".$textOnShowReviewButton."\">";
+    echo "</form>";
+}
+
+
+
+
+
 // help functions stop-------------------------------------------------------------------------
 
 
@@ -140,7 +155,7 @@ function changeOrderMessage($conn,$orderId,$userId,$redirectToString,$message){
 // specific functions for productsForMembers.php start --------------------------------------------------------------------------------------------------
 
 
-// Added price to function
+
 function showProductsForMember($conn,$userId,$orderId,$tableClassName){
   
   $redirectToString = "productsForMember.php";
@@ -157,7 +172,7 @@ function showProductsForMember($conn,$userId,$orderId,$tableClassName){
 
 
   $sql = "SELECT * FROM products;";
-  $columnNameToShowArray = array("name","price", "info","image");
+  $columnNameToShowArray = array("name","price","info","image");
 
   echo "<table class='$tableClassName'>";
 
@@ -189,6 +204,12 @@ function showProductsForMember($conn,$userId,$orderId,$tableClassName){
       echo "<td>";
       addOrRemove1ToCartForMember($conn,$redirectToString,$userId,$orderId,$row,$amountInCart);
       echo "</td>";
+
+      $productIdTmp = $row["productId"];
+      echo "<td>";
+      showReviews($conn,$productIdTmp);
+      echo "</td>";
+
       echo "</tr>";
   }
 
@@ -211,6 +232,8 @@ function showMemberCart($conn,$userId,$orderId,$tableClassName){
   
   $redirectToString = "memberCart.php";
 
+  $totalCost = 0;
+
   $productIdInCartArray = array();
   $amountInCartArray = array(); 
   $sqlForCart = "SELECT * FROM itemList WHERE userId = $userId AND orderId = $orderId;";
@@ -226,13 +249,13 @@ function showMemberCart($conn,$userId,$orderId,$tableClassName){
 
 
   
-  $columnNameToShowArray = array("name","info","image");
+  $columnNameToShowArray = array("name","price","info","image");
 
 
   echo "<table class='$tableClassName'>";
 
   echo "<tr>";
-  showTableHeader(array("name","info","image"));
+  showTableHeader(array("name","price","info","image"));
   echo "<th></th>";
   echo "</tr>";
 
@@ -246,7 +269,10 @@ function showMemberCart($conn,$userId,$orderId,$tableClassName){
     echo "<tr>";
     foreach ($columnNameToShowArray as $columnName) {
         echo "<td>";
-        showSimple($conn,$columnName,$row);  
+        showSimple($conn,$columnName,$row);
+        if($columnName = "price"){
+            $totalCost = $totalCost + $row["price"];
+        }  
         echo "</td>";
     }
 
@@ -273,6 +299,8 @@ function showMemberCart($conn,$userId,$orderId,$tableClassName){
     $i++;
   }
    echo "</table>";
+
+   echo "<br><br>Total cost: ".$totalCost;
 }
 
 // specific functions for membersCart.php stop ----------------------------------------------------------------------------------------------------
@@ -408,6 +436,7 @@ function showOrdersForUser($conn,$userId,$tableClassForVisual){
             $orderStatus = $orderRowWithSpecificStatus["status"]; // (unnecessarry for now, can use $orderStatusIterator)
             $orderStatusText = showOrderStatus($orderStatus);
             $message = $orderRowWithSpecificStatus["message"];
+            $totalCost = $orderRowWithSpecificStatus["totalCost"];
 
             $sqlForUser = "SELECT * FROM users WHERE userId = $userId;";
             $sqlForUserQueryResult = mysqli_query($conn,$sqlForUser);
@@ -471,6 +500,11 @@ function showOrdersForUser($conn,$userId,$tableClassForVisual){
                 echo "</tr>";
             }
 
+            echo "<tr></tr>";
+            echo "<tr>";
+            echo "TotalCost: ".$totalCost;
+            echo "</tr>";
+            echo "<tr></tr>";
 
         }
 

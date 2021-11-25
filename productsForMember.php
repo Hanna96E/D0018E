@@ -3,6 +3,7 @@
 <?php
     session_start();
 ?>
+
 <script>
 
     //check if user is not member
