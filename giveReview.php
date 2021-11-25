@@ -27,6 +27,7 @@ switch(userType) {
 
 </script>
 <?php
+    //Setup
     include "init.php";
     include "functions100.php";
 
@@ -80,7 +81,7 @@ switch(userType) {
 // Set error and Request Method == POST
 // So that when POST is sent we can handle it
 
-$userId = "2";
+//$userId = "2";
 $productId = "1";
 $reviewErr = "";
 
@@ -105,8 +106,8 @@ echo "Try me!";
 ?>
 
 <p class="error">* required field</p>
-	// So that we send the values to the same page
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+<?php	// So that we send the values to the same page
+?>  <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
 <label for="reviewText">Thoughts? </label><br><br>
 

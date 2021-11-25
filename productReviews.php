@@ -1,5 +1,4 @@
 <?php
-//
     session_start();
 ?>
 <script>
@@ -21,7 +20,7 @@ switch(userType) {
         break;
 
     default:
-        window.location.replace("http://130.240.200.56");
+        window.location.replace("/");
 
 }
 
@@ -66,10 +65,23 @@ $sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `produ
         $sqlQueryHasProd = mysqli_query($conn,$sqlHasProd);
         $hasProd = mysqli_fetch_array($sqlQueryHasProd);
         if (($hasProd["userId"]==$userId)){
-                echo "Would you like to give a review?";
-?>
+                echo "Would you like to give a review?";?>
 	<td><a href="/giveReview.php"><button> Give a review </button></a></td>
+
 <?php
+/*function showReviews($conn,$productId){
+
+    $textOnShowReviewButton = "show review";
+    $Reviews = "productReviews.php"
+    echo "<form method="POST" action="actionChangeOrderStatus.php?productId=$productId">";
+        echo "<input type="submit" name="";
+        echo $textOnShowReviewButton; // unique name
+        echo "" value="".$textOnShowReviewButton."">";
+    echo "</form>";
+}*/
+
+
+
         }
 ?>
 
@@ -80,7 +92,7 @@ $sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `produ
 	// TEST $userId = "1";
 	$productId = "1";
         //$productId = $_POST["productId"];
-
+	$productId = $_REQUEST['productId'];
 //Print the review text for productId
 	$sql = "SELECT `reviewText`,`numStar` FROM `reviews` WHERE `productId`= $productId";
 	$sqlQueryResult = mysqli_query($conn,$sql);
