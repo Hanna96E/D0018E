@@ -126,16 +126,18 @@ while($amount = mysqli_fetch_array($items)) {
 	<td><img src="<?php echo $row['image']; ?>" style="width:50px;height:50px;"  >
 	</tr>
 <?php
-}
-echo $totalCost;
-}
+}}
 ?>
 </table>
 
-	<form action="/paymentDone.php" method="post">
-	Adress: <input type="text" name="adress"><br>
-	E-mail: <input type="text" name="email"><br>
-	Buy: <input type="submit">
+<?php 	echo "Total cost: ";
+	echo $totalCost; ?>
+
+	<form action="/paymentDone.php" method="post"><br>
+	Adress:<br><br><input type="text" name="adress"><br>
+<!---	E-mail:<> <input type="text" name="email"><br>
+--->	<br><br>
+	Buy: <input type="submit" value="Finalize purchase">
 	</form>
 
 <?php
