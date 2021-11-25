@@ -67,6 +67,8 @@ $('[data-toggle="tooltip"]').tooltip();
 <td><a href="/member_start.php"><button> Home </button></a></td>
 <td><a href="/productsForMember.php"><button> View products </button></a></td>
 <td><a href="/memberCart.php"><button> View cart </button></a></td>
+<td><a href="/paymentPage.php"><button> Pay </button></a></td>
+<td><a href="/memberOrders.php"><button> Your past orders </button></a></td>
 <td><a href="/member_account.php"><button> My account </button></a></td>
 <td><a href="/logout.php"><button> Log out </button></a></td>
 </tr>

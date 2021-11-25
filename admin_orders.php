@@ -73,7 +73,17 @@
                         <div class="page-header clearfix">
                             <h2 class="pull-left">Orders for admin</h2>
 
-
+    <!--ADMIN MENUE BAR-->
+<table>
+<tr>
+<td><a href="/admin_start.php"><button> Home </button></a></td>
+<td><a href="/admin_products.php"><button> Manage products </button></a></td>
+<td><a href="/admin_orders.php"><button> Manage orders </button></a></td>
+<td><a href="/admin_accounts.php"><button> Manage accounts </button></a></td>
+<td><a href="/logout.php"><button> Log out </button></a></td>
+</tr>
+</table>
+<br><br>
 
 
                         </div>
