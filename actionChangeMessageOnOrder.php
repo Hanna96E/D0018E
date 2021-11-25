@@ -9,7 +9,7 @@
     $orderId = $_REQUEST['orderId'];
     $userId = $_REQUEST['userId'];
 
-    $message = $_POST["amountInNumberBox"];
+    $message = $_POST["message"];
     $message = hannnas_test_input($message);
 
     $sql = "UPDATE orders SET message = $message WHERE orderId = $orderId AND userId = $userId;";
@@ -17,5 +17,6 @@
 
     header("Location: $redirectToString", true, 303); 
     exit;
+    disconnect($conn);
 
 ?>

@@ -1,5 +1,3 @@
-
-
 <?php
     session_start();
 ?>
@@ -31,7 +29,7 @@
 </script>
 <?php
     include "init.php";
-    include "functions101.php";
+//    include "functions101.php";
     
     $conn = connect();
     $userId = $_SESSION["userId"];
@@ -85,7 +83,6 @@
 <!--MEMBER MENUE BAR-->
 <table>
 <tr>
-<!---<td><?php// echo $row["id"]; ?></td>--->
 <td><a href="/member_start.php"><button> Home </button></a></td>
 <td><a href="/productsForMember.php"><button> View products </button></a></td>
 <td><a href="/memberCart.php"><button> View cart </button></a></td>
@@ -99,11 +96,9 @@
 
 
                         </div>
-                        
                         <?php
-                            showProductsForMember($conn,$userId,$orderId,'table table-bordered table-striped');
+                           // showProductsForMember($conn,$userId,$orderId,'table table-bordered table-striped');
                         ?>
-                        
                     </div>
                 </div>
             </div>

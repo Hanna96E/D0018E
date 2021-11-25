@@ -1,4 +1,4 @@
-x<?php
+<?php
 
 
 // security functions start-------------------------------------------------------------------
@@ -178,7 +178,7 @@ function showProductsForMember($conn,$userId,$orderId,$tableClassName){
 
   echo "<tr>";
   showTableHeader(array("name","price","info","image"));
-  echo "<th></th><th></th>";
+  echo ""cd /var/www/d0018e-g9.com/public_html""
   echo "</tr>";
   
   $sqlQueryResult = mysqli_query($conn,$sql);
@@ -270,6 +270,9 @@ function showMemberCart($conn,$userId,$orderId,$tableClassName){
     foreach ($columnNameToShowArray as $columnName) {
         echo "<td>";
         showSimple($conn,$columnName,$row);
+        if($columnName = "price"){
+            $totalCost = $totalCost + $row["price"];
+        }  
         echo "</td>";
     }
 
@@ -280,7 +283,10 @@ function showMemberCart($conn,$userId,$orderId,$tableClassName){
     addOrRemove1ToCartForMember($conn,$redirectToString,$userId,$orderId,$row,$amountInCart);
     echo "</td>";
 
+    echo "<td>";
     
+    //$conn
+    //$redirectToString
     $tableName = "itemList";
     $primaryKeyColumnNameArray = array("listId");
     $row = $itemListRowArray[$i];
