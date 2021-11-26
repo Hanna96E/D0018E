@@ -144,4 +144,7 @@ while($amount = mysqli_fetch_array($items)) {
 // We are only looking for input on paymentpage
 disconnect($conn);
 ?>
+
+</div></div></div></div></div>
 </body>
+</html>

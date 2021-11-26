@@ -115,3 +115,13 @@ while($row = mysqli_fetch_array($sqlQueryResult)) {
 }
 
 
+<?php
+// We are only looking for input on paymentpage
+disconnect($conn);
+?>
+
+</div></div></div></div></div>
+</body>
+</html>
+
+
