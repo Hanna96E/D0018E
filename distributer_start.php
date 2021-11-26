@@ -34,7 +34,7 @@
     include "functions101.php";
     
     $conn = connect();
-    $userId = $_SESSION["userId"];
+    //$userId = $_SESSION["userId"];
     //$userName = $_SESSION["name"];
     //$userStatus = $_SESSION["status"];
     
@@ -78,7 +78,12 @@
                             <h2 class="pull-left">Orders</h2>
 
 
-
+<!--distributer MENUE BAR-->
+<table>
+<tr>
+<td><a href="/logout.php"><button> Log out </button></a></td>
+</tr>
+</table><br><br>
 
                         </div>
                         <?php

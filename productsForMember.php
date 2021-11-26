@@ -29,7 +29,7 @@
 </script>
 <?php
     include "init.php";
-//    include "functions101.php";
+    include "functions101.php";
     
     $conn = connect();
     $userId = $_SESSION["userId"];
@@ -97,7 +97,7 @@
 
                         </div>
                         <?php
-                           // showProductsForMember($conn,$userId,$orderId,'table table-bordered table-striped');
+                            showProductsForMember($conn,$userId,$orderId,'table table-bordered table-striped');
                         ?>
                     </div>
                 </div>

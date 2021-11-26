@@ -9,5 +9,5 @@ session_destroy();
 ?>
 
 <script>
-	window.location.replace("http://bestshop.com/");
+	window.location.replace("/");
 </script>

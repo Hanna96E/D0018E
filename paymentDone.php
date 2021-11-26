@@ -54,7 +54,6 @@ switch(userType) {
 <!--MEMBER MENUE BAR-->
 <table>
 <tr>
-<!---<td><?php// echo $row["id"]; ?></td>--->
 <td><a href="/member_start.php"><button> Home </button></a></td>
 <td><a href="/productsForMember.php"><button> View products </button></a></td>
 <td><a href="/memberCart.php"><button> View cart </button></a></td>
@@ -66,7 +65,7 @@ switch(userType) {
 <?php
 
 	$adress = $_POST["adress"];
-	$email = $_POST["email"];
+	$totalCost = $_POST["totalCost"];
 
 //Create an order table to store the order
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -113,10 +112,6 @@ while($itemArray = mysqli_fetch_array($itemQuery)) {
 	// Updates the database
 	$sql = "UPDATE `products` SET `amount` = $newAmount WHERE `products`.`productId` = $itemArray[productId]";
 	$endResult = mysqli_query($conn, $sql);
-}
-
-	echo $amountArray[1];
-
 
 // Update the users orderId to a new one
 	$newOrderId = $orderId + 1;
@@ -124,7 +119,7 @@ while($itemArray = mysqli_fetch_array($itemQuery)) {
 	$sqlOrderId = "UPDATE `users` SET `orderId` = $newOrderId WHERE `users`.`userId` = $userId";
 	$orderIdUpdate = mysqli_query($conn, $sqlOrderId);
 }
-
+}
 ?>
 
 <body>

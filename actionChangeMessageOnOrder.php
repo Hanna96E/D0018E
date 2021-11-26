@@ -10,9 +10,10 @@
     $userId = $_REQUEST['userId'];
 
     $message = $_POST["message"];
-    $message = hannnas_test_input($message);
+     
+    
 
-    $sql = "UPDATE orders SET message = $message WHERE orderId = $orderId AND userId = $userId;";
+    $sql = "UPDATE orders SET message = '$message' WHERE orderId = $orderId AND userId = $userId;";
     mysqli_query($conn,$sql);
 
     header("Location: $redirectToString", true, 303); 

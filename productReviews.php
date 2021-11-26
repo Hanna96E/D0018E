@@ -66,19 +66,20 @@ $sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `produ
         $hasProd = mysqli_fetch_array($sqlQueryHasProd);
         if (($hasProd["userId"]==$userId)){
                 echo "Would you like to give a review?";?>
+
 	<td><a href="/giveReview.php"><button> Give a review </button></a></td>
 
 <?php
-/*function showReviews($conn,$productId){
+function showReviews($conn,$productId){
 
     $textOnShowReviewButton = "show review";
-    $Reviews = "productReviews.php"
+    $Reviews = "giveReview.php"
     echo "<form method="POST" action="actionChangeOrderStatus.php?productId=$productId">";
         echo "<input type="submit" name="";
         echo $textOnShowReviewButton; // unique name
         echo "" value="".$textOnShowReviewButton."">";
     echo "</form>";
-}*/
+}
 
 
 

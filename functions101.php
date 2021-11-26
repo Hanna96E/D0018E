@@ -47,7 +47,7 @@ function addOrRemove1ToCartForMember($conn,$redirectToString,$userId,$orderId,$r
     $textOnRemoveButton = "remove";
 
     $nameForNumberBox = "amountInNumberBox"; // do not change
-    $textOnNumberSubmitButton = "submit number";
+    $textOnNumberSubmitButton = "change";
     
     $productIdValue = $row["productId"];
 
@@ -63,7 +63,7 @@ function addOrRemove1ToCartForMember($conn,$redirectToString,$userId,$orderId,$r
 
     echo "<form method=\"POST\" action=\"actionAddOrRemove1ToCartForMember.php?redirectToString=$redirectToString&formEnum=1&orderId=$orderId&userId=$userId&productIdValue=$productIdValue&amountInCart=$amountInCart\">";
                 
-      echo "<input type=\"number\" name=\"";
+      echo "<input style= \"width:50px;\" type=\"number\" name=\"";
       echo $nameForNumberBox;
       echo "\" value=\"".$amountInCart."\">";
       
@@ -117,7 +117,8 @@ function changeOrderMessage($conn,$orderId,$userId,$redirectToString,$message){
 
     $textOnSubmitMessageButton = "submit message"; // do not change
 
-    echo "<form method=\"POST\" action=\"actionChangeOrderMessage.php?redirectToString=$redirectToString&orderId=$orderId&userId=$userId\">";
+
+    echo "<form method=\"POST\" action=\"actionChangeMessageOnOrder.php?redirectToString=$redirectToString&orderId=$orderId&userId=$userId\">";
         
         
         echo "<label for=\"message\">Message: </label><br><br>";
@@ -173,12 +174,11 @@ function showProductsForMember($conn,$userId,$orderId,$tableClassName){
 
   $sql = "SELECT * FROM products;";
   $columnNameToShowArray = array("name","price","info","image");
-
   echo "<table class='$tableClassName'>";
 
   echo "<tr>";
   showTableHeader(array("name","price","info","image"));
-  echo "<th></th>";
+  echo "<th></th><th></th>";
   echo "</tr>";
   
   $sqlQueryResult = mysqli_query($conn,$sql);
@@ -223,6 +223,37 @@ function showProductsForMember($conn,$userId,$orderId,$tableClassName){
 
 
 
+// specific functions for products.php start --------------------------------------------------------------------------------------------------
+
+
+
+function showProducts($conn,$tableClassName){
+
+  $sql = "SELECT * FROM products;";
+  $columnNameToShowArray = array("name","price","info","image");
+  echo "<table class='$tableClassName'>";
+
+  echo "<tr>";
+  showTableHeader(array("name","price","info","image"));
+  echo "</tr>";
+
+  $sqlQueryResult = mysqli_query($conn,$sql);
+  while ($row = mysqli_fetch_assoc($sqlQueryResult))
+  {
+      echo "<tr>";
+      foreach ($columnNameToShowArray as $columnName) {
+          echo "<td>";
+          showSimple($conn,$columnName,$row);
+          echo "</td>";
+      }
+      echo "</tr>";
+  }
+   echo "</table>";
+}
+
+
+// specific functions for products.php stop ----------------------------------------------------------------------------------------------
+
 
 
 // specific functions for membersCart.php start ----------------------------------------------------------------------------------------------------
@@ -231,8 +262,7 @@ function showProductsForMember($conn,$userId,$orderId,$tableClassName){
 function showMemberCart($conn,$userId,$orderId,$tableClassName){
   
   $redirectToString = "memberCart.php";
-
-  $totalCost = 0;
+  
 
   $productIdInCartArray = array();
   $amountInCartArray = array(); 
@@ -259,7 +289,7 @@ function showMemberCart($conn,$userId,$orderId,$tableClassName){
   echo "<th></th>";
   echo "</tr>";
 
-
+  $totalCost = 0;
   $i = 0;
   foreach ($productIdInCartArray as $productIdInCart) {
     $sql = "SELECT * FROM products WHERE productId = $productIdInCart";
@@ -270,9 +300,14 @@ function showMemberCart($conn,$userId,$orderId,$tableClassName){
     foreach ($columnNameToShowArray as $columnName) {
         echo "<td>";
         showSimple($conn,$columnName,$row);
-        if($columnName = "price"){
-            $totalCost = $totalCost + $row["price"];
-        }  
+	
+	if($columnName == "price"){
+	    $priceTmp = $row["price"];
+	    $amountTmp = $amountInCartArray[$i];
+	    $totalCost = $totalCost + $priceTmp * $amountTmp;
+	}
+
+        
         echo "</td>";
     }
 
@@ -283,16 +318,6 @@ function showMemberCart($conn,$userId,$orderId,$tableClassName){
     addOrRemove1ToCartForMember($conn,$redirectToString,$userId,$orderId,$row,$amountInCart);
     echo "</td>";
 
-    echo "<td>";
-    
-    //$conn
-    //$redirectToString
-    $tableName = "itemList";
-    $primaryKeyColumnNameArray = array("listId");
-    $row = $itemListRowArray[$i];
-    deleteRow($conn,$redirectToString,$tableName,$primaryKeyColumnNameArray,$row);
-    
-    echo "</td>";
 
     echo "</tr>";
 
@@ -428,9 +453,11 @@ function showOrdersForUser($conn,$userId,$tableClassForVisual){
         $sqlForOrders = "SELECT * FROM orders WHERE status = $orderStatusIterator AND userId = $userId;";
         $sqlForOrdersQueryResult = mysqli_query($conn,$sqlForOrders);
 
-        echo "<table class= '$tableClassForVisual'>";
 
         while($orderRowWithSpecificStatus = mysqli_fetch_assoc($sqlForOrdersQueryResult)){
+	    
+             echo "<table class= '$tableClassForVisual'>";
+
             $orderId = $orderRowWithSpecificStatus["orderId"];
             $adress = $orderRowWithSpecificStatus["adress"];
             $orderStatus = $orderRowWithSpecificStatus["status"]; // (unnecessarry for now, can use $orderStatusIterator)
@@ -499,17 +526,10 @@ function showOrdersForUser($conn,$userId,$tableClassForVisual){
                     //echo "<td></td><td></td><td></td><td></td>";
                 echo "</tr>";
             }
-
-            echo "<tr></tr>";
-            echo "<tr>";
+	    echo "</table>";
             echo "TotalCost: ".$totalCost;
-            echo "</tr>";
-            echo "<tr></tr>";
-
+	    echo "<br><br><br><br>";
         }
-
-        echo "</table>";
-
     }
 
 
