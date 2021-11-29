@@ -62,6 +62,7 @@ switch(userType) {
 // If so give them acces to give a review
 //$productId = "1";
 //$userId = "1";
+/*
 $sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `productId`=$productId";
         $sqlQueryHasProd = mysqli_query($conn,$sqlHasProd);
         $hasProd = mysqli_fetch_array($sqlQueryHasProd);
@@ -70,7 +71,9 @@ $sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `produ
 ?>
                 <td><a href="/giveReview.php"><button> Give a review </button></a></td>
 <?php
-}   
+} */
+
+echo "leave review";  
 ?>
 
 </tr>
@@ -80,7 +83,7 @@ $sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `produ
     // TEST $userId = "1";
     $productId = "1";
         //$productId = $_POST["productId"];
-    $productId = $_REQUEST['productId'];
+    //$productId = $_REQUEST['productId'];
 //Print the review text for productId
     $sql = "SELECT `reviewText`,`numStar` FROM `reviews` WHERE `productId`= $productId";
     $sqlQueryResult = mysqli_query($conn,$sql);
@@ -100,7 +103,7 @@ while($row = mysqli_fetch_array($sqlQueryResult)) {
     </tr>
 <?php
 }
-
+?>
 
 <?php
 // We are only looking for input on paymentpage
