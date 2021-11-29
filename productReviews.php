@@ -1,5 +1,4 @@
 <?php
-//
     session_start();
 ?>
 <script>
@@ -21,16 +20,16 @@ switch(userType) {
         break;
 
     default:
-        window.location.replace("http://130.240.200.56");
+        window.location.replace("/");
 
 }
 
 </script>
 <?php
-    //Setup
     include "init.php";
-    include "functions100.php";
-
+    //include "functions100.php";
+    include "functions101.php";
+    
     $conn = connect();
     $userId = $_SESSION["userId"];
     $userName = $_SESSION["name"];
@@ -41,97 +40,81 @@ switch(userType) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Give a review - bestshop</title>
+    <title>Reviews - bestshop</title>
 </head>
 <?php
-    // Formating (can be removed, but looks bad)
-        include "headerTabular.php";
+    include "headerTabular.php";
 ?>
 
-<h2> Give a reviews </h2>
+<h2> Reviews </h2>
 
 <!--MEMBER MENUE BAR-->
-<table>
+<table><tr>
 <td><a href="/member_start.php"><button> Home </button></a></td>
 <td><a href="/productsForMember.php"><button> View products </button></a></td>
 <td><a href="/memberCart.php"><button> View cart </button></a></td>
 <td><a href="/logout.php"><button> Log out </button></a></td>
-</table>
-
-<body>
-<p></p>
-<!--
-<p class="error">* required field</p>
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-
-<label for="reviewText">Thoughts? </label><br><br> 
-
-<textarea id="reviewText" name="reviewText" rows="10" cols="50"
- placeholder="What did you think?"></textarea>
-
-<br><span class="error"> <?php echo $reviewErr;?></span>
-
-    <br><br>
-    <input type="submit" name="submit" value="Add product"> 
-    </td></form></tr>
--->
-
+<?php //</tr></table><br><br>
+?>
 
 <?php
-// Set error and Request Method == POST
-// So that when POST is sent we can handle it
-
-//$userId = "2";
+// Check if user has product
+// If so give them acces to give a review
 $productId = "1";
-$reviewErr = "";
+//$userId = "1";
+$sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `productId`=$productId";
+        $sqlQueryHasProd = mysqli_query($conn,$sqlHasProd);
+        $hasProd = mysqli_fetch_array($sqlQueryHasProd);
+        if (($hasProd["userId"]==$userId)){
+                echo "Would you like to give a review?";?>
 
-// Runs after reviewText has been given
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//echo "Try me!";
-
-      if (empty($_POST["reviewText"])) {
-    $reviewErr = "Review is required";
- //   echo $reviewErr;
-  } else {
-    $reviewText = $_POST["reviewText"];
-    echo $reviewText;
-    echo "testRe";
-  }
-
-   if($reviewErr == ""){
-    insertReview($conn, $productId, $userId, $reviewText);
-  }
-}
-//Set the outlook of page
-?>
-
-<p class="error">* required field</p>
-<?php   // So that we send the values to the same page
-?>  <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-
-<label for="reviewText">Thoughts? </label><br><br>
-
-<textarea id="reviewText" name="reviewText" rows="10" cols="50"
- placeholder="What did you think?"></textarea>
-
-<br><span class="error"> <?php echo $reviewErr;?></span>
-
-    <br><br>
-    <input type="submit" name="submit" value="Give Review">
-
+    <td><a href="/giveReview.php"><button> Give a review </button></a></td>
 
 <?php
-// Sends a sql query to the database, so that the reviewText will be inserted
-function insertReview($conn, $productId, $userId, $reviewText){
-$sql = "INSERT INTO `reviews` (`productId`, `userId`, `reviewText`, `numStar`) VALUES ('$productId', '$userId', '$reviewText', '5') ";
+function showReviews($conn,$productId){
 
-if (mysqli_query($conn, $sql)) {
-        //echo "<script>alert('Your product was successfully added.');</script>";
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    }
+    $textOnShowReviewButton = "show review";
+    $Reviews = "giveReview.php"
+    echo "<form method="POST" action="actionChangeOrderStatus.php?productId=$productId">";
+        echo "<input type="submit" name="";
+        echo $textOnShowReviewButton; // unique name
+        echo "" value="".$textOnShowReviewButton."">";
+    echo "</form>";
 }
+
+
+
+        }
 ?>
+
+</tr>
+
+<?php
+//Get productId
+    // TEST $userId = "1";
+    $productId = "1";
+        //$productId = $_POST["productId"];
+    $productId = $_REQUEST['productId'];
+//Print the review text for productId
+    $sql = "SELECT `reviewText`,`numStar` FROM `reviews` WHERE `productId`= $productId";
+    $sqlQueryResult = mysqli_query($conn,$sql);
+//  $row = mysqli_fetch_assoc($sqlQueryResult);
+?>
+
+
+<table class='table table-bordered table-striped'>
+<tr> <td>Review</td> <td>Score</td> </tr>
+
+<?php
+// Running through and printing the users shopping cart
+while($row = mysqli_fetch_array($sqlQueryResult)) {
+
+?>  <tr>
+    <td><?php echo $row["reviewText"]; ?></td> <td><?php echo $row["numStar"]; ?></td>
+    </tr>
+<?php
+}
+
 
 <?php
 // We are only looking for input on paymentpage
