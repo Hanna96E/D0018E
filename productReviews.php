@@ -27,7 +27,7 @@ switch(userType) {
 </script>
 <?php
     include "init.php";
-    //include "functions100.php";
+    include "functions100.php";
     include "functions101.php";
     
     $conn = connect();
@@ -60,31 +60,17 @@ switch(userType) {
 <?php
 // Check if user has product
 // If so give them acces to give a review
-$productId = "1";
+//$productId = "1";
 //$userId = "1";
 $sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `productId`=$productId";
         $sqlQueryHasProd = mysqli_query($conn,$sqlHasProd);
         $hasProd = mysqli_fetch_array($sqlQueryHasProd);
         if (($hasProd["userId"]==$userId)){
-                echo "Would you like to give a review?";?>
-
-    <td><a href="/giveReview.php"><button> Give a review </button></a></td>
-
+                echo "Would you like to give a review?";
+?>
+                <td><a href="/giveReview.php"><button> Give a review </button></a></td>
 <?php
-function showReviews($conn,$productId){
-
-    $textOnShowReviewButton = "show review";
-    $Reviews = "giveReview.php"
-    echo "<form method="POST" action="actionChangeOrderStatus.php?productId=$productId">";
-        echo "<input type="submit" name="";
-        echo $textOnShowReviewButton; // unique name
-        echo "" value="".$textOnShowReviewButton."">";
-    echo "</form>";
-}
-
-
-
-        
+}   
 ?>
 
 </tr>
