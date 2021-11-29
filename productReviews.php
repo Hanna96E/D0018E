@@ -72,15 +72,14 @@ $sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `produ
                 <td><a href="/giveReview.php"><button> Give a review </button></a></td>
 <?php
 } */
-
-echo "leave review";  
+  
 ?>
 
 </tr>
 
 <?php
 //Get productId
-    // TEST $userId = "1";
+    $userId = "2";
     $productId = "1";
         //$productId = $_POST["productId"];
     //$productId = $_REQUEST['productId'];
@@ -99,8 +98,10 @@ echo "leave review";
 while($row = mysqli_fetch_array($sqlQueryResult)) {
 
 ?>  <tr>
-    <td><?php echo $row["reviewText"]; ?></td> <td><?php echo $row["numStar"]; ?></td>
-    </tr>
+    <td><?php echo $row["reviewText"]; ?>
+    </td><td>
+    <?php echo $row["numStar"]; ?>
+    </td></tr>
 <?php
 }
 ?>
