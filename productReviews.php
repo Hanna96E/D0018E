@@ -84,7 +84,7 @@ function showReviews($conn,$productId){
 
 
 
-        }
+        
 ?>
 
 </tr>
