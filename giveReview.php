@@ -29,7 +29,6 @@ switch(userType) {
 <?php
     //Setup
     include "init.php";
-    include "functions100.php";
 
     $conn = connect();
     $userId = $_SESSION["userId"];
@@ -46,6 +45,7 @@ switch(userType) {
 <?php
 	// Formating (can be removed, but looks bad)
         include "headerTabular.php";
+    // Dont forget 5 div at the end
 ?>
 
 <h2> Give a reviews </h2>
@@ -81,22 +81,16 @@ switch(userType) {
 // Set error and Request Method == POST
 // So that when POST is sent we can handle it
 
-//$userId = "2";
-$productId = "1";
+$productId = $_REQUEST['productId'];
 $reviewErr = "";
 
 // Runs after reviewText has been given
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-echo "Try me!";
-
-      if (empty($_POST["reviewText"])) {
-    $reviewErr = "Review is required";
-	echo $reviewErr;
-  } else {
-    $reviewText = $_POST["reviewText"];
-	echo $reviewText;
-	echo "testRe";
-  }
+    if (empty($_POST["reviewText"])) {
+        $reviewErr = "Review is required";
+    } else {
+        $reviewText = $_POST["reviewText"];
+	}
 
    if($reviewErr == ""){
    	insertReview($conn, $productId, $userId, $reviewText);
@@ -106,9 +100,9 @@ echo "Try me!";
 ?>
 
 <p class="error">* required field</p>
-<?php	// So that we send the values to the same page
-?>  <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+<?php	// So that we send the values to the same page?>  
 
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 <label for="reviewText">Thoughts? </label><br><br>
 
 <textarea id="reviewText" name="reviewText" rows="10" cols="50"
@@ -132,5 +126,7 @@ if (mysqli_query($conn, $sql)) {
 	}
 }
 ?>
-</body>
 
+</div></div></div></div></div>
+</body>
+</html>
