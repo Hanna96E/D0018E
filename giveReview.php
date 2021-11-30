@@ -82,6 +82,9 @@ switch(userType) {
 // So that when POST is sent we can handle it
 
 $productId = $_REQUEST['productId'];
+echo "Review: ";
+echo $productId;
+
 $reviewErr = "";
 
 // Runs after reviewText has been given
