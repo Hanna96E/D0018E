@@ -71,8 +71,8 @@ $sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `produ
 
  $textOnShowReviewButton = "Give a review";
     $Reviews = "giveReview.php";
-    echo "<td><button><form method=\"POST\" action=\"$Reviews?productId=$productId\">";
-        echo "<input type=\"submit\" name=\"";
+    echo "<td><form method=\"POST\" action=\"$Reviews?productId=$productId\">";
+        echo "<button><input type=\"submit\" name=\"";
         echo $textOnShowReviewButton;
         echo "\" value=\"".$textOnShowReviewButton."\">";
     echo "</form></button><td>";
