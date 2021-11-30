@@ -180,10 +180,4 @@ if (mysqli_query($conn, $sql)) {
 
 </div></div></div></div></div>
 </body>
-
-<?php
-include "productReviews.php";
-echo "-test-";
-?>
-
 </html>
