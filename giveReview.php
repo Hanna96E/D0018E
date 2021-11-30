@@ -183,7 +183,7 @@ if (mysqli_query($conn, $sql)) {
 </body>
 
 <?php
-include "productReview.php";
+include "productReviews.php";
 ?>
 
 </html>
