@@ -85,16 +85,14 @@ switch(userType) {
 $productId = $_REQUEST['productId'];
 echo "star: ";
 //echo $productId;
-$star = $_POST["star"];
-echo $star;
 
-$numStar = 5;
+$numStar = $_POST["star"];
 
 $reviewErr = "";
 
 // Runs after reviewText has been given
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (empty($_POST["reviewText"])) {
+    if (empty($_POST["reviewText"]) && empty($numStar) ) {
         $reviewErr = "Review is required";
     } else {
         $reviewText = $_POST["reviewText"];
