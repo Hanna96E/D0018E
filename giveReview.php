@@ -103,9 +103,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <p class="error">* required field</p>
-<?php	// So that we send the values to the same page?>  
+<?php	// So that we send the values to the same page
+//action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"
+?>  
 
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+<form method="post" action="giveReview.php?productId=$productId">
 <label for="reviewText">Thoughts? </label><br><br>
 
 <textarea id="reviewText" name="reviewText" rows="10" cols="50"
