@@ -100,6 +100,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
    if($reviewErr == ""){
    	insertReview($conn, $productId, $userId, $reviewText, $numStar);
+    echo "<form method=\"POST\" action=\"productReview.php?productId=$productId\">";
+    echo "</form><td>";
   }
 }
 //Set the outlook of page
