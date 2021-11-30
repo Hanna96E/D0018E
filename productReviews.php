@@ -71,18 +71,18 @@ $sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `produ
 
  $textOnShowReviewButton = "Give a review";
     $Reviews = "giveReview.php";
-    echo "<form method=\"POST\" action=\"$Reviews?productId=$productId\">";
+    echo "<td><form method=\"POST\" action=\"$Reviews?productId=$productId\">";
         echo "<input type=\"submit\" name=\"";
         echo $textOnShowReviewButton;
         echo "\" value=\"".$textOnShowReviewButton."\">";
-    echo "</form>";
+    echo "</form><td>";
 
-
+/*
 ?>
 
     <td><a href="/giveReview.php"><button> Give a review </button></a></td>
 
-<?php
+<?php*/
 /*function showReviews($conn,$productId){
 
     $textOnShowReviewButton = "show review";
