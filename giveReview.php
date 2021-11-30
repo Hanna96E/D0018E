@@ -107,9 +107,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 /*
 action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"
 */
-?>  
-
-<form method="post" action="giveReview.php?productId=$productId">
+echo "<form method=\"POST\" action=\"giveReview.php?productId=$productId\">";
+?> 
 <label for="reviewText">Thoughts? </label><br><br>
 
 <textarea id="reviewText" name="reviewText" rows="10" cols="50"
