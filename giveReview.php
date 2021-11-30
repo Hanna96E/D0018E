@@ -92,7 +92,7 @@ $reviewErr = "";
 
 // Runs after reviewText has been given
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (empty($_POST["reviewText"]) && empty($numStar) ) {
+    if (empty($_POST["reviewText"]) || empty($numStar) ) {
         $reviewErr = "Review is required";
     } else {
         $reviewText = $_POST["reviewText"];
