@@ -83,8 +83,10 @@ switch(userType) {
 // So that when POST is sent we can handle it
 
 $productId = $_REQUEST['productId'];
-echo "Review: ";
-echo $productId;
+echo "star: ";
+//echo $productId;
+$star = $_POST["star"];
+echo $star;
 
 $numStar = 5;
 
