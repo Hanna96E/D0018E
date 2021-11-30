@@ -71,11 +71,11 @@ $sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `produ
 
  $textOnShowReviewButton = "Give a review";
     $Reviews = "giveReview.php";
-    echo "<td><form method=\"POST\" action=\"$Reviews?productId=$productId\">";
+    echo "<td><button><form method=\"POST\" action=\"$Reviews?productId=$productId\">";
         echo "<input type=\"submit\" name=\"";
         echo $textOnShowReviewButton;
         echo "\" value=\"".$textOnShowReviewButton."\">";
-    echo "</form><td>";
+    echo "</form></button><td>";
 
 /*
 ?>
@@ -83,19 +83,6 @@ $sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `produ
     <td><a href="/giveReview.php"><button> Give a review </button></a></td>
 
 <?php*/
-/*function showReviews($conn,$productId){
-
-    $textOnShowReviewButton = "show review";
-    $Reviews = "productReviews.php"
-    echo "<form method="POST" action="actionChangeOrderStatus.php?productId=$productId">";
-        echo "<input type="submit" name="";
-        echo $textOnShowReviewButton; // unique name
-        echo "" value="".$textOnShowReviewButton."">";
-    echo "</form>";
-}*/
-
-
-
         }
 ?>
 
