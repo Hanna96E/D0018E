@@ -85,6 +85,8 @@ $productId = $_REQUEST['productId'];
 echo "Review: ";
 echo $productId;
 
+$numStar = 5;
+
 $reviewErr = "";
 
 // Runs after reviewText has been given
@@ -96,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 
    if($reviewErr == ""){
-   	insertReview($conn, $productId, $userId, $reviewText);
+   	insertReview($conn, $productId, $userId, $reviewText, $numStar);
   }
 }
 //Set the outlook of page
@@ -116,14 +118,55 @@ echo "<form method=\"POST\" action=\"giveReview.php?productId=$productId\">";
 
 <br><span class="error"> <?php echo $reviewErr;?></span>
 
+
+
+<p>Please select star ranking of the product:</p>
+  <input type="radio" id="star1" name="star" value="1">
+  <label for="star1">
+    <span class="fa fa-star checked"></span>
+  </label><br>
+  
+  <input type="radio" id="star2" name="star" value="2">
+  <label for="star2">
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+  </label><br>  
+  
+  <input type="radio" id="star3" name="star" value="3">
+  <label for="star3">
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+  </label><br>
+  
+  
+  <input type="radio" id="star4" name="star" value="4">
+  <label for="star4">
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+  </label><br>  
+  
+  <input type="radio" id="star5" name="star" value="5">
+  <label for="star5">
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+    <span class="fa fa-star checked"></span>
+  </label><br>
+
+
+
     <br><br>
     <input type="submit" name="submit" value="Give Review">
-
+</form>
 
 <?php
 // Sends a sql query to the database, so that the reviewText will be inserted
-function insertReview($conn, $productId, $userId, $reviewText){
-$sql = "INSERT INTO `reviews` (`productId`, `userId`, `reviewText`, `numStar`) VALUES ('$productId', '$userId', '$reviewText', '5') ";
+function insertReview($conn, $productId, $userId, $reviewText, $numStar){
+$sql = "INSERT INTO `reviews` (`productId`, `userId`, `reviewText`, `numStar`) VALUES ('$productId', '$userId', '$reviewText', '$numStar') ";
 
 if (mysqli_query($conn, $sql)) {
   		//echo "<script>alert('Your product was successfully added.');</script>";
