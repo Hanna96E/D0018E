@@ -27,7 +27,6 @@ switch(userType) {
 </script>
 <?php
     include "init.php";
-//    include "functions100.php";
 
     $conn = connect();
     $userId = $_SESSION["userId"];
@@ -60,14 +59,27 @@ switch(userType) {
 <?php
 // Check if user has product
 // If so give them acces to give a review
-$productId = "1";
+//$productId = "1";
+$productId = $_REQUEST['productId'];
 //$userId = "1";
 $sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `productId`=$productId";
         $sqlQueryHasProd = mysqli_query($conn,$sqlHasProd);
         $hasProd = mysqli_fetch_array($sqlQueryHasProd);
         if (($hasProd["userId"]==$userId)){
                 echo "Would you like to give a review?";
+
+
+ $textOnShowReviewButton = "Give a review";
+    $Reviews = "giveReview.php";
+    echo "<form method=\"POST\" action=\"$Reviews?productId=$productId\">";
+        echo "<input type=\"submit\" name=\"";
+        echo $textOnShowReviewButton;
+        echo "\" value=\"".$textOnShowReviewButton."\">";
+    echo "</form>";
+
+
 ?>
+
     <td><a href="/giveReview.php"><button> Give a review </button></a></td>
 
 <?php
@@ -92,9 +104,9 @@ $sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `produ
 <?php
 //Get productId
     // TEST $userId = "1";
-    $productId = "1";
+//    $productId = "1";
         //$productId = $_POST["productId"];
-//    $productId = $_REQUEST['productId'];
+    //$productId = $_REQUEST['productId'];
 //Print the review text for productId
     $sql = "SELECT `reviewText`,`numStar` FROM `reviews` WHERE `productId`= $productId";
     $sqlQueryResult = mysqli_query($conn,$sql);
