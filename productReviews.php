@@ -59,45 +59,29 @@ switch(userType) {
 <?php
 // Check if user has product
 // If so give them acces to give a review
-//$productId = "1";
 $productId = $_REQUEST['productId'];
-//$userId = "1";
 $sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `productId`=$productId";
         $sqlQueryHasProd = mysqli_query($conn,$sqlHasProd);
         $hasProd = mysqli_fetch_array($sqlQueryHasProd);
         if (($hasProd["userId"]==$userId)){
-                echo "Would you like to give a review?";
-
-
- $textOnShowReviewButton = "Give a review";
-    $Reviews = "giveReview.php";
-    echo "<td><form method=\"POST\" action=\"$Reviews?productId=$productId\">";
-        echo "<input type=\"submit\" name=\"";
-        echo $textOnShowReviewButton;
-        echo "\" value=\"".$textOnShowReviewButton."\">";
-    echo "</form><td>";
-
-/*
-?>
-
-    <td><a href="/giveReview.php"><button> Give a review </button></a></td>
-
-<?php*/
+            echo "Would you like to give a review?";
+            $textOnShowReviewButton = "Give a review";
+            $Reviews = "giveReview.php";
+            echo "<td><form method=\"POST\" action=\"$Reviews?productId=$productId\">";
+            echo "<input type=\"submit\" name=\"";
+            echo $textOnShowReviewButton;
+            echo "\" value=\"".$textOnShowReviewButton."\">";
+            echo "</form><td>";
         }
 ?>
 
-</tr>
+</tr></table><br><br>
 
 <?php
 //Get productId
-    // TEST $userId = "1";
-//    $productId = "1";
-        //$productId = $_POST["productId"];
-    //$productId = $_REQUEST['productId'];
 //Print the review text for productId
     $sql = "SELECT `reviewText`,`numStar` FROM `reviews` WHERE `productId`= $productId";
     $sqlQueryResult = mysqli_query($conn,$sql);
-//  $row = mysqli_fetch_assoc($sqlQueryResult);
 ?>
 
 
@@ -107,7 +91,6 @@ $sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `produ
 <?php
 // Running through and printing the users shopping cart
 while($row = mysqli_fetch_array($sqlQueryResult)) {
-
 ?>  <tr>
     <td><?php echo $row["reviewText"]; ?></td> <td><?php echo $row["numStar"]; ?></td>
     </tr>
@@ -115,6 +98,6 @@ while($row = mysqli_fetch_array($sqlQueryResult)) {
 }
 ?>
 
-
+</div></div></div></div></div>
 </body>
-
+</html>
