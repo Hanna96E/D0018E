@@ -83,7 +83,6 @@ switch(userType) {
 // So that when POST is sent we can handle it
 
 $productId = $_REQUEST['productId'];
-echo "star: ";
 //echo $productId;
 
 $numStar = $_POST["star"];
@@ -184,6 +183,7 @@ if (mysqli_query($conn, $sql)) {
 
 <?php
 include "productReviews.php";
+echo "-test-";
 ?>
 
 </html>
