@@ -27,7 +27,6 @@ switch(userType) {
 </script>
 <?php
     include "init.php";
-    include "functions100.php";
     
     $conn = connect();
     $userId = $_SESSION["userId"];
@@ -47,23 +46,56 @@ switch(userType) {
 <html lang="en">
 <head>
 	<title>Payment Page - bestshop</title>
+
+    <style>
+    .error {color: #FF0000;}
+
+
+
+input[type=submit] {
+  width: 30%;
+  background-color: #0099FF;
+  color: white;
+  padding: 14px 20px;
+  margin: 4px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #0066FF;
+}
+
+input[type=text], input[type=password], input[type=email] {
+  width: 30%;
+  padding: 12px 8px;
+  margin: 4px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+textarea {
+  width: 30%;
+  height: 170px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  font-size: 16px;
+  resize: none;
+}
+
+    </style>
+
 </head>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<style type="text/css">
-.bs-example{
-margin: 20px;
-}
-</style>
-<script type="text/javascript">
-$(document).ready(function(){
-$('[data-toggle="tooltip"]').tooltip();
-});
-</script>
+<?php
+include "styleHeader.php" 
+?>
 
 <body>
 
@@ -97,48 +129,127 @@ $userName = mysqli_query($conn,$userName);
 $name = mysqli_fetch_array($userName);
 ?>
 	<h4> Welcome <?php echo $name[name];?> </h4>
-
 <?php
+
 // Tell of what products are in the shoping cart
 $sqlItems = "SELECT `productId`, `amount` FROM `itemList` WHERE `orderId`=$orderId AND `userId`=$userId";
 $items = mysqli_query($conn,$sqlItems); //Items in cart
-$prodInfo = mysqli_query($conn,"SELECT `name`,`price`,`image` FROM products");
+?>
 
-?>
-<?php
-if (mysqli_num_rows($prodInfo) > 0 && mysqli_num_rows($items) > 0 ) {
-?>
 <table class='table table-bordered table-striped'>
 <tr> <td>Product</td> <td>Price</td> <td>Amount</td> <td></td> </tr>
 
 <?php
-$totalCost = "0";
+
+$totalCost = 0;
 // Running through and printing the users shopping cart
-while($amount = mysqli_fetch_array($items)) {
-	$row = mysqli_fetch_array($prodInfo);
+while($cartInfo = mysqli_fetch_array($items)) {
 
-	$totalCost = $totalCost + $row["price"]*$amount["amount"];
+    //Call for each product
+    $prodId = $cartInfo["productId"];
+    $prodInfo = mysqli_query($conn,"SELECT `name`,`price`,`image` FROM `products` WHERE `productId`=$prodId");
+	
+    $row = mysqli_fetch_array($prodInfo);
 
+	$totalCost = $totalCost + $row["price"]*$cartInfo["amount"];
+
+    //Print out in table
 ?>	<tr>
 	<td><?php echo $row["name"]; ?></td>
 	<td><?php echo $row["price"]; ?></td>
-        <td><?php echo $amount["amount"]; ?></td>
-	<td><img src="<?php echo $row['image']; ?>" style="width:50px;height:50px;"  >
+        <td><?php echo $cartInfo["amount"]; ?></td>
+	<td><img src="<?php echo $row["image"]; ?>" style="width:50px;height:50px;"  >
 	</tr>
 <?php
-}}
+}
+// END OF WHILE LOOP
 ?>
 </table>
 
-<?php 	echo "Total cost: ";
-	echo $totalCost; ?>
+<?php  echo "Total cost: ";
+	   echo $totalCost; 
 
+// THE ADREES IS REQUIERD
+/*
 	<form action="/paymentDone.php" method="post"><br>
 	Adress:<br><br><input type="text" name="adress"><br>
 <!---	E-mail:<> <input type="text" name="email"><br>
 --->	<br><br>
 	Buy: <input type="submit" value="Finalize purchase">
-	</form>
+	</form>*/
+?>
+
+<?php
+$nameErr = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // collect value of input field
+    $name = htmlspecialchars($_REQUEST['fname']);
+    if (empty($_POST["name"])) {
+        $nameErr = "Adress is empty";
+    } else {
+        // Move to next page
+        echo "string ";
+        echo "<script>window.location.href = '/paymentDone.php';</script>";
+    }
+}
+
+/*
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
+
+
+<p><span class="error">* required field</span></p>
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
+  Name: <input type="text" name="name">
+  <span class="error">* <?php echo $nameErr;?></span>
+  <input type="submit" name="submit" value="Submit">  
+  <br><br>
+
+
+
+
+
+ */
+?>
+<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+  <br>
+  Adress <span class="error">* <?php echo $nameErr;?></span>
+  <br>
+  <input type="text" name="name">
+  <br>
+  <?php
+  // Add Discounts
+  ?>
+
+
+  <input type="submit" value="Finalize purchase">
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</form>
+
+
+
 
 <?php
 // We are only looking for input on paymentpage
