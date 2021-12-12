@@ -51,6 +51,56 @@ $('[data-toggle="tooltip"]').tooltip();
 </script>
 <style>
 .error {color: #FF0000;}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #0099FF;
+  color: white;
+  padding: 14px 20px;
+  margin: 4px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #0066FF;
+}
+
+input[type=text], input[type=password], input[type=email] {
+  width: 100%;
+  padding: 12px 8px;
+  margin: 4px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+div.account {
+  position: absolute;
+  left: 0px;
+  top: 100px;
+  background-color: #cce6ff;
+  border: 10px solid #cce6ff;
+  padding: 10px;
+  margin: 10px;
+  overflow: auto;
+  border-radius: 15px;
+}
+
+div.new {
+  position: absolute;
+  right: 0px;
+  top: 100px;
+  background-color: #cce6ff;
+  width: 600px;
+  border: 10px solid #cce6ff;
+  padding: 10px;
+  margin: 10px;
+  overflow: auto;
+  border-radius: 15px;
+}
 </style>
 </head>
 <body>
@@ -67,18 +117,12 @@ $('[data-toggle="tooltip"]').tooltip();
 <td><a href="/member_start.php"><button> Home </button></a></td>
 <td><a href="/productsForMember.php"><button> View products </button></a></td>
 <td><a href="/memberCart.php"><button> View cart </button></a></td>
-<td><a href="/paymentPage.php"><button> Pay </button></a></td>
-<td><a href="/memberOrders.php"><button> Your past orders </button></a></td>
 <td><a href="/member_account.php"><button> My account </button></a></td>
+<td><a href="/member_support.php"><button> Support </button></a></td>
 <td><a href="/logout.php"><button> Log out </button></a></td>
 </tr>
 </table>
 </div>
-
-<table><tr><td>Name: </td><td></td><td><?=$_SESSION['name']?></td></tr><br>
-	<tr><td>Email: </td><td></td><td><?=$_SESSION['email']?></td></tr><br>
-	<tr><td>User type: </td><td></td><td><?=$_SESSION['status']?></td></tr></table>
-
 
 
 <?php
@@ -95,19 +139,21 @@ $passwordErr = $password2Err = "";
 $name = $password = $password2 = $email = "";
 
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  
-  if (!empty($_POST["password"])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {  
+   
+   if (empty($_POST["password"])) {
+    $passwordErr = "Password is required";
+  } else {
     $password = test_input($_POST["password"]);
   }
 
-  if (!empty($_POST["password"]) && empty($_POST["password2"])) {
+  if (empty($_POST["password2"])) {
     $password2Err = "Password verification is required";
-  } elseif (!empty($_POST["password"]) && !empty($_POST["password2"])) {
+  } else {
     $password2 = test_input($_POST["password2"]);
-    	if($_POST["password"] != $_POST["password2"]){
-    		$password2Err = "Password did not match";
-    	}
+    if($_POST["password"] != $_POST["password2"]){
+    	$password2Err = "Password did not match";
+    }
   }
 
 
@@ -122,20 +168,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 ?>
 
-<br><h5>Change password</h5>
+<div class="account"><h3>Account information</h3>
+	<b style="font-size: 26;">Name:</b><p style="font-size: 26;"><?=$_SESSION['name']?></p><br>
+	<b style="font-size: 26;">Email:</b><p style="font-size: 26;"><?=$_SESSION['email']?></p><br>
+	<b style="font-size: 26;">User type:</b><p style="font-size: 26;"><?=$_SESSION['status']?></p><br>
+</div>
+
+<div class="new"><h3>Change password</h3>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 	<label for="password"> Password: </label><br>
-	<input  type = "password" id = "password" name="password" >
+	<input  type = "password" id = "password" name="password" placeholder="New password..">
 	<span class="error"> <?php echo $passwordErr;?></span>
 	<br><br>
 	<label for="password2">Verify password: </label><br>
-	<input type = "password" id = "password2" name="password2">
+	<input type = "password" id = "password2" name="password2" placeholder="Verify new password..">
 	<span class="error"> <?php echo $password2Err;?></span>
 	<br><br>
 	<input type="submit" name="submit" value="Change password">  
 </form>
 
-
+</div>
 
 </div>
 </div>

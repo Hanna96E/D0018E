@@ -139,8 +139,8 @@ function setSessionUser($conn, $email){
 }
 
 
-function addProduct($conn, $name, $price, $info, $amount, $image){
-	$sql = "INSERT INTO products (name, price, amount, info, image) VALUES ('$name', '$price', '$amount', '$info','$image')";
+function addProduct($conn, $name, $price, $info, $amount, $image, $content){
+	$sql = "INSERT INTO products (name, price, amount, info, image, contents) VALUES ('$name', '$price', '$amount', '$info','$image', '$content')";
 
 	if (mysqli_query($conn, $sql)) {
   		//echo "<script>alert('Your product was successfully added.');</script>";
@@ -154,7 +154,7 @@ function removeProduct($conn, $id){
 		$sql = "DELETE FROM products WHERE productId = $id";
 
 		if (mysqli_query($conn, $sql)) {
-  		echo "<script>alert('Your product was successfully removed.');</script>";
+  		//echo "<script>alert('Your product was successfully removed.');</script>";
 	} else {
   		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 	}
@@ -162,8 +162,20 @@ function removeProduct($conn, $id){
 
 
 //////////////////////// CHANGE PRODUCT //////////////////////////////////////////
+/*function changeProduct($conn, $id, $name, $price, $info, $amount, $image, $content){
 
-function changeProduct($conn, $id, $name, $price, $info, $amount, $image){
+
+	$sql = "UPDATE products SET name='$name', price='$price', info='$info', amount='$amount', image='$image', contents='$content' WHERE productId=$id";
+
+	if (mysqli_query($conn, $sql)) {
+  		//echo "<script>alert('Your product was successfully changed.');</script>";
+	} else {
+  		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	}
+}*/
+
+
+function changeProduct($conn, $id, $name, $price, $info, $amount, $image, $content){
 
 	$numOfcolumns = 0;
 	
@@ -174,6 +186,7 @@ function changeProduct($conn, $id, $name, $price, $info, $amount, $image){
 	$arguments['info'] = $info;
 	$arguments['amount'] = $amount;
 	$arguments['image'] = $image;
+	$arguments['contents'] = $content;
 	
 
 	$columnNames = array();
@@ -208,6 +221,10 @@ function changeProduct($conn, $id, $name, $price, $info, $amount, $image){
 			case 5:
 				$sql = "UPDATE products SET $columnNames[0]='$columnItems[0]', $columnNames[1]='$columnItems[1]', $columnNames[2]='$columnItems[2]', $columnNames[3]='$columnItems[3]', $columnNames[4]='$columnItems[4]' WHERE productId=$id";
 				break;
+
+			case 6:
+				$sql = "UPDATE products SET $columnNames[0]='$columnItems[0]', $columnNames[1]='$columnItems[1]', $columnNames[2]='$columnItems[2]', $columnNames[3]='$columnItems[3]', $columnNames[4]='$columnItems[4]', $columnNames[5]='$columnItems[5]' WHERE productId=$id";
+				break;
 		}
 
 
@@ -224,4 +241,65 @@ function changeProduct($conn, $id, $name, $price, $info, $amount, $image){
 ////////////////////////// END OF CHANGE PRODUCT //////////////////////////////////
 
 
+
+function createMessage ($conn, $sender, $receiver, $message, $messageType){
+	$date = date("Y-m-d");
+	$time = date("H:i");
+	$sql1 = "INSERT INTO messages (messageType ,sender, receiver, message, date, time) VALUES ('$messageType', '$sender', '$receiver', '$message', '$date','$time')";
+		
+	if (mysqli_query($conn, $sql1)) {
+  		//echo "<script>alert('Your message was successfully sent.');</script>";
+	} else {
+  		echo "Error: " . $sql1 . "<br>" . mysqli_error($conn);
+	}
+
+}
+
+
+function createDiscount($conn, $code, $amount, $isPercent){
+	$isActive = '1';
+	$sql1 = "INSERT INTO discounts (code, amount, isActive, isPercent) VALUES ('$code', $amount, $isActive, $isPercent)";
+		
+	if (mysqli_query($conn, $sql1)) {
+  		//echo "<script>alert('Your message was successfully sent.');</script>";
+	} else {
+  		echo "Error: " . $sql1 . "<br>" . mysqli_error($conn);
+	}
+
+}
+
+
+function checkDiscountCode($conn, $code){
+	$sql = "SELECT code FROM discounts WHERE code = '$code'";
+	$stmt = mysqli_prepare($conn, $sql);
+	mysqli_stmt_bind_param($stmt, "s", $continent);
+	mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+  $code = mysqli_fetch_assoc($result)["code"];
+  return $code;
+}
+
+function changeDiscountActiveStatus($conn, $discountId, $isActive){
+	$sql = "UPDATE discounts SET isActive ='$isActive' WHERE discountId='$discountId'";
+
+	if (mysqli_query($conn, $sql)) {
+  		//echo "<script>alert('Your product was successfully removed.');</script>";
+	} else {
+  		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	}
+}
+
+function removeDiscount($conn, $discountId){
+			$sql = "DELETE FROM discounts WHERE discountId = $discountId";
+
+		if (mysqli_query($conn, $sql)) {
+  		//echo "<script>alert('Your product was successfully removed.');</script>";
+	} else {
+  		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	}
+}
+
 ?>
+
+
+

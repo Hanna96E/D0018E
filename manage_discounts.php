@@ -28,18 +28,13 @@ switch(userType) {
 <?php if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $action = test_input($_REQUEST['action']);
     $id = test_input($_REQUEST['id']);
-    $name = test_input($_POST['name']);
-    $price = test_input($_POST['price']);
-    $info = test_input($_POST['info']);
-    $amount = test_input($_POST['amount']);
-    $image = test_input($_POST['image']);
-    $content = test_input($_POST['content']);
+    $isActive = test_input($_REQUEST['isActive']);
     switch ($action){
         case "remove":
-            removeProduct($conn, $id);
+            removeDiscount($conn, $id);
             break;
         case "change":
-            changeProduct($conn, $id, $name, $price, $info, $amount, $image, $content);
+            changeDiscountActiveStatus($conn, $id, $isActive);
             break;
     }
 
@@ -52,5 +47,5 @@ disconnect($conn);
 ?>
 
 <script>
-window.location.replace("/admin_products.php");
+window.location.replace("/admin_discounts.php");
 </script>

@@ -32,6 +32,7 @@ switch(userType) {
   $password = test_input($_POST['password']);
   $email = test_input($_POST['email']);
   $userType = test_input($_POST['userType']);
+  if($id != $_SESSION['userId']){
     switch ($action){
       case "remove":
           removeAccount($conn, $id);
@@ -47,6 +48,7 @@ switch(userType) {
 			}
 		break;
     }
+  } else { echo "<script>alert('You cannot remove or change your own administrator account.');</script>";}
 
 }
 
