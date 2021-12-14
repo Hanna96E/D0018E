@@ -4,7 +4,6 @@ function paymentFunc($conn, $userId, $orderId, $adress,$totalCost, $discount){
 // ----------------------------
 //  START TRANSACTION
 // ----------------------------
-
 $conn->autocommit(FALSE);
 
 	// Order message
@@ -16,18 +15,16 @@ $conn->autocommit(FALSE);
 	*
 	*   Alter the database to have the correct amount of products
 	*   Gives productId and amount of the users "shopping cart"
-	*
 	*/
 	$sqlItems = "SELECT `productId`, `amount` FROM `itemList` WHERE `orderId`=$orderId AND `userId`=$userId";
 	$itemQuery = mysqli_query($conn, $sqlItems);
-
 
 if (mysqli_num_rows($itemQuery) > 0) {
 	$prodIdArray = array();
 	$amountArray = array();
 
 	while($itemArray = mysqli_fetch_array($itemQuery)) {
-		// Gives the current amount of specifide product
+		// Gets the current amount of specifide product
 		$sqlProd  = "SELECT `amount`,`price` FROM `products` WHERE `productId`= $itemArray[productId] ";
 		$amountProd = mysqli_query($conn, $sqlProd);
 		$amountProd = mysqli_fetch_array($amountProd);
@@ -39,9 +36,9 @@ if (mysqli_num_rows($itemQuery) > 0) {
 			// Add error message to the order
 			// Reduces the product amount so they don't get out of stock items
 			// And makes the total cost reflect this
-			$message = "One or more products where reduced as they're out of stock";
-			
-			$totalCost = $totalCost + ($newAmount)*$amountProd[prize];
+			$message = "One or more products where reduced as they are out of stock";
+		
+			$totalCost = $totalCost + ($newAmount)*$amountProd[price];
 			$newAmount = 0;
 
 			$sqlErrorFix = "UPDATE `itemList` SET `amount` = $amountProd[amount] WHERE `orderId`=$orderId AND `userId`=$userId";
@@ -51,7 +48,6 @@ if (mysqli_num_rows($itemQuery) > 0) {
 			if ($updateItem == false) {
 				array_push($error, "ERROR: Item update failed");
 			}
-
 		}
 		// Updates the database
 		$sql = "UPDATE `products` SET `amount` = $newAmount WHERE `products`.`productId` = $itemArray[productId]";
@@ -78,10 +74,7 @@ if (mysqli_num_rows($itemQuery) > 0) {
 				$totalCost = 0;
 			}
 		}
-	}
-	// END OF DISCOUNT
-
-
+	}// END OF DISCOUNT
 
 	// Update the users orderId to a new one
 	$newOrderId = $orderId + 1;
@@ -93,9 +86,6 @@ if (mysqli_num_rows($itemQuery) > 0) {
 	if ($updateOrderId == false) {
 		array_push($error, "ERROR: OrderId update failed");
 	}
-
-
-
 }
 
 //Create an order table to store the order
@@ -115,20 +105,16 @@ if (mysqli_num_rows($itemQuery) > 0) {
 		array_push($error, "ERROR: Order update failed");
 	}
 
-
-
-
 // ----------------------------
 //  END OF TRANSACTION
 // ----------------------------
 	// ERROR CHECK
 	if (!empty($error)) {
-		echo "EROOROROOOROOEOEOER404 string-..:::";
 		$conn -> rollback();
 	}
-	// Else send it over
+
+	// When ready send it over
 	$conn->commit();
-
-
 }
+
 ?>

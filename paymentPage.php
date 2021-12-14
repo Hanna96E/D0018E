@@ -186,20 +186,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $adress = $_POST["name"];
         $discount = $_POST["discount"];
 
-        echo "Begin<br>";
-
-        echo "DiscountORG:";
-        echo "$discount";
-
-//https://www.youtube.com/watch?v=CNt9HPqDIVc
-//$conn->autocommit(FALSE);
     paymentFunc($conn, $userId, $orderId, $adress,$totalCost, $discount);
-//$conn->commit();
-
-        echo "End<br>";
 
         // Move to next page
-        //echo "<script>window.location.href = '/memberOrders.php';</script>";
+        echo "<script>window.location.href = '/memberOrders.php';</script>";
     }
 }
 ?>
