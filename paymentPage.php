@@ -170,13 +170,6 @@ while($cartInfo = mysqli_fetch_array($items)) {
 	   echo $totalCost; 
 
 // THE ADREES IS REQUIERD
-/*
-	<form action="/paymentDone.php" method="post"><br>
-	Adress:<br><br><input type="text" name="adress"><br>
-<!---	E-mail:<> <input type="text" name="email"><br>
---->	<br><br>
-	Buy: <input type="submit" value="Finalize purchase">
-	</form>*/
 ?>
 
 <?php
@@ -185,66 +178,43 @@ $nameErr = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // collect value of input field
     $name = htmlspecialchars($_REQUEST['fname']);
-    if (empty($_POST["name"])) {
+    if (empty($_POST["name"]) || $totalCost==0) {
         $nameErr = "Adress is empty";
     } else {
+        // Start transaction
+        include "paymentFunc.php";
+        $adress = $_POST["name"];
+        $discount = $_POST["discount"];
+
+        echo "Begin<br>";
+
+        echo "DiscountORG:";
+        echo "$discount";
+
+//https://www.youtube.com/watch?v=CNt9HPqDIVc
+//$conn->autocommit(FALSE);
+    paymentFunc($conn, $userId, $orderId, $adress,$totalCost, $discount);
+//$conn->commit();
+
+        echo "End<br>";
+
         // Move to next page
-        echo "string ";
-        echo "<script>window.location.href = '/paymentDone.php';</script>";
+        //echo "<script>window.location.href = '/memberOrders.php';</script>";
     }
 }
-
-/*
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
-
-
-
-<p><span class="error">* required field</span></p>
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-  Name: <input type="text" name="name">
-  <span class="error">* <?php echo $nameErr;?></span>
-  <input type="submit" name="submit" value="Submit">  
-  <br><br>
-
-
-
-
-
- */
 ?>
 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+
   <br>
   Adress <span class="error">* <?php echo $nameErr;?></span>
   <br>
   <input type="text" name="name">
   <br>
-  <?php
-  // Add Discounts
-  ?>
-
-
+  Discount
+  <br>
+  <input type="text" name="discount">
+  <br>
   <input type="submit" value="Finalize purchase">
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </form>
 
