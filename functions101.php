@@ -1,5 +1,6 @@
 <?php
 
+include_once "visualFunctions.php";
 
 // security functions start-------------------------------------------------------------------
 
@@ -33,8 +34,217 @@ function showSimple($conn,$columnName,$row){
 }
 
 
+
+
+
+function showProductBetter($conn,$row,$booleanIsLoggedIn,$booleanShowCart,$userId,$orderId,$redirectToString,$amountInCart){
+
+    $amount = $row["amount"];
+    if($amount==0){
+        $backgroundColor="gray";
+    }
+    else{
+        $backgroundColor="#2D4263";
+    }
+
+
+
+    echo "<span style=\" width:100%; background-color: $backgroundColor; display: inline-block; text-align: center;\">";
+    
+        echo "<span style=\"font-weight: 900; font-size: 20px;\">";
+            $name = $row["name"];
+            echo "$name";
+            echo "<br>";
+            $price = $row["price"];
+            echo "price: $price";
+        echo "</span>";
+        echo "<br>";
+
+        echo "<span style=\"vertical-align: top; top: 20px; position: relative;\">";
+            $image = $row["image"];
+            echo "<img src= \"". $image. "\" style= \"width:150px;height:150px;\">";
+        echo "</span>";
+
+
+
+        if($booleanIsLoggedIn==true){
+            echo "<span style=\"display: inline-block; padding-left: 10px; padding-right: 10px; vertical-align: top; top: 20px; position: relative\">";
+                addOrRemove1ToCartForMember($conn,$redirectToString,$userId,$orderId,$row,$amountInCart);
+            echo "</span>";
+        }
+
+        echo "<br>";
+        if($booleanShowCart==true){
+            echo "<span style=\"font-weight: 900; font-size: 20px; display: inline-block; margin-top: 65px; vertical-align: top; text-align: left;\">";
+            $priceForProducts = $row["price"]*$amountInCart;
+            echo "amount in cart: $amountInCart";
+            echo "<br>";
+            echo "price for products: $priceForProducts";
+        echo "</span>";    
+        }
+        
+
+
+        
+        
+        $amount = $row["amount"];
+        $warningNumber = 10;
+
+
+        echo "<br>";
+        if((($amount-$amountInCart)<=$warningNumber)&&(0<$amountInCart)&&($amountInCart<=$amount)){
+            echo "<span style=\"font-weight: 900; font-size: 20; background-color: orange; width: 80%; display: inline-block\">";
+                echo "amount in stock is close to amount in cart (left: $amount)";
+            echo "</span>";
+            echo "<br>";
+            echo "<br>";        
+        }
+        else if(($amount<=$warningNumber)&&(0<$amount)){
+                echo "<span style=\"font-weight: 900; font-size: 20; background-color: red;\">";
+                    echo "low amount (left: $amount)";
+                echo "</span>";
+                echo "<br>";
+                echo "<br>";
+        }
+        else if($amount==0)
+        {
+                echo "<span style=\"font-weight: 900; font-size: 20; color: red;\">";
+                    echo "OUT OF STOCK";
+                echo "</span>";
+                echo "<br>";
+                echo "<br>";
+        }
+        else if($amount<$amountInCart){
+            echo "<span style=\"font-weight: 900; font-size: 20; background-color: black; color: red; display: inline-block;\">";
+                echo "SORRY, WE DO NOT HAVE THAT AMOUNT IN STOCK";
+                echo "<br>";
+                echo "WE HAVE: $amount";
+            echo "</span>";
+            echo "<br>";
+            echo "<br>";
+        }
+
+        
+
+        if($booleanShowCart==false){
+        
+            $productId = $row["productId"];
+            $sql = "SELECT numStar FROM reviews WHERE productId = $productId;";
+            $sqlQueryResult = mysqli_query($conn,$sql);
+            $count=0;
+            $sum=0;
+            while ($rowReview = mysqli_fetch_assoc($sqlQueryResult))
+            {
+                $count++; // there exist a better way
+                $sum = $sum + $rowReview["numStar"];
+            }
+            if($count!=0){
+                $rating = $sum/$count;
+            }
+            echo "<span style=\" text-align: center\">";
+                if(0<$count){
+                    for($i=1;$i<=5;$i++){
+                        if($i<=$rating){
+                            echo "<span class=\"fa fa-star checked\" style=\"color:gold;\"></span>";
+                        }
+                        else{
+                            echo "<span class=\"fa fa-star checked\" style=\"color:white;\"></span>";   
+                        }
+                    }
+                    echo "<br>";
+                    if($count==1){
+                        echo "($count rating)";
+                    }
+                    else{
+                        echo "($count ratings)";
+                    }
+                    echo "<br>";
+                    
+                }
+                else{
+                    //echo "no ratings";
+                }
+            echo "</span>";
+
+            echo "<br>";
+
+            if($booleanIsLoggedIn==true){
+                showReviews($conn,$productId);    
+            }
+        }
+        
+
+
+        if($booleanShowCart==true){
+            echo "<span class=dropdown>";
+                echo "<button style= \"font-weight: 500; font-size: 20; margin-top: 10px;\">show more</button>";
+                echo "<span class=\"dropdown-content\" style=\" width: 100%;\">";
+        }
+                    echo "<span style=\"font-weight: 900; background-color: $backgroundColor; display: inline-block; width: 100%;\">";
+                        echo "<span style=\" background-color: #ECDBBA; display: inline-block; width: 42%; float: left; height: 150px; overflow: scroll; margin-left: 5%\">";
+                            $content = $row["content"];
+                            echo "<h2>content</h2>";
+                            echo $content;
+                        echo "</span>";
+
+                        
+
+                        echo "<span style=\"background-color: #ECDBBA; display: inline-block; width: 42%; float: right; height: 150px; overflow: scroll; margin-right: 5%\">";
+                            $info = $row["info"];
+                            echo "<h2>info</h2>";
+                            echo $info;
+                        echo "</span>";
+                    echo "</span>";
+                
+        if($booleanShowCart==true){
+                echo "</span>";
+            echo "</span>";
+        }
+
+        echo "<br>";
+        echo "<br>";
+        
+
+
+
+    echo "</span>"; 
+
+
+    if($booleanShowCart==true){
+        
+            $priceForThisProducts = $row["price"]*$amountInCart;
+            return $priceForThisProducts;      
+    }
+
+
+    //*/
+}
+
+
+
 function showOrderStatus($status){
-    return $status;
+
+    if($status==0){
+        $statusString = "a dog ate your order";
+    }
+    elseif($status==1){
+        $statusString = "awaiting confirmation";
+    }
+    elseif($status==2){
+        $statusString = "confirmed";
+    }
+    elseif($status==3){
+        $statusString = "sent";
+    }
+    elseif($status==4){
+        $statusString = "on the way";
+    }
+    elseif($status==5){
+        $statusString = "delivered";
+    }
+
+
+    return $statusString;
 }
 
 
@@ -63,15 +273,13 @@ function addOrRemove1ToCartForMember($conn,$redirectToString,$userId,$orderId,$r
 
     echo "<form method=\"POST\" action=\"actionAddOrRemove1ToCartForMember.php?redirectToString=$redirectToString&formEnum=1&orderId=$orderId&userId=$userId&productIdValue=$productIdValue&amountInCart=$amountInCart\">";
                 
-      echo "<input style= \"width:50px;\" type=\"number\" name=\"";
+      echo "<input style= \"width:100px;\" type=\"number\" name=\"";
       echo $nameForNumberBox;
       echo "\" value=\"".$amountInCart."\">";
       
       echo "<input type=\"submit\" name=\"";
       echo $textOnNumberSubmitButton;
       echo "\" value=\"".$textOnNumberSubmitButton."\">";
-
-      echo "<br>";
 
     echo "</form>";
 
@@ -83,7 +291,6 @@ function addOrRemove1ToCartForMember($conn,$redirectToString,$userId,$orderId,$r
       echo "\" value=\"".$textOnRemoveButton."\">";
         
     echo "</form>";
-
 }
 
 
@@ -252,6 +459,84 @@ function showProducts($conn,$tableClassName){
 }
 
 
+function showProductsBetter($conn,$numberOfColumns,$sqlForProducts,$booleanIsLoggedIn,$booleanShowCart,$userId,$orderId,$redirectToString){
+
+    $sqlQueryResult = mysqli_query($conn,$sqlForProducts);
+    $productToShowNumber = 0;
+    $modulo=0;
+
+    $width = (80/$numberOfColumns);
+    $marginOnSides = (10/$numberOfColumns);
+
+
+    if($booleanShowCart==true){
+        $totalCost = 0;
+    }
+
+    echo "<div style=\" width: 80%; margin-left: 10%; background-color: #C84B31; margin-bottom: 200px\">";
+
+        while ($row = mysqli_fetch_assoc($sqlQueryResult))
+        {
+
+            $productToShowNumber++;
+            $modulo = $productToShowNumber%$numberOfColumns;
+
+             $amountInCart=0;
+                if($booleanIsLoggedIn == true){
+                    $productId = $row["productId"];
+                    $sqlForCart = "SELECT amount FROM itemList WHERE userId = $userId AND orderId = $orderId AND productId = $productId;";
+                    $sqlQueryResultCart = mysqli_query($conn,$sqlForCart);
+                    if($rowCart = mysqli_fetch_assoc($sqlQueryResultCart))
+                    {
+                        $amountInCart = $rowCart["amount"];
+                    }
+                }
+                $amount = $row["amount"];
+
+            if(($booleanShowCart==false)||(0<$amountInCart)){
+                echo "<span style=\"display: inline-block; width: $width%; background-color: #C84B31; margin-left: $marginOnSides%; margin-right: $marginOnSides%; padding-top: 20px; padding-bottom: 20px; vertical-align: top;\">";
+
+                    $priceForThisProducts = showProductBetter($conn,$row,$booleanIsLoggedIn,$booleanShowCart,$userId,$orderId,$redirectToString,$amountInCart);
+                
+                echo "</span>";
+
+                if($modulo==0){
+                    echo "<br>";
+                }
+
+                if($booleanShowCart==true){
+                    $totalCost = $totalCost+$priceForThisProducts;
+                }
+
+            }
+
+
+
+
+        }
+        if($modulo!=0){
+            echo "<br>";
+        }
+
+        
+
+
+
+
+
+
+    echo "</div>";
+
+    if($booleanShowCart==true){
+        echo "<span style=\" text-align: center; border-radius: 15px; font-weight: 900; font-size: 20;  display: inline-block; position: fixed; top: 100px; left: 10%; width: 8%; background-color: #ECDBBA;\">";
+            echo "total cost: <br>$totalCost";
+        echo "</span>";
+    }
+
+}
+
+
+
 // specific functions for products.php stop ----------------------------------------------------------------------------------------------
 
 
@@ -376,7 +661,7 @@ function showForDistributer($conn, $tableClassForVisual){
             $boldText3 = "users name: ".$userName;
             $boldText4 = "users email: ".$userEmail;
             $boldText5 = "adress: ".$adress;
-            $boldText6 = "orders status: ".$orderStatusText;
+            $boldText6 = "order status: ".$orderStatusText;
 
 
 
@@ -479,7 +764,7 @@ function showOrdersForUser($conn,$userId,$tableClassForVisual){
             $boldText3 = "users name: ".$userName;
             $boldText4 = "users email: ".$userEmail;
             $boldText5 = "adress: ".$adress;
-            $boldText6 = "orders status:<br>".$orderStatusText;
+            $boldText6 = "order status:<br>".$orderStatusText;
             $boldText7 = "message:<br>".$message;
 
 
@@ -583,7 +868,7 @@ function showForAdmin_orders($conn, $tableClassForVisual){
             $boldText3 = "users name: ".$userName;
             $boldText4 = "users email: ".$userEmail;
             $boldText5 = "adress: ".$adress;
-            $boldText6 = "orders status: ".$orderStatusText;
+            $boldText6 = "order status: ".$orderStatusText;
 
 
 

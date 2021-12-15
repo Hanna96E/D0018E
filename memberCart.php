@@ -59,54 +59,29 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Products - bestshop</title>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <style type="text/css"> .bs-example{margin: 20px;}</style>
-        <script type="text/javascript">$(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});</script>
+        <?php
+        include_once "visualFunctions.php";
+        ?>
+
+
     </head>
-    <body>
+    <body class=bodyClass>
 
-        
-        
-
-
-        <div class="bs-example">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="page-header clearfix">
-                            <h2 class="pull-left">Member Cart</h2>
+    <?php
+    headerMember("Cart");
+    ?>
 
 
-<!--MEMBER MENUE BAR-->
-<table>
-<tr>
-<!---<td><?php// echo $row["id"]; ?></td>--->
-<td><a href="/member_start.php"><button> Home </button></a></td>
-<td><a href="/productsForMember.php"><button> View products </button></a></td>
-<td><a href="/memberCart.php"><button> View cart </button></a></td>
-<td><a href="/paymentPage.php"><button> Pay </button></a></td>
-<td><a href="/memberOrders.php"><button> Your past orders </button></a></td>
-<td><a href="/member_account.php"><button> My account </button></a></td>
-<td><a href="/logout.php"><button> Log out </button></a></td>
-</tr>
-</table><br><br>
-
-
-
-                        </div>
                         
-                        <?php
-                            showMemberCart($conn,$userId,$orderId,'table table-bordered table-striped');
-                        ?>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
+    <?php
+        $numberOfColumns =1;
+        $sqlForProducts = $sqlForCart = "SELECT * FROM products";
+        $booleanIsLoggedIn = true;
+        $booleanShowCart = true;
+        $redirectToString = "memberCart.php";
+        showProductsBetter($conn,$numberOfColumns,$sqlForProducts,$booleanIsLoggedIn,$booleanShowCart,$userId,$orderId,$redirectToString);
+    ?>
+
     </body>
 </html>
 
