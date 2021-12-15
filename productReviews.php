@@ -27,7 +27,8 @@ switch(userType) {
 </script>
 <?php
     include "init.php";
-
+    include_once "visualFunctions.php";
+    
     $conn = connect();
     $userId = $_SESSION["userId"];
     $userName = $_SESSION["name"];
@@ -39,31 +40,110 @@ switch(userType) {
 <html lang="en">
 <head>
     <title>Reviews - bestshop</title>
+
+<style>
+        body{
+            color: #ECDBBA;    
+        }
+        input[type=submit] {
+          width: 30%;
+          background-color: #0099FF;
+          color: white;
+          padding: 14px 20px;
+          margin: 4px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+          background-color: #0066FF;
+        }
+
+        input[type=text], input[type=password], input[type=email] {
+          width: 30%;
+          padding: 12px 8px;
+          margin: 4px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+
+        textarea {
+          width: 30%;
+          height: 170px;
+          padding: 12px 20px;
+          box-sizing: border-box;
+          border: 2px solid #ccc;
+          border-radius: 4px;
+          background-color: #FFFFFF;
+          font-size: 16px;
+          resize: none;
+        }
+
+
+        div.prod {
+          position: relative;
+          left: 10%;
+          top: 20%;
+          background-color: #2D4263;
+          width: 70%;
+          
+          border: 10px solid #C84B31;
+          padding: 10px;
+          margin: 10px;
+          overflow: auto;
+          border-radius: 15px;
+        }
+
+
+        table {
+          border-collapse: collapse;
+          border-spacing: 0;
+          width: 100%;
+          border: 1px solid #C84B31;
+          color: #ECDBBA;
+        }
+
+        th, td {
+          text-align: left;
+          padding: 16px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #191919;
+        }
+
+        .dropdown {
+          position: relative;
+          display: inline-block;
+        }
+
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #f9f9f9;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+          display: block;
+        }
+
+    </style>
+
 </head>
-<?php
-    include "headerTabular.php";
-?>
-<?php
-    //headerMember("Payment");
-    ?>
 <body class=bodyClass>
 
     <?php
-    //headerNotLoggedIn();
+    headerMember("Reviews");
     ?>
 
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<h2> Reviews </h2>
-
-<!--MEMBER MENUE BAR-->
-<table><tr>
-<td><a href="/member_start.php"><button> Home </button></a></td>
-<td><a href="/productsForMember.php"><button> View products </button></a></td>
-<td><a href="/memberCart.php"><button> View cart </button></a></td>
-<td><a href="/logout.php"><button> Log out </button></a></td>
-<?php //</tr></table><br><br>
-?>
 
 <?php
 // Check if user has product
@@ -72,7 +152,12 @@ $productId = $_REQUEST['productId'];
 $sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `productId`=$productId";
         $sqlQueryHasProd = mysqli_query($conn,$sqlHasProd);
         $hasProd = mysqli_fetch_array($sqlQueryHasProd);
-        if (($hasProd["userId"]==$userId)){
+        if (($hasProd["userId"]==$userId)){?>
+
+        <div class="prod">
+        <table><tr>
+        <td>
+            <?php            
             echo "Would you like to give a review?";
             $textOnShowReviewButton = "Give a review";
             $Reviews = "giveReview.php";
@@ -80,11 +165,16 @@ $sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `produ
             echo "<input type=\"submit\" name=\"";
             echo $textOnShowReviewButton;
             echo "\" value=\"".$textOnShowReviewButton."\">";
-            echo "</form><td>";
+            echo "</form><td>";?>
+        </tr></table><br><br>
+        </div>
+<?php  
         }
 ?>
 
-</tr></table><br><br>
+
+
+<div class="prod">
 
 <?php
 //Get productId
@@ -120,6 +210,6 @@ while($row = mysqli_fetch_array($sqlQueryResult)) {
 }
 ?>
 
-</div></div></div></div></div>
+</div></div></div></div></div></div>
 </body>
 </html>

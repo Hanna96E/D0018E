@@ -29,6 +29,7 @@ switch(userType) {
 <?php
     //Setup
     include "init.php";
+    include_once "visualFunctions.php";
 
     $conn = connect();
     $userId = $_SESSION["userId"];
@@ -43,6 +44,105 @@ switch(userType) {
         <title>Give a review - bestshop</title>
         <style>
         .error {color: #000000;}
+        body{
+            color: #ECDBBA;    
+        }
+        input[type=submit] {
+          width: 30%;
+          background-color: #0099FF;
+          color: white;
+          padding: 14px 20px;
+          margin: 4px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+          background-color: #0066FF;
+        }
+
+        input[type=text], input[type=password], input[type=email] {
+          width: 30%;
+          padding: 12px 8px;
+          margin: 4px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+
+        textarea {
+          width: 30%;
+          height: 170px;
+          padding: 12px 20px;
+          box-sizing: border-box;
+          border: 2px solid #ccc;
+          border-radius: 4px;
+          background-color: #FFFFFF;
+          font-size: 16px;
+          resize: none;
+        }
+
+
+        div.prod {
+          position: absolute;
+          left: 10%;
+          top: 20%;
+          background-color: #2D4263;
+          width: 10%;
+          
+          border: 10px solid #C84B31;
+          padding: 10px;
+          margin: 10px;
+          overflow: auto;
+          border-radius: 15px;
+        }
+
+
+        table {
+          border-collapse: collapse;
+          border-spacing: 0;
+          width: 100%;
+          border: 1px solid #C84B31;
+          color: #ECDBBA;
+        }
+
+        th, td {
+          text-align: left;
+          padding: 16px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #191919;
+        }
+
+        .dropdown {
+          position: relative;
+          display: inline-block;
+        }
+
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #f9f9f9;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+          display: block;
+        }
+
+    </style>
+
+</head>
+<body class=bodyClass>
+
+    <?php
+    headerMember("Reviews");
+    ?>
         </style>
 </head>
 <?php
@@ -51,17 +151,11 @@ switch(userType) {
     // Dont forget 5 div at the end
 ?>
 
-<h2> Give a reviews </h2>
-
-<!--MEMBER MENUE BAR-->
-<table>
-<td><a href="/member_start.php"><button> Home </button></a></td>
-<td><a href="/productsForMember.php"><button> View products </button></a></td>
-<td><a href="/memberCart.php"><button> View cart </button></a></td>
-<td><a href="/logout.php"><button> Log out </button></a></td>
-</table>
-
 <body>
+    <table>
+    <td>
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <p></p>
 
@@ -106,11 +200,11 @@ echo "<form method=\"POST\" action=\"giveReview.php?productId=$productId\">";
 
 <textarea id="reviewText" name="reviewText" rows="10" cols="50"
  placeholder="What did you think?"></textarea>
-
-<br><span class="error"> <?php echo $reviewErr;?></span>
+<br>
+<br><span> <?php echo $reviewErr;?></span>
 
 <!--<p>Please select star ranking of the product:</p>-->
-    <br>
+    <br><br>
   <input type="radio" id="star1" name="star" value="1">
   <label for="star1">
     <span class="fa fa-star checked" style="color:gold;"></span>
@@ -166,6 +260,8 @@ if (mysqli_query($conn, $sql)) {
 }
 ?>
 
-</div></div></div></div></div>
+</td>
+</table>
+
 </body>
 </html>
