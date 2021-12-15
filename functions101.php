@@ -473,7 +473,7 @@ function showProductsBetter($conn,$numberOfColumns,$sqlForProducts,$booleanIsLog
         $totalCost = 0;
     }
 
-    echo "<div style=\" width: 80%; margin-left: 10%; background-color: #C84B31; margin-bottom: 200px\">";
+    echo "<div style=\" width: 80%; margin-left: 10%; background-color: #C84B31;\">";
 
         while ($row = mysqli_fetch_assoc($sqlQueryResult))
         {
@@ -529,17 +529,32 @@ function showProductsBetter($conn,$numberOfColumns,$sqlForProducts,$booleanIsLog
 
     if($booleanShowCart==true){
         
+        echo "<span style=\" text-align: center; border-radius: 15px; font-weight: 900; font-size: 20; background-color: #2D4263; display: inline-block; width: 10%; margin-top: 20px; margin-left: 35%; float: left; padding-bottom: 50px; padding-top: 50px; margin-bottom: 50px; margin-top: 50px;\">";
+            echo "<a style=\"color: #ECDBBA; background-color: \" href=\"/productsForMember.php\"> Brows </a>";
+        echo "</span>";
+
+        echo "<span style=\" text-align: center; border-radius: 15px; font-weight: 900; font-size: 20; background-color: #2D4263; display: inline-block; width: 10%; margin-top: 20px; margin-right: 35%; float: right; padding-bottom: 50px; padding-top: 50px; margin-bottom: 50px; margin-top: 50px;\">";
+            echo "<a style=\"color: #ECDBBA; \" href=\"/paymentPage.php\"> Pay </a>";
+        echo "</span>";
+
+
+
+
         echo "<span style=\"display: inline-block; position: fixed; top: 100px; left: 10%; width: 8%;\">";
             echo "<span style=\" text-align: center; border-radius: 15px; font-weight: 900; font-size: 20; background-color: #ECDBBA; display: inline-block; width: 100%; margin-top: 20px;\">";
                 echo "total cost: <br>$totalCost";
             echo "</span>";
             echo "<br>";
-            echo "<span style=\" text-align: center; border-radius: 15px; font-weight: 900; font-size: 20; background-color: #ECDBBA; width: 100%; display: inline-block; margin-top: 20px;\">";
-                echo "Pay:$totalCost";
+            echo "<span style=\" text-align: center; border-radius: 15px; font-weight: 900; font-size: 20; background-color: #2D4263; width: 100%; display: inline-block; margin-top: 20px;\">";
+                echo "<a style=\"color: #ECDBBA;\" href=\"/productsForMember.php\"> Brows </a>";
             echo "</span>";
-
+            echo "<br>";
+            echo "<span style=\" text-align: center; border-radius: 15px; font-weight: 900; font-size: 20; background-color: #2D4263; width: 100%; display: inline-block; margin-top: 20px;\">";
+                echo "<a style=\"color: #ECDBBA;\" href=\"/paymentPage.php\"> Pay </a>";
+            echo "</span>";
         echo "</span>";
     }
+
 
 }
 
