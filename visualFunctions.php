@@ -311,6 +311,8 @@ function headerAdmin($pageName){
 						echo "<a href=\"/admin_products.php\"> Manage products </a>";
 						echo "<a href=\"/admin_orders.php\"> Manage orders </a>";
 						echo "<a href=\"/admin_accounts.php\"> Manage accounts </a>";
+						echo "<a href=\"/admin_messages.php\"> Manage messages </a>";
+						echo "<a href=\"/admin_discounts.php\"> Manage discounts </a>";
 						echo "<a href=\"/logout.php\"> Log out </a>";
 
 					echo "</span>";
