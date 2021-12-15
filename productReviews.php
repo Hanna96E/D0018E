@@ -44,6 +44,7 @@ switch(userType) {
     include "headerTabular.php";
 ?>
 <body>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <h2> Reviews </h2>
 
@@ -92,7 +93,21 @@ $sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `produ
 // Running through and printing the users shopping cart
 while($row = mysqli_fetch_array($sqlQueryResult)) {
 ?>  <tr>
-    <td><?php echo $row["reviewText"]; ?></td> <td><?php echo $row["numStar"]; ?></td>
+    <td><?php echo $row["reviewText"]; ?></td> <td><?php 
+
+    $rating = $row["numStar"];
+    for ($i=0; $i < 5; $i++) { 
+        //echo "<span class='fa fa-star checked'></span>";
+        if ($i<$rating) {/**/
+            echo '<span class="fa fa-star checked" style="color:gold;"></span>';
+        }else{
+            echo '<span class="fa fa-star checked" style="color:gray;"></span>';
+        }
+    }
+
+
+
+    ?></td>
     </tr>
 <?php
 }
