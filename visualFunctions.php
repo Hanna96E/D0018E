@@ -142,7 +142,8 @@ function headerMember($pageName){
 
 
 			echo "<span class=homeInHeader>";
-				echo "<a style=\"color: #ECDBBA;\" href=\"/$homeRef\"> $homeText </a>";
+				echo "<a style=\"color: #ECDBBA;\" href=\"/$homeRef\"> 
+							<img src=\"https://e7.pngegg.com/pngimages/171/800/png-clipart-english-country-house-silhouette-home-icon-angle-building.png\" style=\"width:50px;height:50px;\">$homeText </a>";
 			echo "</span>";
 
 

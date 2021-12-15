@@ -46,6 +46,12 @@ switch(userType) {
 <html lang="en">
 <head>
 	<title>Payment Page - bestshop</title>
+    <?php
+        include_once "visualFunctions.php";
+    ?>
+    <?php
+    headerMember("Payment");
+    ?>
 
     <style>
     .error {color: #FF0000;}
