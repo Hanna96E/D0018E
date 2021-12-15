@@ -89,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "</form><td>";
     
     // Move to next page
-    echo "<script>window.location.href = '/memberOrders.php';</script>";
+    echo "<script>window.location.href = '/productReviews.php';</script>";
   }
 }
 //Set the outlook of page
