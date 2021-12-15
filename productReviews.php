@@ -43,7 +43,15 @@ switch(userType) {
 <?php
     include "headerTabular.php";
 ?>
-<body>
+<?php
+    //headerMember("Payment");
+    ?>
+<body class=bodyClass>
+
+    <?php
+    //headerNotLoggedIn();
+    ?>
+
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <h2> Reviews </h2>
@@ -97,8 +105,7 @@ while($row = mysqli_fetch_array($sqlQueryResult)) {
 
     $rating = $row["numStar"];
     for ($i=0; $i < 5; $i++) { 
-        //echo "<span class='fa fa-star checked'></span>";
-        if ($i<$rating) {/**/
+        if ($i<$rating) {
             echo '<span class="fa fa-star checked" style="color:gold;"></span>';
         }else{
             echo '<span class="fa fa-star checked" style="color:gray;"></span>';

@@ -24,12 +24,12 @@
     <body class=bodyClass>
 
     <?php
-    headerNotLoggedIn();
-    ?>
+    headerNotLoggedIn("Products");
+   
 
-    <h2 style="text-align: center;">Products</h2>
+    //<h2 style="text-align: center;">Products</h2>
 
-
+ ?>
                         
     <?php
         $numberOfColumns =2;

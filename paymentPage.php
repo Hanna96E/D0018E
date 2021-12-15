@@ -57,7 +57,9 @@ switch(userType) {
     .error {color: #FF0000;}
 
 
-
+body{
+    color: #ECDBBA;    
+}
 input[type=submit] {
   width: 30%;
   background-color: #0099FF;
@@ -95,53 +97,76 @@ textarea {
   resize: none;
 }
 
+
+div.prod {
+  position: absolute;
+  left: 10%;
+  top: 20%;
+  background-color: #2D4263;
+  width: 70%;
+  
+  border: 10px solid #C84B31;
+  padding: 10px;
+  margin: 10px;
+  overflow: auto;
+  border-radius: 15px;
+}
+
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #C84B31;
+  color: #ECDBBA;
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+}
+
+tr:nth-child(even) {
+  background-color: #191919;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
     </style>
 
 </head>
 
 <?php
-include "styleHeader.php" 
+//include "styleHeader.php" 
 ?>
 
-<body>
-
-<div class="bs-example">
-<div class="container">
-<div class="row">
-<div class="col-md-12">
-<div class="page-header clearfix">
-<h2 class="pull-left">Payment Page</h2>
-<!--MEMBER MENUE BAR-->
-<table>
-<tr>
-
-<td><a href="/member_start.php"><button> Home </button></a></td>
-<td><a href="/productsForMember.php"><button> View products </button></a></td>
-<td><a href="/memberCart.php"><button> View cart </button></a></td>
-<td><a href="/paymentPage.php"><button> Pay </button></a></td>
-<td><a href="/memberOrders.php"><button> Your past orders </button></a></td>
-<td><a href="/member_account.php"><button> My account </button></a></td>
-<td><a href="/logout.php"><button> Log out </button></a></td>
-</tr>
-</table>
-<br><br>
-
-</div>
+<body class=bodyClass>
 
 <?php
-// Welcome the user
-$userName = "SELECT `name` FROM `users` WHERE `userId`=$userId";
-$userName = mysqli_query($conn,$userName);
-$name = mysqli_fetch_array($userName);
-?>
-	<h4> Welcome <?php echo $name[name];?> </h4>
-<?php
-
 // Tell of what products are in the shoping cart
 $sqlItems = "SELECT `productId`, `amount` FROM `itemList` WHERE `orderId`=$orderId AND `userId`=$userId";
 $items = mysqli_query($conn,$sqlItems); //Items in cart
 ?>
 
+<div class="prod">
+
+<?php //START OF TABLE ?>
 <table class='table table-bordered table-striped'>
 <tr> <td>Product</td> <td>Price</td> <td>Amount</td> <td></td> </tr>
 
@@ -164,13 +189,31 @@ while($cartInfo = mysqli_fetch_array($items)) {
 	<td><?php echo $row["name"]; ?></td>
 	<td><?php echo $row["price"]; ?></td>
         <td><?php echo $cartInfo["amount"]; ?></td>
-	<td><img src="<?php echo $row["image"]; ?>" style="width:50px;height:50px;"  >
+	<td>
+
+        <div class="dropdown">
+             <img src="<?php echo $row["image"]; ?>" width="50" height="50">
+             <div class="dropdown-content">
+             <img src="<?php echo $row["image"]; ?>" width="160" height="160">
+             </div></div>
+    </td>
+
+
+
+
+
+
+
+
+
 	</tr>
 <?php
 }
 // END OF WHILE LOOP
 ?>
 </table>
+<br>
+<?php //END OF TABLE ?>
 
 <?php  echo "Total cost: ";
 	   echo $totalCost; 
@@ -205,7 +248,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   Adress <span class="error">* <?php echo $nameErr;?></span>
   <br>
   <input type="text" name="name">
-  <br>
+  <br><br>
   Discount
   <br>
   <input type="text" name="discount">
@@ -214,7 +257,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </form>
 
-
+</div>
 
 
 <?php
@@ -222,6 +265,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 disconnect($conn);
 ?>
 
-</div></div></div></div></div>
 </body>
 </html>
