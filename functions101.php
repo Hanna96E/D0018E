@@ -528,8 +528,16 @@ function showProductsBetter($conn,$numberOfColumns,$sqlForProducts,$booleanIsLog
     echo "</div>";
 
     if($booleanShowCart==true){
-        echo "<span style=\" text-align: center; border-radius: 15px; font-weight: 900; font-size: 20;  display: inline-block; position: fixed; top: 100px; left: 10%; width: 8%; background-color: #ECDBBA;\">";
-            echo "total cost: <br>$totalCost";
+        
+        echo "<span style=\"display: inline-block; position: fixed; top: 100px; left: 10%; width: 8%;\">";
+            echo "<span style=\" text-align: center; border-radius: 15px; font-weight: 900; font-size: 20; background-color: #ECDBBA; display: inline-block; width: 100%; margin-top: 20px;\">";
+                echo "total cost: <br>$totalCost";
+            echo "</span>";
+            echo "<br>";
+            echo "<span style=\" text-align: center; border-radius: 15px; font-weight: 900; font-size: 20; background-color: #ECDBBA; width: 100%; display: inline-block; margin-top: 20px;\">";
+                echo "Pay:$totalCost";
+            echo "</span>";
+
         echo "</span>";
     }
 

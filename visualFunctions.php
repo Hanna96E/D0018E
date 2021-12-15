@@ -14,7 +14,6 @@
 	position: absolute;
 }
 .homeInHeader{
-	padding-left: 50px;
 	font-size: xx-large;
 	font-weight: 700;
 }
@@ -141,15 +140,19 @@ function headerMember($pageName){
 
 
 
-			echo "<span class=homeInHeader>";
+			echo "<span style=\"vertical-align: top; padding-left: 50px;\" class=homeInHeader>";
 				echo "<a style=\"color: #ECDBBA;\" href=\"/$homeRef\"> 
-							<img src=\"/img/house.png\" style=\"width:50px;height:50px;\">$homeText </a>";
+							<img src=\"/img/house.png\" style=\"width:50px;height:50px;\"></a>";
+			echo "</span>";
+			echo "<span style=\"vertical-align: top;\" class=homeInHeader>";
+				echo "<a style=\"color: #ECDBBA;\" href=\"/$homeRef\">$homeText</a>";
 			echo "</span>";
 
 
-			//echo "<span style=\"text-align: center; color: #ECDBBA; font-size: xx-large; font-weight: 700; display: inline-block; width: 100%; position: absolute; background-color:\" >";
-				//echo $pageName;
-			//echo "</span>";
+
+			echo "<span style=\"text-align: center; color: #ECDBBA; font-size: xx-large; font-weight: 700; display: inline-block; width: 20%; position: absolute; left: 40%;\" >";
+				echo $pageName;
+			echo "</span>";
 			
 			echo "<span class=menueBarInHeader>";
 				echo "<span class=dropdown>";
@@ -197,11 +200,17 @@ function headerNotLoggedIn($pageName){
 
 
 
-			echo "<span class=homeInHeader>";
-				echo "<a href=\"/$homeRef\"> $homeText </a>";
+			echo "<span style=\"vertical-align: top; padding-left: 50px;\" class=homeInHeader>";
+				echo "<a style=\"color: #ECDBBA;\" href=\"/$homeRef\"> 
+							<img src=\"/img/house.png\" style=\"width:50px;height:50px;\"></a>";
+			echo "</span>";
+			echo "<span style=\"vertical-align: top;\" class=homeInHeader>";
+				echo "<a style=\"color: #ECDBBA;\" href=\"/$homeRef\">$homeText</a>";
 			echo "</span>";
 
-
+			echo "<span style=\"text-align: center; color: #ECDBBA; font-size: xx-large; font-weight: 700; display: inline-block; width: 20%; position: absolute; left: 40%;\" >";
+				echo $pageName;
+			echo "</span>";
 
 			echo "<span class=menueBarInHeader>";
 
@@ -233,10 +242,17 @@ function headerDistributer($pageName){
 
 
 
-			echo "<span class=homeInHeader>";
-				echo "<a href=\"/$homeRef\"> $homeText </a>";
+			echo "<span style=\"vertical-align: top; padding-left: 50px;\" class=homeInHeader>";
+				echo "<a style=\"color: #ECDBBA;\" href=\"/$homeRef\"> 
+							<img src=\"/img/house.png\" style=\"width:50px;height:50px;\"></a>";
+			echo "</span>";
+			echo "<span style=\"vertical-align: top;\" class=homeInHeader>";
+				echo "<a style=\"color: #ECDBBA;\" href=\"/$homeRef\">$homeText</a>";
 			echo "</span>";
 
+			echo "<span style=\"text-align: center; color: #ECDBBA; font-size: xx-large; font-weight: 700; display: inline-block; width: 20%; position: absolute; left: 40%;\" >";
+				echo $pageName;
+			echo "</span>";
 
 			echo "<span class=menueBarInHeader>";
 
@@ -273,10 +289,17 @@ function headerAdmin($pageName){
 
 
 
-			echo "<span class=homeInHeader>";
-				echo "<a href=\"/$homeRef\"> $homeText </a>";
+			echo "<span style=\"vertical-align: top; padding-left: 50px;\" class=homeInHeader>";
+				echo "<a style=\"color: #ECDBBA;\" href=\"/$homeRef\"> 
+							<img src=\"/img/house.png\" style=\"width:50px;height:50px;\"></a>";
+			echo "</span>";
+			echo "<span style=\"vertical-align: top;\" class=homeInHeader>";
+				echo "<a style=\"color: #ECDBBA;\" href=\"/$homeRef\">$homeText</a>";
 			echo "</span>";
 
+			echo "<span style=\"text-align: center; color: #ECDBBA; font-size: xx-large; font-weight: 700; display: inline-block; width: 20%; position: absolute; left: 40%;\" >";
+				echo $pageName;
+			echo "</span>";
 
 			echo "<span class=menueBarInHeader>";
 
