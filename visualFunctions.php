@@ -331,7 +331,20 @@ function headerAdmin($pageName){
 }
 
 
+function footer(){
+	echo "<footer style=\" width: 100%; height: 100px; background-color: #2D4263; position: absolute; text-align: bottom; \" >";
 
+		echo "<span style=\"color: #ECDBBA; display: inline-block; padding-top: 25px; padding-bottom: 25px; text-align: left; font-weight: 900; font-size: 20px;\">";
+			
+			echo "this company have existed since 1854 and proude to sell safe ketchup";
+			echo "<br>";
+			echo "safe products for eating";
+
+
+		echo "</span>";
+
+	echo "</footer>";
+}
 
 
 

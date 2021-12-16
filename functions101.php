@@ -92,40 +92,7 @@ function showProductBetter($conn,$row,$booleanIsLoggedIn,$booleanShowCart,$userI
 
 
         echo "<br>";
-        if((($amount-$amountInCart)<=$warningNumber)&&(0<$amountInCart)&&($amountInCart<=$amount)){
-            echo "<span style=\"font-weight: 900; font-size: 20; background-color: orange; width: 80%; display: inline-block\">";
-                echo "amount in stock is close to amount in cart (left: $amount)";
-            echo "</span>";
-            echo "<br>";
-            echo "<br>";       
-        }
-        else if(($amount<=$warningNumber)&&(0<$amount)){
-                echo "<span style=\"font-weight: 900; font-size: 20; background-color: red;\">";
-                    echo "low amount (left: $amount)";
-                echo "</span>";
-                echo "<br>";
-                echo "<br>";
-        }
-        else if($amount==0)
-        {
-                echo "<span style=\"font-weight: 900; font-size: 20; color: red;\">";
-                    echo "OUT OF STOCK";
-                echo "</span>";
-                echo "<br>";
-                echo "<br>";
-        }
-        else if($amount<$amountInCart){
-            echo "<span style=\"font-weight: 900; font-size: 20; background-color: black; color: red; width: 80%; display: inline-block;\">";
-                echo "SORRY, WE DO NOT HAVE THAT AMOUNT IN STOCK";
-                echo "<br>";
-                echo "WE HAVE: $amount";
-            echo "</span>";
-            echo "<br>";
-            echo "<br>";
-        }
-
-        
-
+        echo "<br>";        
         if((($amount-$amountInCart)<=$warningNumber)&&(0<$amountInCart)&&($amountInCart<=$amount)){
             echo "<span style=\"font-weight: 900; font-size: 20; width: 80%; display: inline-block\" class=errorBackground>";
                 echo "amount in stock is close to amount in cart (left: $amount)";
@@ -575,7 +542,7 @@ function showProductsBetter($conn,$numberOfColumns,$sqlForProducts,$booleanIsLog
 
 
 
-        echo "<span style=\"display: inline-block; position: fixed; top: 100px; left: 10%; width: 8%;\">";
+        echo "<span style=\"display: inline-block; position: fixed; top: 200px; left: 10%; width: 8%;\">";
             echo "<span style=\" text-align: center; border-radius: 15px; font-weight: 900; font-size: 20; background-color: #ECDBBA; display: inline-block; width: 100%; margin-top: 20px;\">";
                 echo "total cost: <br>$totalCost";
             echo "</span>";
@@ -987,12 +954,7 @@ function showForAdmin_orders($conn, $tableClassForVisual){
 
 // specific functions for admin_orders.php stop -------------------------------------------------------------------------------------------------
 
-/*
-#191919
-#2D4263
-#C84B31
-#ECDBBA
-*/
+
 
 function showOrdersViaTable($conn, $tableClassForVisual, $redirectToString, $booleanShowOrdersForAllUsers, $userId, $booleanShowBigStatusHeader, $booleanShowStatusOnOrder, $booleanShowOrderId, $booleanShowUserId, $booleanShowUserName, $booleanShowUserEmail,$booleanShowAdress,$booleanShowChangeOrderStatus,$booleanShowChangeOrderMessage,$booleanShowProducts,$booleanShowProductId,$booleanShowProductImage,$booleanShowProductName,$booleanShowProductAmount){
 
@@ -1118,7 +1080,7 @@ function showOrdersViaTable($conn, $tableClassForVisual, $redirectToString, $boo
                         echo "<tr>";
                         if($booleanShowProductId==true){
                             echo "<td>";
-                                echo "<span style=\" background-color: #ECDBBA; color: black; padding-right: 10px; display: padding-left: 10px; inline-block;  text-align: left;\">";
+                                echo "<span style=\" background-color: #ECDBBA; color: black; padding-right: 10px; padding-left: 10px; display: padding-left: 10px; inline-block;  text-align: left;\">";
                                     echo "productId ";
                                 echo "</span>";
                             echo "</td>";
