@@ -53,6 +53,7 @@ input[type=submit]:hover {
   background-color: #0066FF;
 }
 
+
 input[type=text], input[type=number], input[type=email], input[type=password] {
   width: 35%;
   padding: 5px 8px;
@@ -64,8 +65,9 @@ input[type=text], input[type=number], input[type=email], input[type=password] {
   background-color: #ECDBBA;
 }
 
-
 .error {color: #C84B31;}
+
+.errorBackground {background-color: #C84B31;}
 
 
 /*https://www.w3schools.com/howto/howto_css_dropdown.asp*/
@@ -73,7 +75,6 @@ input[type=text], input[type=number], input[type=email], input[type=password] {
 /* The container <div> - needed to position the dropdown content */ /*https://www.w3schools.com/howto/howto_css_dropdown.asp*/
 .dropdown {
   display: inline-block;
-  
 }
 
 /* Dropdown Content (Hidden by Default) */ /*https://www.w3schools.com/howto/howto_css_dropdown.asp*/
@@ -163,8 +164,8 @@ function headerMember($pageName){
 						echo "<a href=\"/paymentPage.php\"> Pay </a>";
 						echo "<a href=\"/memberOrders.php\"> Your past orders </a>";
 						echo "<a href=\"/member_account.php\"> My account </a>";
-						echo "<a href=\"/member_support.php\"> Support </a>";
 						echo "<a href=\"/logout.php\"> Log out </a>";
+						echo "<a href=\"/member_support.php\"> Support </a>";
 						
 					echo "</span>";
 								
