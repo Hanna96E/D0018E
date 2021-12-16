@@ -178,9 +178,9 @@ function showProductBetter($conn,$row,$booleanIsLoggedIn,$booleanShowCart,$userI
 
 
         if($booleanShowCart==true){
-            echo "<span class=dropdown>";
+            echo "<span class=dropdown style=\" width: 100%;\">";
                 echo "<button style= \"font-weight: 500; font-size: 20; margin-top: 10px;\">show more</button>";
-                echo "<span class=\"dropdown-content\" style=\" width: 100%;\">";
+                echo "<span class=\"dropdown-content\">";
         }
                     echo "<span style=\"font-weight: 900; background-color: $backgroundColor; display: inline-block; width: 100%;\">";
                         echo "<span style=\" background-color: #ECDBBA; display: inline-block; width: 42%; float: left; height: 150px; overflow: scroll; margin-left: 5%\">";

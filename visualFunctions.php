@@ -84,7 +84,6 @@ input[type=text], input[type=number], input[type=email], input[type=password] {
   z-index: 10;
   background-color: #ECDBBA;
   position: relative;
-
 }
 
 /* Links inside the dropdown */ /*https://www.w3schools.com/howto/howto_css_dropdown.asp*/
@@ -156,7 +155,7 @@ function headerMember($pageName){
 			echo "<span class=menueBarInHeader>";
 				echo "<span class=dropdown>";
 						echo "<img src= \"". $menuebarImage. "\" style= \"width:50px;height:50px;\">";
-					echo "<span class=dropdown-content>";
+					echo "<span class=dropdown-content style=\"width: 300px;\">";
 
 						echo "<a href=\"/member_start.php\"> Home </a>";
 						echo "<a href=\"/productsForMember.php\"> View products </a>";
@@ -216,7 +215,7 @@ function headerNotLoggedIn($pageName){
 
 				echo "<span class=dropdown>";
 						echo "<img src= \"". $menuebarImage. "\" style= \"width:50px;height:50px;\">";
-					echo "<span class=dropdown-content>";
+					echo "<span class=dropdown-content style=\"width: 300px;\">";
 
 						echo "<a href=\"/products.php\"> Products </a>";
 						echo "<a href=\"/login.php\"> Login </a>";
@@ -259,7 +258,7 @@ function headerDistributer($pageName){
 
 				echo "<span class=dropdown>";
 						echo "<img src= \"". $menuebarImage. "\" style= \"width:50px;height:50px;\">";
-					echo "<span class=dropdown-content>";
+					echo "<span class=dropdown-content style=\"width: 300px;\">";
 
 						echo "<a href=\"/$homeRef\"> $homeText </a>";
 						echo "<a href=\"/logout.php\"> Log out </a>";
@@ -306,7 +305,7 @@ function headerAdmin($pageName){
 
 				echo "<span class=dropdown>";
 						echo "<img src= \"". $menuebarImage. "\" style= \"width:50px;height:50px;\">";
-					echo "<span class=dropdown-content>";
+					echo "<span class=dropdown-content style=\"width: 300px;\">";
 
 						echo "<a href=\"/$homeRef\"> $homeText </a>";
 						echo "<a href=\"/admin_products.php\"> Manage products </a>";
