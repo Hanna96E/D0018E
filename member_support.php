@@ -45,108 +45,69 @@ margin: 20px;
 
 div.support {
   position: absolute;
-  left: -100px;
-  top: 100px;
-  background-color: #cce6ff;
-  width: 650px;
+  left: 0px;
+  top: 10px;
+  background-color: #2D4263;
+  color: #ECDBBA;
+  width: 55%;
   height: 600px;
-  border: 10px solid #cce6ff;
+  border: 25px solid #C84B31;
   padding: 10px;
-  margin: 10px;
-  overflow: auto;
-  border-radius: 15px;
-} 
-
-div.supportTopLeft {
-  position: absolute;
-  left: 0px;
-  top: 35px;
-  background-color: #cce6ff;
-  width: 360px;
-  height: 250px;
-  border: 10px solid cce6ff;
-  padding: 10px;
-  margin: 10px;
-  overflow: auto;
-  border-radius: 15px;
-}
-div.supportTopRight {
-  position: absolute;
-  right: 0px;
-  top:35px;
-  background-color: #cce6ff;
-  width: 240px;
-  height: 250px;
-  border: 10px solid cce6ff;
-  padding: 10px;
-  margin: 10px;
   overflow: auto;
   border-radius: 15px;
 }
 
-div.supportBottomLeft {
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
-  background-color: #cce6ff;
-  width: 320px;
-  height: 280px;
-  border: 10px solid cce6ff;
+div.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  background-color: #2D4263;
   padding: 10px;
-  margin: 10px;
-  overflow: auto;
-  border-radius: 15px;
 }
-div.supportBottomRight {
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
-  background-color: #cce6ff;
-  width: 280px;
-  height: 280px;
-  border: 10px solid cce6ff;
-  padding: 10px;
-  margin: 10px;
-  overflow: auto;
+div.grid-item {
+  background-color: #ECDBBA;
+  border: 5px solid #2D4263;
+  padding: 20px;
+  color: black;
+  text-align: center;
   border-radius: 15px;
 }
 
 div.alert {
   position: absolute;
-  right: -100px;
-  top: 100px;
-  background-color: #ffcce6;
-  width: 650px;
-  height: 700px;
-  border: 10px solid #ffcce6;
+  right: 0px;
+  top: 10px;
+  background-color: #2D4263;
+  color: #ECDBBA;
+  width: 47%;
+  height: 600px;
+  border: 25px solid #C84B31;
   padding: 10px;
-  margin: 10px;
   overflow: auto;
   border-radius: 15px;
 }
 div.discount {
   position: absolute;
-  left: -100px;
-  bottom: -1420px;
-  background-color: #ccffcc;
-  width: 650px;
-  height: 800px;
-  border: 10px solid #ccffcc;
+  left: 0px;
+  top: 580px;
+  background-color: #2D4263;
+  color: #ECDBBA;
+  width: 53%;
+  height: 700px;
+  border: 25px solid #C84B31;
   padding: 10px;
-  margin: 10px;
   overflow: auto;
   border-radius: 15px;
 }
 div.other {
   position: absolute;
-  right: -100px;
-  bottom: -1420px;
-  background-color: #ffff80;
-  width: 650px;
+  right: 0px;
+  top: 580px;
+  background-color: #2D4263;
+  color: #ECDBBA;
+  width: 49%;
   height: 700px;
-  border: 10px solid #ffff80;
+  border: 25px solid #C84B31;
   padding: 10px;
-  margin: 10px;
   overflow: auto;
   border-radius: 15px;
 }
@@ -156,28 +117,21 @@ $(document).ready(function(){
 $('[data-toggle="tooltip"]').tooltip();   
 });
 </script>
+<?php
+    include_once "visualFunctions.php";
+?>
+
+
 </head>
-<body>
+<body class=bodyClass>
+
+<?php
+    headerMember("Support");
+?>
 <div class="bs-example">
 <div class="container">
 <div class="row">
 <div class="col-md-12">
-<div class="page-header clearfix">
-<h2 class="pull-left">Support </h2>
-
-<!--MEMBER MENUE BAR-->
-<table>
-<tr>
-<td><a href="/member_start.php"><button> Home </button></a></td>
-<td><a href="/productsForMember.php"><button> View products </button></a></td>
-<td><a href="/memberCart.php"><button> View cart </button></a></td>
-<td><a href="/member_account.php"><button> My account </button></a></td>
-<td><a href="/member_support.php"><button> Support </button></a></td>
-<td><a href="/logout.php"><button> Log out </button></a></td>
-</tr>
-</table>
-<br><br>
-</div>
 
 <?php
     include "functions.php";
@@ -192,35 +146,37 @@ $('[data-toggle="tooltip"]').tooltip();
 ?>
 
 <div class="support"><h3>Contact information & customer support</h3>
-	<div class="supportTopLeft">
+  <div class="grid-container">
+	<div class="grid-item">
 		<br>
-		<b style="font-size: 24;">Order and shipping questions:</b><br><br>
-		<p style="font-size: 18";>Tel: 8357-123456<br>(Phone hours: 06:30-21:30)</p>
-		<p style="font-size: 18";>Email: <br>orders-and-shipping@bestshop.com</p>
+		<b style="font-size: 20;">Order questions:</b><br>
+		<p style="font-size: 14";>Tel: 8357-123456<br>(Phone hours: 06:30-21:30)</p>
+		<p style="font-size: 14";>Email: <br>orders-and-shipping@bestshop.com</p>
 	</div>
-	<div class="supportTopRight">
+	<div class="grid-item">
 		<br>
-		<b style="font-size: 24";>Other questions:</b><br><br>
-		<p style="font-size: 18";>Tel: 8357-123457<br>(Phone hours: 10:00-18:00)</p>
-		<p style="font-size: 18";>Email: <br>support@bestshop.com</p>
+		<b style="font-size: 20";>Other questions:</b><br>
+		<p style="font-size: 14";>Tel: 8357-123457<br>(Phone hours: 10:00-18:00)</p>
+		<p style="font-size: 14";>Email: <br>support@bestshop.com</p>
 	</div>
-	<div class="supportBottomLeft">
+	<div class="grid-item">
 		<br><br>
-		<b style="font-size: 24";>Account questions:</b><br><br>
-		<p style="font-size: 18";>Tel: 8357-123458<br>(Phone hours: 09:00-17:00)</p>
-		<p style="font-size: 18";>Email: <br> account-support@bestshop.com</p>
+		<b style="font-size: 20";>Account questions:</b><br>
+		<p style="font-size: 14";>Tel: 8357-123458<br>(Phone hours: 09:00-17:00)</p>
+		<p style="font-size: 14";>Email: <br> account-support@bestshop.com</p>
 	</div>
-	<div class="supportBottomRight">
+	<div class="grid-item">
 		<br><br>
-		<b style="font-size: 24";>Product questions:</b><br><br>
-		<p style="font-size: 18";>Tel: 8357-123459<br>(Phone hours: 12:00-16:00)</p>
-		<p style="font-size: 18";>Email: <br>product-support@bestshop.com</p>
+		<b style="font-size: 20";>Product questions:</b><br>
+		<p style="font-size: 14";>Tel: 8357-123459<br>(Phone hours: 12:00-16:00)</p>
+		<p style="font-size: 14";>Email: <br>product-support@bestshop.com</p>
 	</div>
+  </div>
 	
 
 </div>
 
-<div class="alert"><h3>Alerts</h3>	<table class='table table-bordered table-striped'>
+<div class="alert"><h3>Alerts</h3>	<table class='table table-bordered table-striped' style="color: #ECDBBA;">
     <tr>
     	<td><label></label></td>
     	<td><label>Message</label></td>
@@ -252,7 +208,7 @@ $('[data-toggle="tooltip"]').tooltip();
     ?>
 
     <tr>
-    	<td><label <?php if($sender == 'Direct message') echo "style='color:red;'";?> ><?=$sender?></label></td>
+    	<td><label <?php if($sender == 'Direct message') echo "style='color: #C84B31;'";?> ><?=$sender?></label></td>
     	<td><label><?=$message?></label></td>
     	<td><label><?=$date?></label></td>
     	<td><label><?=$time?></label></td>
@@ -269,7 +225,7 @@ $('[data-toggle="tooltip"]').tooltip();
 </div>
 
   <div class="discount"><h3>Discounts</h3>
-<table class='table table-bordered table-striped'>
+<table class='table table-bordered table-striped' style="color: #ECDBBA;">
     <tr>
     	<td><label></label></td>
     	<td><label>Message</label></td>
@@ -300,7 +256,7 @@ $('[data-toggle="tooltip"]').tooltip();
     ?>
 
     <tr>
-    	<td><label <?php if($sender == 'Direct message') echo "style='color:red;'";?> ><?=$sender?></label></td>
+    	<td><label <?php if($sender == 'Direct message') echo "style='color: #C84B31;'";?> ><?=$sender?></label></td>
     	<td><label><?=$message?></label></td>
     	<td><label><?=$date?></label></td>
     	<td><label><?=$time?></label></td>
@@ -317,7 +273,7 @@ $('[data-toggle="tooltip"]').tooltip();
 
   </div>
   <div class="other"><h3>Other messages</h3>
-<table class='table table-bordered table-striped'>
+<table class='table table-bordered table-striped' style="color: #ECDBBA;">
     <tr>
     	<td><label></label></td>
     	<td><label>Message</label></td>
@@ -348,7 +304,7 @@ $('[data-toggle="tooltip"]').tooltip();
     ?>
 
     <tr>
-    	<td><label <?php if($sender == 'Direct message') echo "style='color:red;'";?> ><?=$sender?></label></td>
+    	<td><label <?php if($sender == 'Direct message') echo "style='color: #C84B31;'";?> ><?=$sender?></label></td>
     	<td><label><?=$message?></label></td>
     	<td><label><?=$date?></label></td>
     	<td><label><?=$time?></label></td>

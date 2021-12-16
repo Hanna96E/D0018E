@@ -50,39 +50,14 @@ $('[data-toggle="tooltip"]').tooltip();
 });
 </script>
 <style>
-.error {color: #FF0000;}
-
-input[type=submit] {
-  width: 100%;
-  background-color: #0099FF;
-  color: white;
-  padding: 14px 20px;
-  margin: 4px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-input[type=submit]:hover {
-  background-color: #0066FF;
-}
-
-input[type=text], input[type=password], input[type=email] {
-  width: 100%;
-  padding: 12px 8px;
-  margin: 4px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
 
 div.account {
   position: absolute;
-  left: 0px;
-  top: 100px;
-  background-color: #cce6ff;
-  border: 10px solid #cce6ff;
+  left: 10%;
+  top: 10px;
+  background-color: #2D4263;
+  color: #ECDBBA;
+  border: 25px solid #C84B31;
   padding: 10px;
   margin: 10px;
   overflow: auto;
@@ -91,38 +66,33 @@ div.account {
 
 div.new {
   position: absolute;
-  right: 0px;
-  top: 100px;
-  background-color: #cce6ff;
-  width: 600px;
-  border: 10px solid #cce6ff;
+  right: 10%;
+  top: 10px;
+  background-color: #2D4263;
+  color: #ECDBBA;
+  width: 40%;
+  border: 25px solid #C84B31;
   padding: 10px;
   margin: 10px;
   overflow: auto;
   border-radius: 15px;
 }
 </style>
+<?php
+    include_once "visualFunctions.php";
+?>
+
+
 </head>
-<body>
+<body class=bodyClass>
+
+<?php
+    headerMember("My account");
+?>
 <div class="bs-example">
 <div class="container">
 <div class="row">
 <div class="col-md-12">
-<div class="page-header clearfix">
-<h2 class="pull-left">My account <?=$_SESSION["name"]?>! </h2>
-
-<!--MEMBER MENUE BAR-->
-<table>
-<tr>
-<td><a href="/member_start.php"><button> Home </button></a></td>
-<td><a href="/productsForMember.php"><button> View products </button></a></td>
-<td><a href="/memberCart.php"><button> View cart </button></a></td>
-<td><a href="/member_account.php"><button> My account </button></a></td>
-<td><a href="/member_support.php"><button> Support </button></a></td>
-<td><a href="/logout.php"><button> Log out </button></a></td>
-</tr>
-</table>
-</div>
 
 
 <?php
@@ -171,20 +141,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="account"><h3>Account information</h3>
 	<b style="font-size: 26;">Name:</b><p style="font-size: 26;"><?=$_SESSION['name']?></p><br>
 	<b style="font-size: 26;">Email:</b><p style="font-size: 26;"><?=$_SESSION['email']?></p><br>
-	<b style="font-size: 26;">User type:</b><p style="font-size: 26;"><?=$_SESSION['status']?></p><br>
 </div>
 
 <div class="new"><h3>Change password</h3>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 	<label for="password"> Password: </label><br>
-	<input  type = "password" id = "password" name="password" placeholder="New password..">
+	<input  type = "password" id = "password" name="password" placeholder="New password.." style="width: 100%;">
 	<span class="error"> <?php echo $passwordErr;?></span>
 	<br><br>
 	<label for="password2">Verify password: </label><br>
-	<input type = "password" id = "password2" name="password2" placeholder="Verify new password..">
+	<input type = "password" id = "password2" name="password2" placeholder="Verify new password.." style="width: 100%;">
 	<span class="error"> <?php echo $password2Err;?></span>
 	<br><br>
-	<input type="submit" name="submit" value="Change password">  
+	<input type="submit" name="submit" value="Change password" style="width: 60%; padding: 20px 0px;">  
 </form>
 
 </div>

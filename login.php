@@ -89,41 +89,15 @@ switch(userType) {
 margin: 20px;
 }
 
-.error {color: #FF0000;}
-
-input[type=submit] {
-  width: 100%;
-  background-color: #0099FF;
-  color: white;
-  padding: 14px 20px;
-  margin: 4px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-input[type=submit]:hover {
-  background-color: #0066FF;
-}
-
-input[type=text], input[type=password], input[type=email] {
-  width: 100%;
-  padding: 12px 8px;
-  margin: 4px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
 
 div.new {
   position: absolute;
-  left: -100px;
-  top: 100px;
-  background-color: #cce6ff;
-  width: 600px;
-  border: 10px solid #cce6ff;
+  left: 25%;
+  top: 10px;
+  background-color: #2D4263;
+  color: #ECDBBA;
+  width: 50%;
+  border: 25px solid #C84B31;
   padding: 10px;
   margin: 10px;
   overflow: auto;
@@ -136,33 +110,36 @@ $(document).ready(function(){
 $('[data-toggle="tooltip"]').tooltip();   
 });
 </script>
+<?php
+    include_once "visualFunctions.php";
+?>
+
+
 </head>
-<body>
+<body class=bodyClass>
+
+<?php
+    headerNotLoggedIn("Log in");
+?>
 <div class="bs-example">
 <div class="container">
 <div class="row">
 <div class="col-md-12">
-<div class="page-header clearfix">
-<h2 class="pull-left">Log in to account </h2>
-<h4><a href="index.html"><button> Home </button></a></h4>
-</div>
-
-
 
 
 <div class="new">
 
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 	<label for="email">Email: </label><br>
-	<input type="text" id = "email" name="email" placeholder="Email..">
+	<input type="text" id = "email" name="email" placeholder="Email.." style="width: 100%;">
 	<br><span class="error"> <?php echo $emailErr;?></span>
 	<br><br>
 	<label for="password"> Password: </label><br>
-	<input  type = "password" id = "password" name="password" placeholder="Password..">
+	<input  type = "password" id = "password" name="password" placeholder="Password.." style="width: 100%;">
 	<br><span class="error"> <?php echo $passwordErr;?></span>
 	
 	<br><br>
-	<input type="submit" name="submit" value="Log in">  
+	<input type="submit" name="submit" value="Login" style="width: 50%; padding: 20px 0px;">  
 </form>
 
 </div>

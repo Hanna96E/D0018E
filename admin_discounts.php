@@ -43,77 +43,49 @@ switch(userType) {
 margin: 20px;
 }
 
-.error {color: #FF0000;}
-
-
-input[type=submit] {
-  width: 100%;
-  background-color: #0099FF;
-  color: white;
-  padding: 14px 20px;
-  margin: 4px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-input[type=text], input[type=number] {
-  width: 90%;
-  padding: 12px 8px;
-  margin: 4px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-input[type=submit]:hover {
-  background-color: #0066FF;
-}
-
 select {
   width: 90%;
   padding: 5px 15px;
   border: none;
   border-radius: 4px;
-  background-color: #FFFFFF;
+  background-color: #ECDBBA;
 }
 
 div.new {
   position: absolute;
-  left: -100px;
-  top: 100px;
-  background-color: #cce6ff;
-  width: 400px;
+  left: 0px;
+  top: 10px;
+  background-color: #2D4263;
+  color: #ECDBBA;
+  width: 40%;
   height: 550px;
-  border: 10px solid #cce6ff;
+  border: 25px solid #C84B31;
   padding: 10px;
-  margin: 10px;
   overflow: auto;
   border-radius: 15px;
 }  
 div.active {
   position: absolute;
-  right: -100px;
-  top: 100px;
-  background-color: #ffcce6;
-  width: 900px;
+  right: 0px;
+  top: 10px;
+  background-color: #2D4263;
+  color: #ECDBBA;
+  width: 62%;
   height: 550px;
-  border: 10px solid #ffcce6;
+  border: 25px solid #C84B31;
   padding: 10px;
-  margin: 10px;
   overflow: auto;
   border-radius: 15px;
 }
 div.inactive {
   position: absolute;
-  left: -100px;
-  top: 670px;
-  background-color: #ccffcc;
-  width: 1320px;
-  border: 10px solid #ccffcc;
+  left: 0px;
+  top: 530px;
+  background-color: #2D4263;
+  color: #ECDBBA;
+  width: 100%;
+  border: 25px solid #C84B31;
   padding: 10px;
-  margin: 10px;
   overflow: auto;
   border-radius: 15px;
 }
@@ -125,29 +97,20 @@ $(document).ready(function(){
 $('[data-toggle="tooltip"]').tooltip();   
 });
 </script>
+<?php
+    include_once "visualFunctions.php";
+?>
 </head>
-<body>
+<body class=bodyClass>
+
+<?php
+    headerAdmin("Discounts");
+?>
 <div class="bs-example">
 <div class="container">
 <div class="row">
 <div class="col-md-12">
-<div class="page-header clearfix">
-<h2 class="pull-left">Discounts </h2>
 
-    <!--ADMIN MENUE BAR-->
-<table>
-<tr>
-<td><a href="/admin_start.php"><button> Home </button></a></td>
-<td><a href="/admin_products.php"><button> Manage products </button></a></td>
-<td><a href="/admin_orders.php"><button> Manage orders </button></a></td>
-<td><a href="/admin_accounts.php"><button> Manage accounts </button></a></td>
-<td><a href="/admin_messages.php"><button> Messages </button></a></td>
-<td><a href="/admin_discounts.php"><button> Discounts </button></a></td>
-<td><a href="/logout.php"><button> Log out </button></a></td>
-</tr>
-</table>
-<br><br>
-</div>
 
 <?php
     include "functions.php";
@@ -205,7 +168,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <p><span class="error">* required field</span></p>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <label for="code">Code: <span class="error">* <?php echo $codeErr;?></span></label><br>  
-        <input type="text" id = "code" name="code" placeholder="Code..">
+        <input type="text" id = "code" name="code" placeholder="Code.." style="width: 70%;">
         
         <br><br>
         <label for="amount">Amount: <span class="error">* <?php echo $amountErr;?></span></label><br>
@@ -213,11 +176,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           
         <br><br>
         <label for="isPercent">Currency or percent: <span class="error">* <?php echo $isPercentErr;?></span></label><br>
-        <input type="radio" name="isPercent" <?php if (isset($isPercent) && $isPercent =="0") echo "checked";?> value="0"> Currency
-        <br><input type="radio" name="isPercent" <?php if (isset($isPercent) && $isPercent =="1") echo "checked";?> value="1"> Percent
+        <input type="radio" name="isPercent" <?php if (isset($isPercent) && $isPercent =="0") echo "checked";?> value="0" style="background: ECDBBA;"> Currency
+        <br><input type="radio" name="isPercent" <?php if (isset($isPercent) && $isPercent =="1") echo "checked";?> value="1" style="background: ECDBBA;"> Percent
         
         <br><br>
-        <input type="submit" name="submit" value="Create discount">  
+        <input type="submit" name="submit" value="Create discount" style="width: 90%;">  
 </form>
 
 
@@ -226,7 +189,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="active"><h3>Active discounts</h3>	
 
 
-	<table class='table table-bordered table-striped'>
+	<table class='table table-bordered table-striped' style="color: #ECDBBA;">
   	<tr>
     <td>Code</td>
     <td>Amount</td>
@@ -281,7 +244,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-	<table class='table table-bordered table-striped'>
+	<table class='table table-bordered table-striped' style="color: #ECDBBA;">
   	<tr>
     <td>Code</td>
     <td>Amount</td>
@@ -322,7 +285,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form method="post" action="manage_discounts.php?action=change&id=<?=$id?>&isActive=<?=$notIsActive?>">
     <input type="submit" name="submit" value="Activate">
 	</form></td>
-	<td><label style="color: #ccffcc;"> .</label><br>
+	<td><label style="color: #2D4263;"> .</label><br>
 	<form method="post" action="manage_discounts.php?action=remove&id=<?=$id?>&isActive=<?=$notIsActive?>">
     <input type="submit" name="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this discount?')">
 	</form>

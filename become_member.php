@@ -110,42 +110,17 @@ $('[data-toggle="tooltip"]').tooltip();
 });
 </script>
 <style>
-.error {color: #FF0000;}
-
-input[type=submit] {
-  width: 100%;
-  background-color: #0099FF;
-  color: white;
-  padding: 14px 20px;
-  margin: 4px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-input[type=submit]:hover {
-  background-color: #0066FF;
-}
-
-input[type=text], input[type=password], input[type=email] {
-  width: 100%;
-  padding: 12px 8px;
-  margin: 4px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
 
 
 div.new {
   position: absolute;
-  left: -100px;
-  top: 100px;
-  background-color: #cce6ff;
-  width: 1000px;
+  left: 10%;
+  top: 10px;
+  background-color: #2D4263;
+  color: #ECDBBA;
+  width: 80%;
   height: 450px;
-  border: 10px solid #cce6ff;
+  border: 25px solid #C84B31;
   padding: 10px;
   margin: 10px;
   overflow: auto;
@@ -155,10 +130,8 @@ div.newLeft {
   position: absolute;
   left: 0px;
   top: 20px;
-  background-color: #cce6ff;
-  width: 450px;
-  height: 400px;
-  border: 10px solid #cce6ff;
+  width: 50%;
+  height: 350px;
   padding: 10px;
   margin: 10px;
   overflow: auto;
@@ -168,26 +141,29 @@ div.newRight {
   position: absolute;
   right: 0px;
   top: 20px;
-  background-color: #cce6ff;
-  width: 450px;
-  height: 400px;
-  border: 10px solid #cce6ff;
+  width: 50%;
+  height: 350px;
   padding: 10px;
   margin: 10px;
   overflow: auto;
   border-radius: 15px;
 }
 </style>
+<?php
+    include_once "visualFunctions.php";
+?>
+
+
 </head>
-<body>
+<body class=bodyClass>
+
+<?php
+    headerNotLoggedIn("Become member");
+?>
 <div class="bs-example">
 <div class="container">
 <div class="row">
 <div class="col-md-12">
-<div class="page-header clearfix">
-<h2 class="pull-left">Become member</h2>
-<h4><a href="index.html"><button> Home </button></a></h4>
-</div>
 
 
 <div class="new">
@@ -198,23 +174,23 @@ div.newRight {
 	<div class="newLeft">
 	
 	<label for="name">Name: </label><br>  
-	<input type="text" id = "name" name="name" placeholder="Name..">
-	<span class="error">* <?php echo $nameErr;?></span>
+	<input type="text" id = "name" name="name" placeholder="Name.." style="width: 80%;">
+	<br><span class="error">* <?php echo $nameErr;?></span>
 	<br><br>
 	<label for="email">Email: </label><br>
-	<input type="text" id = "email" name="email" placeholder="Email..">
-	<span class="error">* <?php echo $emailErr;?></span>
-	<br><br><input type="submit" name="submit" value="Create account"> 
+	<input type="text" id = "email" name="email" placeholder="Email.." style="width: 80%;">
+	<br><span class="error">* <?php echo $emailErr;?></span>
+	<br><br><input type="submit" name="submit" value="Create account" style="width: 80%;"> 
 	</div>
 	<div class="newRight">
 	
 	<label for="password"> Password: </label><br>
-	<input  type = "password" id = "password" name="password" placeholder="Password..">
-	<span class="error">* <?php echo $passwordErr;?></span>
+	<input  type = "password" id = "password" name="password" placeholder="Password.." style="width: 80%;">
+	<br><span class="error">* <?php echo $passwordErr;?></span>
 	<br><br>
 	<label for="password2">Verify password: </label><br>
-	<input type = "password" id = "password2" name="password2" placeholder="Verify password..">
-	<span class="error">* <?php echo $password2Err;?></span>
+	<input type = "password" id = "password2" name="password2" placeholder="Verify password.." style="width: 80%;">
+	<br><span class="error">* <?php echo $password2Err;?></span>
 	
 	</div>
 

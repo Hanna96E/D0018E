@@ -43,34 +43,17 @@ switch(userType) {
 margin: 20px;
 }
 
-.error {color: #FF0000;}
-
-
-input[type=submit] {
-  width: 50%;
-  background-color: #0099FF;
-  color: white;
-  padding: 14px 20px;
-  margin: 4px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
 
 textarea {
   width: 90%;
-  height: 170px;
+  height: 230px;
   padding: 12px 20px;
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 4px;
-  background-color: #FFFFFF;
+  background-color: #ECDBBA;
   font-size: 16px;
   resize: none;
-}
-
-input[type=submit]:hover {
-  background-color: #0066FF;
 }
 
 select {
@@ -78,58 +61,58 @@ select {
   padding: 5px 15px;
   border: none;
   border-radius: 4px;
-  background-color: #FFFFFF;
+  background-color: #ECDBBA;
 }
 
 div.new {
   position: absolute;
-  left: -100px;
-  top: 100px;
-  background-color: #cce6ff;
-  width: 650px;
-  height: 600px;
-  border: 10px solid #cce6ff;
+  left: 0px;
+  top: 10px;
+  background-color: #2D4263;
+  color: #ECDBBA;
+  width: 40%;
+  height: 700px;
+  border: 25px solid #C84B31;
   padding: 10px;
-  margin: 10px;
   overflow: auto;
   border-radius: 15px;
 }  
 div.alert {
   position: absolute;
-  right: -100px;
-  top: 100px;
-  background-color: #ffcce6;
-  width: 650px;
+  right: 0px;
+  top: 10px;
+  background-color: #2D4263;
+  color: #ECDBBA;
+  width: 62%;
   height: 700px;
-  border: 10px solid #ffcce6;
+  border: 25px solid #C84B31;
   padding: 10px;
-  margin: 10px;
   overflow: auto;
   border-radius: 15px;
 }
 div.discount {
   position: absolute;
-  left: -100px;
-  bottom: -1420px;
-  background-color: #ccffcc;
-  width: 650px;
-  height: 800px;
-  border: 10px solid #ccffcc;
+  left: 0px;
+  top: 685px;
+  background-color: #2D4263;
+  color: #ECDBBA;
+  width: 100%;
+  height: 700px;
+  border: 25px solid #C84B31;
   padding: 10px;
-  margin: 10px;
   overflow: auto;
   border-radius: 15px;
 }
 div.other {
   position: absolute;
-  right: -100px;
-  bottom: -1420px;
-  background-color: #ffff80;
-  width: 650px;
+  left: 0px;
+  top: 1360px;
+  background-color: #2D4263;
+  color: #ECDBBA;
+  width: 100%;
   height: 700px;
-  border: 10px solid #ffff80;
+  border: 25px solid #C84B31;
   padding: 10px;
-  margin: 10px;
   overflow: auto;
   border-radius: 15px;
 }
@@ -140,29 +123,22 @@ $(document).ready(function(){
 $('[data-toggle="tooltip"]').tooltip();   
 });
 </script>
+<?php
+    include_once "visualFunctions.php";
+?>
+
+
 </head>
-<body>
+<body class=bodyClass>
+
+<?php
+    headerAdmin("Messages");
+?>
 <div class="bs-example">
 <div class="container">
 <div class="row">
 <div class="col-md-12">
-<div class="page-header clearfix">
-<h2 class="pull-left">Messages </h2>
 
-    <!--ADMIN MENUE BAR-->
-<table>
-<tr>
-<td><a href="/admin_start.php"><button> Home </button></a></td>
-<td><a href="/admin_products.php"><button> Manage products </button></a></td>
-<td><a href="/admin_orders.php"><button> Manage orders </button></a></td>
-<td><a href="/admin_accounts.php"><button> Manage accounts </button></a></td>
-<td><a href="/admin_messages.php"><button> Messages </button></a></td>
-<td><a href="/admin_discounts.php"><button> Discounts </button></a></td>
-<td><a href="/logout.php"><button> Log out </button></a></td>
-</tr>
-</table>
-<br><br>
-</div>
 
 <?php
     include "functions.php";
@@ -239,13 +215,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   	<input type="radio" name="messageType" <?php if (isset($messageType) && $messageType =="other") echo "checked";?> value="other">Other  
 	<span class="error">* <?php echo $messageTypeErr;?></span>
 	<br><br>
-	<input type="submit" name="submit" value="Send message">  
+	<input type="submit" name="submit" value="Send message" style="width: 90%; padding: 5px;">  
 </form>
 
 
 </div>
 
-<div class="alert"><h3>Alert messages</h3>	<table class='table table-bordered table-striped'>
+<div class="alert"><h3>Alert messages</h3>	<table class='table table-bordered table-striped' style="color: #ECDBBA;">
     <tr>
     	<td><label>Sender</label></td>
     	<td><label>Receiver</label></td>
@@ -298,7 +274,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 
   <div class="discount"><h3>Discount messages</h3>
-<table class='table table-bordered table-striped'>
+<table class='table table-bordered table-striped' style="color: #ECDBBA;">
     <tr>
     	<td><label>Sender</label></td>
     	<td><label>Receiver</label></td>
@@ -350,7 +326,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   </div>
   <div class="other"><h3>Other messages</h3>
-<table class='table table-bordered table-striped'>
+<table class='table table-bordered table-striped' style="color: #ECDBBA;">
     <tr>
     	<td><label>Sender</label></td>
     	<td><label>Receiver</label></td>

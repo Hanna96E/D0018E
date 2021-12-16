@@ -57,14 +57,13 @@ switch(userType) {
 margin: 20px;
 }
 
-.error {color: #FF0000;}
 
-.dropdown {
+.dropdown1 {
   position: relative;
   display: inline-block;
 }
 
-.dropdown-content {
+.dropdown1-content {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
@@ -73,20 +72,8 @@ margin: 20px;
   z-index: 1;
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown1:hover .dropdown1-content {
   display: block;
-}
-
-
-input[type=submit] {
-  width: 100%;
-  background-color: #0099FF;
-  color: white;
-  padding: 14px 20px;
-  margin: 4px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 textarea {
@@ -96,43 +83,30 @@ textarea {
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 4px;
-  background-color: #FFFFFF;
+  background-color: #ECDBBA;
   font-size: 16px;
   resize: none;
 }
 
-input[type=submit]:hover {
-  background-color: #0066FF;
-}
-
-input[type=text], input[type=number] {
-  width: 35%;
-  padding: 12px 8px;
-  margin: 4px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
 
 select {
   width: 80%;
   padding: 5px 15px;
   border: none;
   border-radius: 4px;
-  background-color: #FFFFFF;
+  background-color: #ECDBBA;
 }
 
 div.new {
   position: absolute;
-  left: -100px;
-  top: 100px;
-  background-color: #cce6ff;
-  width: 820px;
+  left: 0px;
+  top: 10px;
+  background-color: #2D4263;
+  color: #ECDBBA;
+  width: 65%;
   height: 600px;
-  border: 10px solid #cce6ff;
+  border: 25px solid #C84B31;
   padding: 10px;
-  margin: 10px;
   overflow: auto;
   border-radius: 15px;
 } 
@@ -141,70 +115,61 @@ div.newLeft {
   position: absolute;
   top: 0px;
   left: 0px;
-  width: 300px;
+  width: 40%;
   padding: 10px;
 } 
 div.newRight {
   position: absolute;
   top: 20px;
-  right: 0px;
-  width: 500px;
+  right: 10px;
+  width: 60%;
   padding: 10px;
 }
 
 div.low {
   position: absolute;
-  right: -100px;
-  top: 100px;
-  background-color: #ffcce6;
-  width: 480px;
+  right: 0px;
+  top: 10px;
+  background-color: #2D4263;
+  color: #ECDBBA;
+  width: 37%;
   height: 600px;
-  border: 10px solid #ffcce6;
+  border: 25px solid #C84B31;
   padding: 10px;
-  margin: 10px;
   overflow: auto;
   border-radius: 15px;
 }
 
 div.change {
   position: absolute;
-  left: -100px;
-  top: 720px;
-  background-color: #ccffcc;
-  width: 1320px;
-  border: 10px solid #ccffcc;
+  left: 0px;
+  top: 580px;
+  background-color: #2D4263;
+  color: #ECDBBA;
+  width: 100%;
+  border: 25px solid #C84B31;
   padding: 10px;
-  margin: 10px;
   overflow: auto;
   border-radius: 15px;
 }
 
     </style>
-    </head>
-    <body>
+<?php
+    include_once "visualFunctions.php";
+?>
+
+
+</head>
+<body class=bodyClass>
+
+<?php
+    headerAdmin("Products");
+?>
 
     <div class="bs-example">
     <div class="container">
     <div class="row">
     <div class="col-md-12">
-    <div class="page-header clearfix">
-    <h2 class="pull-left">Manage products</h2>
-
-    <!--ADMIN MENUE BAR-->
-<table>
-<tr>
-<td><a href="/admin_start.php"><button> Home </button></a></td>
-<td><a href="/admin_products.php"><button> Manage products </button></a></td>
-<td><a href="/admin_orders.php"><button> Manage orders </button></a></td>
-<td><a href="/admin_accounts.php"><button> Manage accounts </button></a></td>
-<td><a href="/admin_messages.php"><button> Messages </button></a></td>
-<td><a href="/admin_discounts.php"><button> Discounts </button></a></td>
-<td><a href="/logout.php"><button> Log out </button></a></td>
-</tr>
-</table>
-<br><br>
-
-</div>
 
 
 <?php
@@ -300,7 +265,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="low"><h3>Low in stock </h3> 
 
-    <table class='table table-bordered table-striped'>
+    <table class='table table-bordered table-striped' style="color: #ECDBBA;">
 
     <tr>
     <td>Id</td>
@@ -341,7 +306,7 @@ echo "No result found";
 
 <div class="change"><h3>Edit product information or remove a product</h3>
 
-<table class='table table-bordered table-striped'>
+<table class='table table-bordered table-striped' style="color: #ECDBBA;">
 
     <tr>
     <td>Id/Name</td>
@@ -378,17 +343,17 @@ while($row = mysqli_fetch_array($result)) {
     <td>
         <br><label>Product id: <?=$id?></label><br><br>
         <label for="name">Name: </label><br>
-    <input type="text" id = "name" name="name" style="width: 250px;" value="<?=$name?>"></td>
+    <input type="text" id = "name" name="name" style="width: 220px;" value="<?=$name?>"></td>
 
 
     <td>
-            <label for="image"><div class="dropdown">
+            <label for="image"><div class="dropdown1">
                                 <img src="<?=$image?>" width="60" height="60">
-                                <div class="dropdown-content">
+                                <div class="dropdown1-content">
                                 <img src="<?=$image?>" width="300" height="300">
                                 </div></div>
             </label>
-            <textarea name="image" id = "image" style="width: 180px;height:100px;" cols="20"><?=$image?></textarea>
+            <textarea name="image" id = "image" style="height: 100px;"><?=$image?></textarea>
           
     </td>
 
@@ -402,17 +367,17 @@ while($row = mysqli_fetch_array($result)) {
 
     </td>
 
-    <td><textarea name="info" id = "info" rows="3" cols="20"><?=$info?></textarea></td>
+    <td><textarea name="info" id = "info" rows="3" cols="30"><?=$info?></textarea></td>
 
     <td><textarea name="content" id = "content"><?=$content?></textarea></td>
 
     <td>
     <br>
-    <input type="submit" name="submit" value="Submit changes">
+    <input type="submit" name="submit" value="Submit changes" style="padding: 5px;">
     <br><br>
     </form>
     <form method="post" action="manage_products.php?action=remove&id=<?=$id?>">
-    <input type="submit" name="submit" value="Remove product" onclick="return confirm('Are you sure you want to remove this product?')">
+    <input type="submit" name="submit" value="Remove product" style="padding: 5px;" onclick="return confirm('Are you sure you want to remove this product?')">
     </td> </form>
     </tr>
 
