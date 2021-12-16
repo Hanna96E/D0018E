@@ -218,6 +218,7 @@ function headerNotLoggedIn($pageName){
 						echo "<img src= \"". $menuebarImage. "\" style= \"width:50px;height:50px;\">";
 					echo "<span class=dropdown-content>";
 
+						echo "<a href=\"/products.php\"> Products </a>";
 						echo "<a href=\"/login.php\"> Login </a>";
 						echo "<a href=\"/become_member.php\"> Become member </a>";
 						

@@ -23,7 +23,7 @@
             break;
 
         default:
-            window.location.replace("http://130.240.200.56");
+            window.location.replace("/");
 
     }
 
@@ -65,44 +65,27 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <style type="text/css"> .bs-example{margin: 20px;}</style>
         <script type="text/javascript">$(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});</script>
+        
+
+        <?php
+        include_once "visualFunctions.php";
+        ?>
     </head>
-    <body>
+    <body class=bodyClass>
 
+        <?php
+        headerMember("My Orders");
+        ?>
         
         
 
 
-        <div class="bs-example">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="page-header clearfix">
-                            <h2 class="pull-left">My orders</h2>
-<!--MEMBER MENUE BAR-->
-<table>
-<tr>
-<!---<td><?php// echo $row["id"]; ?></td>--->
-<td><a href="/member_start.php"><button> Home </button></a></td>
-<td><a href="/productsForMember.php"><button> View products </button></a></td>
-<td><a href="/memberCart.php"><button> View cart </button></a></td>
-<td><a href="/paymentPage.php"><button> Pay </button></a></td>
-<td><a href="/memberOrders.php"><button> Your past orders </button></a></td>
-<td><a href="/member_account.php"><button> My account </button></a></td>
-<td><a href="/logout.php"><button> Log out </button></a></td>
-</tr>
-</table><br><br>
-
-
-
-                        </div>
-                        <?php
-                            showOrdersForUser($conn,$userId,'table table-bordered table-striped');
-                        ?>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
+        
+        <?php
+            $tableClassForVisual = 'table table-bordered table-striped';
+            $redirectToString = "memberOrders.php";
+            showOrdersViaTableMember($conn, $tableClassForVisual, $redirectToString,$userId);
+        ?>
     </body>
 </html>
 

@@ -51,7 +51,7 @@ function showProductBetter($conn,$row,$booleanIsLoggedIn,$booleanShowCart,$userI
 
     echo "<span style=\" width:100%; background-color: $backgroundColor; display: inline-block; text-align: center;\">";
     
-        echo "<span style=\"font-weight: 900; font-size: 20px;\">";
+        echo "<span style=\"font-weight: 900; font-size: 20px; background-color: #ECDBBA; width: 80%; display: inline-block;\">";
             $name = $row["name"];
             echo "$name";
             echo "<br>";
@@ -75,7 +75,7 @@ function showProductBetter($conn,$row,$booleanIsLoggedIn,$booleanShowCart,$userI
 
         echo "<br>";
         if($booleanShowCart==true){
-            echo "<span style=\"font-weight: 900; font-size: 20px; display: inline-block; margin-top: 65px; vertical-align: top; text-align: left;\">";
+            echo "<span style=\"font-weight: 900; font-size: 20px; display: inline-block; margin-top: 65px; vertical-align: top; text-align: center; background-color: #ECDBBA; width: 30%; display: inline-block;\">";
             $priceForProducts = $row["price"]*$amountInCart;
             echo "amount in cart: $amountInCart";
             echo "<br>";
@@ -97,7 +97,7 @@ function showProductBetter($conn,$row,$booleanIsLoggedIn,$booleanShowCart,$userI
                 echo "amount in stock is close to amount in cart (left: $amount)";
             echo "</span>";
             echo "<br>";
-            echo "<br>";        
+            echo "<br>";       
         }
         else if(($amount<=$warningNumber)&&(0<$amount)){
                 echo "<span style=\"font-weight: 900; font-size: 20; background-color: red;\">";
@@ -115,7 +115,7 @@ function showProductBetter($conn,$row,$booleanIsLoggedIn,$booleanShowCart,$userI
                 echo "<br>";
         }
         else if($amount<$amountInCart){
-            echo "<span style=\"font-weight: 900; font-size: 20; background-color: black; color: red; display: inline-block;\">";
+            echo "<span style=\"font-weight: 900; font-size: 20; background-color: black; color: red; width: 80%; display: inline-block;\">";
                 echo "SORRY, WE DO NOT HAVE THAT AMOUNT IN STOCK";
                 echo "<br>";
                 echo "WE HAVE: $amount";
@@ -125,6 +125,39 @@ function showProductBetter($conn,$row,$booleanIsLoggedIn,$booleanShowCart,$userI
         }
 
         
+
+        if((($amount-$amountInCart)<=$warningNumber)&&(0<$amountInCart)&&($amountInCart<=$amount)){
+            echo "<span style=\"font-weight: 900; font-size: 20; width: 80%; display: inline-block\" class=errorBackground>";
+                echo "amount in stock is close to amount in cart (left: $amount)";
+            echo "</span>";
+            echo "<br>";
+            echo "<br>";
+        }
+        else if(($amount<=$warningNumber)&&(0<$amount)){
+                echo "<span style=\"font-weight: 900; font-size: 20;\" class=errorBackground>";
+                    echo "low amount (left: $amount)";
+                echo "</span>";
+                echo "<br>";
+                echo "<br>";
+        }
+        else if($amount==0)
+        {
+                echo "<span style=\"font-weight: 900; font-size: 20; color: red;\">";
+                    echo "OUT OF STOCK";
+                echo "</span>";
+                echo "<br>";
+                echo "<br>";
+        }
+        else if($amount<$amountInCart){
+            echo "<span style=\"font-weight: 900; font-size: 20; display: inline-block;\" class=errorBackground>";
+                echo "SORRY, WE DO NOT HAVE THAT AMOUNT IN STOCK";
+                echo "<br>";
+                echo "WE HAVE: $amount";
+            echo "</span>";
+            echo "<br>";
+            echo "<br>";
+        }
+
 
         if($booleanShowCart==false){
         
@@ -169,7 +202,9 @@ function showProductBetter($conn,$row,$booleanIsLoggedIn,$booleanShowCart,$userI
             echo "<br>";
 
             if($booleanIsLoggedIn==true){
-                showReviews($conn,$productId);    
+                echo "<span style=\"width: 50%; margin-left: auto; margin-right: auto; left: 0; right: 0; text-align: center; min-width: 100px; display: inline-block; \">";
+                    showReviews($conn,$productId);
+                echo "</span>";    
             }
         }
         
@@ -225,7 +260,7 @@ function showProductBetter($conn,$row,$booleanIsLoggedIn,$booleanShowCart,$userI
 function showOrderStatus($status){
 
     if($status==0){
-        $statusString = "a dog ate your order";
+        $statusString = "something have happend to order";
     }
     elseif($status==1){
         $statusString = "awaiting confirmation";
@@ -318,8 +353,6 @@ function changeOrderStatus($conn,$orderId,$userId,$status,$redirectToString){
 }
 
 
-
-
 function changeOrderMessage($conn,$orderId,$userId,$redirectToString,$message){
 
     $textOnSubmitMessageButton = "submit message"; // do not change
@@ -329,7 +362,7 @@ function changeOrderMessage($conn,$orderId,$userId,$redirectToString,$message){
         
         
         echo "<label for=\"message\">Message: </label><br><br>";
-        echo "<textarea name=\"message\" id = \"message\" rows=\"3\" cols=\"20\">$message</textarea>";
+        echo "<textarea name=\"message\" id = \"message\" rows=\"3\" cols=\"20\" style=\"box-sizing: border-box; border: 2px solid #ccc; border-radius: 4px; background-color: #ECDBBA; \">$message</textarea>";
 
         echo "<input type=\"submit\" name=\"";
         echo $textOnSubmitMessageButton."message";
@@ -461,6 +494,8 @@ function showProducts($conn,$tableClassName){
 
 function showProductsBetter($conn,$numberOfColumns,$sqlForProducts,$booleanIsLoggedIn,$booleanShowCart,$userId,$orderId,$redirectToString){
 
+
+
     $sqlQueryResult = mysqli_query($conn,$sqlForProducts);
     $productToShowNumber = 0;
     $modulo=0;
@@ -473,7 +508,7 @@ function showProductsBetter($conn,$numberOfColumns,$sqlForProducts,$booleanIsLog
         $totalCost = 0;
     }
 
-    echo "<div style=\" width: 80%; margin-left: 10%; background-color: #C84B31;\">";
+    echo "<div style=\" width: 80%; margin-left: 10%; background-color: #C84B31; margin-bottom: 100px; margin-top: 100px;\">";
 
         while ($row = mysqli_fetch_assoc($sqlQueryResult))
         {
@@ -530,11 +565,11 @@ function showProductsBetter($conn,$numberOfColumns,$sqlForProducts,$booleanIsLog
     if($booleanShowCart==true){
         
         echo "<span style=\" text-align: center; border-radius: 15px; font-weight: 900; font-size: 20; background-color: #2D4263; display: inline-block; width: 10%; margin-top: 20px; margin-left: 35%; float: left; padding-bottom: 50px; padding-top: 50px; margin-bottom: 50px; margin-top: 50px;\">";
-            echo "<a style=\"color: #ECDBBA; background-color: \" href=\"/productsForMember.php\"> Brows </a>";
+            echo "<a style=\"color: #ECDBBA; padding: 50px; \" href=\"/productsForMember.php\"> Browse </a>";
         echo "</span>";
 
         echo "<span style=\" text-align: center; border-radius: 15px; font-weight: 900; font-size: 20; background-color: #2D4263; display: inline-block; width: 10%; margin-top: 20px; margin-right: 35%; float: right; padding-bottom: 50px; padding-top: 50px; margin-bottom: 50px; margin-top: 50px;\">";
-            echo "<a style=\"color: #ECDBBA; \" href=\"/paymentPage.php\"> Pay </a>";
+            echo "<a style=\"color: #ECDBBA; padding: 50px; \" href=\"/paymentPage.php\">Pay </a>";
         echo "</span>";
 
 
@@ -546,7 +581,7 @@ function showProductsBetter($conn,$numberOfColumns,$sqlForProducts,$booleanIsLog
             echo "</span>";
             echo "<br>";
             echo "<span style=\" text-align: center; border-radius: 15px; font-weight: 900; font-size: 20; background-color: #2D4263; width: 100%; display: inline-block; margin-top: 20px;\">";
-                echo "<a style=\"color: #ECDBBA;\" href=\"/productsForMember.php\"> Brows </a>";
+                echo "<a style=\"color: #ECDBBA;\" href=\"/productsForMember.php\"> Browse </a>";
             echo "</span>";
             echo "<br>";
             echo "<span style=\" text-align: center; border-radius: 15px; font-weight: 900; font-size: 20; background-color: #2D4263; width: 100%; display: inline-block; margin-top: 20px;\">";
@@ -554,8 +589,6 @@ function showProductsBetter($conn,$numberOfColumns,$sqlForProducts,$booleanIsLog
             echo "</span>";
         echo "</span>";
     }
-
-
 }
 
 
@@ -953,6 +986,297 @@ function showForAdmin_orders($conn, $tableClassForVisual){
 }
 
 // specific functions for admin_orders.php stop -------------------------------------------------------------------------------------------------
+
+/*
+#191919
+#2D4263
+#C84B31
+#ECDBBA
+*/
+
+function showOrdersViaTable($conn, $tableClassForVisual, $redirectToString, $booleanShowOrdersForAllUsers, $userId, $booleanShowBigStatusHeader, $booleanShowStatusOnOrder, $booleanShowOrderId, $booleanShowUserId, $booleanShowUserName, $booleanShowUserEmail,$booleanShowAdress,$booleanShowChangeOrderStatus,$booleanShowChangeOrderMessage,$booleanShowProducts,$booleanShowProductId,$booleanShowProductImage,$booleanShowProductName,$booleanShowProductAmount){
+
+    echo "<div style=\" width: 90%; margin-left: 5%; margin-right 5%; background-color: #C84B31; margin-bottom: 100px; margin-top: 100px; overflow-x: scroll; padding-top: 25px; padding-bottom: 25px;\">";
+
+        for($orderStatusIterator = 0;$orderStatusIterator<=5;$orderStatusIterator++){
+
+            if($booleanShowOrdersForAllUsers==true){
+                $sqlForOrders = "SELECT * FROM orders WHERE status = $orderStatusIterator;";
+            }
+            else{
+                $sqlForOrders = "SELECT * FROM orders WHERE status = $orderStatusIterator AND userId = $userId;";
+            }
+            
+            $sqlForOrdersQueryResult = mysqli_query($conn,$sqlForOrders);
+
+            if($booleanShowBigStatusHeader==true){
+                echo "<span style=\"width: 95%; margin-left: 2.5%; margin-top: 10px; margin-bottom: 10px; background-color: #ECDBBA; display: inline-block; padding-top: 25px; padding-bottom: 25px; text-align: center; font-weight: 900; font-size: 20px;\">";
+                    $tmp = showOrderStatus($orderStatusIterator);
+                    echo "order status: ".$tmp."<br>";
+                echo "</span>";
+            }
+
+
+            while($orderRowWithSpecificStatus = mysqli_fetch_assoc($sqlForOrdersQueryResult)){
+
+                echo "<table class= '$tableClassForVisual' style=\"margin-left: 5%; margin-right: 5%; width: 90%; background-color: #2D4263; color: #ECDBBA;\">";
+
+
+                    $userId = $orderRowWithSpecificStatus["userId"];
+                    $orderId = $orderRowWithSpecificStatus["orderId"];
+                    $adress = $orderRowWithSpecificStatus["adress"];
+                    $orderStatusText = showOrderStatus($orderStatus);
+                    $message = $orderRowWithSpecificStatus["message"];
+
+                    $sqlForUser = "SELECT * FROM users WHERE userId = $userId;";
+                    $sqlForUserQueryResult = mysqli_query($conn,$sqlForUser);
+                    $userRow = mysqli_fetch_assoc($sqlForUserQueryResult);
+
+                    $userName = $userRow["name"];
+                    $userEmail = $userRow["email"];
+
+
+                    if($booleanShowStatusOnOrder==true){
+                        echo "<tr>";
+                            echo "<td>";
+                                echo "<span style=\" background-color: #ECDBBA; color: black; padding-right: 10px; padding-left: 10px; display: inline-block;  text-align: left;\">";
+                                    echo "order status: ";
+                                echo "</span>";
+                                echo "<br>";
+                                $tmp = showOrderStatus($orderStatusIterator);
+                                echo $tmp;
+                            echo "</td>";
+                        echo "</tr>";
+                    }
+                    
+                    echo "<tr>";
+                        if($booleanShowOrderId==true){
+                            echo "<td>";
+                                echo "<span style=\" background-color: #ECDBBA; color: black; padding-right: 10px; padding-left: 10px; display: inline-block;  text-align: left;\">";
+                                    echo "orderId: ";
+                                echo "</span>";
+                                echo "<br>";
+                                echo $orderId;
+                            echo "</td>";
+                        }
+                        if($booleanShowUserId==true){
+                            echo "<td>";
+                                echo "<span style=\" background-color: #ECDBBA; color: black; padding-right: 10px; padding-left: 10px; display: inline-block;  text-align: left;\">";
+                                    echo "userId: ";
+                                echo "</span>";
+                                echo "<br>";
+                                echo $userId;
+                            echo "</td>";
+                        }
+                        if($booleanShowUserName==true){
+                            echo "<td>";
+                                echo "<span style=\" background-color: #ECDBBA; color: black; padding-right: 10px; padding-left: 10px; display: inline-block;  text-align: left;\">";
+                                    echo "users name: ";
+                                echo "</span>";
+                                echo "<br>";
+                                echo $userName;
+                            echo "</td>";
+                        }
+                        if($booleanShowUserEmail==true){
+                            echo "<td>";
+                                echo "<span style=\" background-color: #ECDBBA; color: black; padding-right: 10px; padding-left: 10px; display: inline-block;  text-align: left;\">";
+                                    echo "users email: ";
+                                echo "</span>";
+                                echo "<br>";
+                                echo $userEmail;
+                            echo "</td>";
+                        }
+                        if($booleanShowAdress==true){
+                            echo "<td>";
+                                echo "<span style=\" background-color: #ECDBBA; color: black; padding-right: 10px; padding-left: 10px; display: inline-block;  text-align: left;\">";
+                                    echo "adress: ";
+                                echo "</span>";
+                                echo "<br>";
+                                echo $adress;
+                            echo "</td>";
+                        }
+                        if($booleanShowChangeOrderStatus==true){
+                            echo "<td>";
+                                changeOrderStatus($conn,$orderId,$userId,$orderStatus,$redirectToString);
+                            echo "</td>";
+                        }
+                        if($booleanShowChangeOrderMessage==true){
+                            echo "<td>";
+                                changeOrderMessage($conn,$orderId,$userId,$redirectToString,$message);
+                            echo "</td>";
+                        }
+                    echo "</tr>";
+                    if($booleanShowProducts==true){
+                        echo "<tr>";
+                            echo "<td>";
+                                echo "<span style=\" background-color: #ECDBBA; color: black; padding-right: 10px; padding-left: 10px; display: inline-block;  text-align: left;\">";
+                                    echo "products ";
+                                echo "</span>";
+                           echo "</td>";   
+                        echo "</tr>";
+
+                        echo "<tr>";
+                        if($booleanShowProductId==true){
+                            echo "<td>";
+                                echo "<span style=\" background-color: #ECDBBA; color: black; padding-right: 10px; display: padding-left: 10px; inline-block;  text-align: left;\">";
+                                    echo "productId ";
+                                echo "</span>";
+                            echo "</td>";
+                        }
+                        if($booleanShowProductImage==true){
+                            echo "<td>";
+                                echo "<span style=\" background-color: #ECDBBA; color: black; padding-right: 10px; padding-left: 10px; display: inline-block;  text-align: left;\">";
+                                    echo "product image ";
+                                echo "</span>";
+                            echo "</td>";
+                        }
+                        if($booleanShowProductName==true){
+                            echo "<td>";
+                                echo "<span style=\" background-color: #ECDBBA; color: black; padding-right: 10px; padding-left: 10px; display: inline-block;  text-align: left;\">";
+                                    echo "product name ";
+                                echo "</span>";
+                            echo "<td>";
+                        }
+                        if($booleanShowProductAmount==true){
+                            echo "<td>";
+                                echo "<span style=\" background-color: #ECDBBA; color: black; padding-right: 10px; padding-left: 10px; display: inline-block;  text-align: left;\">";
+                                    echo "amount ";
+                                echo "</span>";
+                            echo "</td>";
+                        }
+                        echo "</tr>";
+                    
+                        $sqlForÍtemListForOneOrderAndForOneUser = "SELECT * FROM itemList WHERE userId = $userId AND orderId = $orderId;";
+                        $sqlForÍtemListForOneOrderIdAndForOneUserIdQueryResult = mysqli_query($conn,$sqlForÍtemListForOneOrderAndForOneUser);
+                        while($itemListRowWithOrderIdAndUserId = mysqli_fetch_assoc($sqlForÍtemListForOneOrderIdAndForOneUserIdQueryResult)){
+                            $productId = $itemListRowWithOrderIdAndUserId["productId"];
+                            $sqlForProductsForSpecificProductId = "SELECT * FROM products WHERE productId = $productId;";
+                            $sqlForProductsForSpecificProductIdQueryResult = mysqli_query($conn,$sqlForProductsForSpecificProductId);
+                            $productRow = mysqli_fetch_assoc($sqlForProductsForSpecificProductIdQueryResult);
+                            
+                            echo "<tr>";
+                                if($booleanShowProductId==true){
+                                echo "<td>";
+                                    echo $productRow["productId"];
+                                echo "</td>";
+                                }
+                                if($booleanShowProductImage==true){
+                                    echo "<td>";
+                                        $resultTmp = mysqli_query($conn,"SELECT image FROM products WHERE productId = $productId;");
+                                        $rowTmp = mysqli_fetch_assoc($resultTmp);
+                                        $imageTmp = $rowTmp["image"];
+                                        echo "<img src= \"". $imageTmp. "\" style= \"width:50px;height:50px;\">";
+                                    echo "</td>";
+                                }
+                                if($booleanShowProductName==true){
+                                    echo "<td>";
+                                        echo $productRow["name"];
+                                    echo "<td>";
+                                }
+                                if($booleanShowProductAmount==true){
+                                    echo "<td>";
+                                        echo $itemListRowWithOrderIdAndUserId["amount"];
+                                    echo "</td>";
+                                }
+                            echo "</tr>";
+                            
+                        }       
+                
+                    }
+                echo "</table>";
+            }   
+        }
+
+    echo "</div>";
+}
+
+
+function showOrdersViaTableAdmin($conn, $tableClassForVisual, $redirectToString){
+    //$conn
+    //$tableClassForVisual
+    //$redirectToString
+    $booleanShowOrdersForAllUsers = true;
+    $userId = "dummy";
+    $booleanShowBigStatusHeader = true;
+    $booleanShowStatusOnOrder = true;
+    $booleanShowOrderId  = true;
+    $booleanShowUserId  = true;
+    $booleanShowUserName  = true;
+    $booleanShowUserEmail  = true;
+    $booleanShowAdress  = true;
+    $booleanShowChangeOrderStatus  = true;
+    $booleanShowChangeOrderMessage  = true;
+    $booleanShowProducts  = true;
+    $booleanShowProductId  = true;
+    $booleanShowProductImage = false; // differance between Distributer and Admin
+    $booleanShowProductName = true;
+    $booleanShowProductAmount = true;
+
+    showOrdersViaTable($conn, $tableClassForVisual, $redirectToString, $booleanShowOrdersForAllUsers, $userId, $booleanShowBigStatusHeader, $booleanShowStatusOnOrder, $booleanShowOrderId, $booleanShowUserId, $booleanShowUserName, $booleanShowUserEmail,$booleanShowAdress,$booleanShowChangeOrderStatus,$booleanShowChangeOrderMessage,$booleanShowProducts,$booleanShowProductId,$booleanShowProductImage,$booleanShowProductName,$booleanShowProductAmount);
+
+}
+
+function showOrdersViaTableDistributer($conn, $tableClassForVisual, $redirectToString){
+    //$conn
+    //$tableClassForVisual
+    //$redirectToString
+    $booleanShowOrdersForAllUsers = true;
+    $userId = "dummy";
+    $booleanShowBigStatusHeader = true;
+    $booleanShowStatusOnOrder = true;
+    $booleanShowOrderId  = true;
+    $booleanShowUserId  = true;
+    $booleanShowUserName  = true;
+    $booleanShowUserEmail  = true;
+    $booleanShowAdress  = true;
+    $booleanShowChangeOrderStatus  = true;
+    $booleanShowChangeOrderMessage  = false; // differance between Distributer and Admin 
+    $booleanShowProducts  = true;
+    $booleanShowProductId  = true;
+    $booleanShowProductImage = false;
+    $booleanShowProductName = true;
+    $booleanShowProductAmount = true;
+
+    showOrdersViaTable($conn, $tableClassForVisual, $redirectToString, $booleanShowOrdersForAllUsers, $userId, $booleanShowBigStatusHeader, $booleanShowStatusOnOrder, $booleanShowOrderId, $booleanShowUserId, $booleanShowUserName, $booleanShowUserEmail,$booleanShowAdress,$booleanShowChangeOrderStatus,$booleanShowChangeOrderMessage,$booleanShowProducts,$booleanShowProductId,$booleanShowProductImage,$booleanShowProductName,$booleanShowProductAmount);
+}
+
+function showOrdersViaTableMember($conn, $tableClassForVisual, $redirectToString,$userId){
+    //$conn
+    //$tableClassForVisual
+    //$redirectToString
+    $booleanShowOrdersForAllUsers = false;
+    //$userId
+    $booleanShowBigStatusHeader = true;
+    $booleanShowStatusOnOrder = true;
+    $booleanShowOrderId  = true;
+    $booleanShowUserId  = false;
+    $booleanShowUserName  = true;
+    $booleanShowUserEmail  = true;
+    $booleanShowAdress  = true;
+    $booleanShowChangeOrderStatus  = false;
+    $booleanShowChangeOrderMessage  = false; // differance between Distributer and Admin 
+    $booleanShowProducts  = true;
+    $booleanShowProductId  = true;
+    $booleanShowProductImage = true;
+    $booleanShowProductName = true;
+    $booleanShowProductAmount = true;
+
+    showOrdersViaTable($conn, $tableClassForVisual, $redirectToString, $booleanShowOrdersForAllUsers, $userId, $booleanShowBigStatusHeader, $booleanShowStatusOnOrder, $booleanShowOrderId, $booleanShowUserId, $booleanShowUserName, $booleanShowUserEmail,$booleanShowAdress,$booleanShowChangeOrderStatus,$booleanShowChangeOrderMessage,$booleanShowProducts,$booleanShowProductId,$booleanShowProductImage,$booleanShowProductName,$booleanShowProductAmount);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

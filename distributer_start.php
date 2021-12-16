@@ -23,7 +23,7 @@
             break;
 
         default:
-            window.location.replace("http://130.240.200.56");
+            window.location.replace("/");
 
     }
 
@@ -64,36 +64,24 @@
         <style type="text/css"> .bs-example{margin: 20px;}</style>
         <script type="text/javascript">$(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});</script>
     </head>
-    <body>
+    <?php
+    include_once "visualFunctions.php";
+    ?>
 
+
+    <body class=bodyClass>
+
+        <?php
+        headerDistributer("Orders");
+        ?>
         
-        
-
-
-        <div class="bs-example">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="page-header clearfix">
-                            <h2 class="pull-left">Orders</h2>
-
-
-<!--distributer MENUE BAR-->
-<table>
-<tr>
-<td><a href="/logout.php"><button> Log out </button></a></td>
-</tr>
-</table><br><br>
-
-                        </div>
-                        <?php
-                            showForDistributer($conn, 'table table-bordered table-striped');
-                        ?>
+    
+        <?php
+            $tableClassForVisual = 'table table-bordered table-striped';
+            $redirectToString = "distributer_start.php";
+            showOrdersViaTableDistributer($conn, $tableClassForVisual, $redirectToString);
+        ?>
                         
-                    </div>
-                </div>
-            </div>
-        </div>
     </body>
 </html>
 

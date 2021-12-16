@@ -20,7 +20,7 @@
             break;
 
         default:
-            window.location.replace("http://130.240.200.56");
+            window.location.replace("/");
 
     }
 
@@ -59,43 +59,25 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <style type="text/css"> .bs-example{margin: 20px;}</style>
         <script type="text/javascript">$(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});</script>
+        <?php
+        include_once "visualFunctions.php";
+        ?>
     </head>
-    <body>
+    <body class=bodyClass>
 
+        <?php
+        headerDistributer("My Orders");
+        ?>
         
         
 
 
-        <div class="bs-example">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="page-header clearfix">
-                            <h2 class="pull-left">Orders for admin</h2>
-
-    <!--ADMIN MENUE BAR-->
-<table>
-<tr>
-<td><a href="/admin_start.php"><button> Home </button></a></td>
-<td><a href="/admin_products.php"><button> Manage products </button></a></td>
-<td><a href="/admin_orders.php"><button> Manage orders </button></a></td>
-<td><a href="/admin_accounts.php"><button> Manage accounts </button></a></td>
-<td><a href="/logout.php"><button> Log out </button></a></td>
-</tr>
-</table>
-<br><br>
-
-
-                        </div>
-                        <?php
-                            showForAdmin_orders($conn, 'table table-bordered table-striped');
-                        ?>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
+        
+        <?php
+            $tableClassForVisual = 'table table-bordered table-striped';
+            $redirectToString = "admin_orders.php";
+            showOrdersViaTableAdmin($conn, $tableClassForVisual, $redirectToString);
+        ?>    </body>
 </html>
 
 
