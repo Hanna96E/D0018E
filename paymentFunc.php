@@ -61,11 +61,14 @@ if (mysqli_num_rows($itemQuery) > 0) {
 	}// END OF WHILE LOOP
 
 	// Add the dicount
-	$sqlDiscount = "SELECT `amount`,`isProcent` FROM `discounts` WHERE `code`='$discount'";
+	$sqlDiscount = "SELECT `amount`,`isPercent` FROM `discounts` WHERE `code` = '$discount' AND `isActive` = '1'";
 	$discountDB = mysqli_query($conn, $sqlDiscount);
 	$discountDB = mysqli_fetch_array($discountDB);
-	if ($discount) { // Either % or -amount on all products
-		if ($discountDB[isProcent]) {
+	if (!Empty($discountDB)) { 
+
+
+		// Either % or -amount on all products
+		if ($discountDB[isPercent]) {
 			$totalCost = $totalCost*(1 - $discountDB[amount]/100);
 		} else {
 			$totalCost = $totalCost - $discountDB[amount];

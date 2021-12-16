@@ -222,10 +222,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $adress = $_POST["name"];
         $discount = $_POST["discount"];
 
-        echo "$totalCost";
-        echo "$adress";
-        echo "$discount";
-
         paymentFunc($conn, $userId, $orderId, $adress,$totalCost, $discount);
 
         // Move to next page
