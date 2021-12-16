@@ -193,8 +193,7 @@ $('[data-toggle="tooltip"]').tooltip();
 	}
 	array_reverse($rows);
 	$i = 0;
-	while($i < 10) {
-	$row = array_pop($rows);
+	while($i < 10 && $row = array_pop($rows)) {
 	$sender = $row["sender"];
 	if($sender == $userId){
 		$sender = 'You';
