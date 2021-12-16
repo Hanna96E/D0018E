@@ -295,13 +295,14 @@ while($row = mysqli_fetch_array($result)) {
 <?php
 }
 ?>
-</table>
+
 <?php
 }
 else{
 echo "No result found";
 }
 ?>
+</table>
 </div>
 
 <div class="change"><h3>Edit product information or remove a product</h3>
@@ -385,19 +386,16 @@ while($row = mysqli_fetch_array($result)) {
 <?php
 }
 ?>
-</table>
+
 <?php
 }
 else{
 echo "No result found";
 }
 ?>
- 
+
+</table>
 </div>
-
-
-
-
 
     </div>
     </div>
