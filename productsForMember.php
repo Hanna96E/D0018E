@@ -81,7 +81,9 @@
     ?>
 
         
-
+<?php
+    footer();
+?>
     </body>
 </html>
 

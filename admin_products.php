@@ -336,7 +336,7 @@ while($row = mysqli_fetch_array($result)) {
     $info = $row["info"];
     $amount = $row["amount"];
     $image = $row["image"];
-    $content = $row["contents"];
+    $content = $row["content"];
     ?>
     <tr>
 

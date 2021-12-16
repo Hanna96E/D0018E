@@ -64,7 +64,7 @@ function removeAccount($conn, $id){
 	$sql = "DELETE FROM users WHERE userId = $id";
 
 	if (mysqli_query($conn, $sql)) {
-  		echo "<script>alert('The account was successfully removed.');</script>";
+  		//echo "<script>alert('The account was successfully removed.');</script>";
 	} else {
   		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 	}
@@ -140,7 +140,20 @@ function setSessionUser($conn, $email){
 
 
 function addProduct($conn, $name, $price, $info, $amount, $image, $content){
-	$sql = "INSERT INTO products (name, price, amount, info, image, contents) VALUES ('$name', '$price', '$amount', '$info','$image', '$content')";
+
+/*
+	echo "$conn";
+	echo "$name";
+	echo "$price";
+	echo "$info";
+	echo "$amount";
+	echo "$image";
+	echo "$content";
+*/
+
+
+	$sql = "INSERT INTO `products` (`productId`, `name`, `price`, `amount`, `info`, `content`, `image`) VALUES (NULL, '$name', '$price', '$amount', '$info', '$content', '$image')"; 
+	//"INSERT INTO products (`name`, `price`, `amount`, `info`, `image`, `content`) VALUES ('$name', '$price', '$amount', '$info','$image', '$content')";
 
 	if (mysqli_query($conn, $sql)) {
   		//echo "<script>alert('Your product was successfully added.');</script>";
@@ -186,7 +199,7 @@ function changeProduct($conn, $id, $name, $price, $info, $amount, $image, $conte
 	$arguments['info'] = $info;
 	$arguments['amount'] = $amount;
 	$arguments['image'] = $image;
-	$arguments['contents'] = $content;
+	$arguments['content'] = $content;
 	
 
 	$columnNames = array();

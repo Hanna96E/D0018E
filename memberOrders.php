@@ -86,6 +86,11 @@
             $redirectToString = "memberOrders.php";
             showOrdersViaTableMember($conn, $tableClassForVisual, $redirectToString,$userId);
         ?>
+
+
+<?php
+    footer();
+?>
     </body>
 </html>
 

@@ -66,7 +66,7 @@
     <body class=bodyClass>
 
         <?php
-        headerDistributer("My Orders");
+        headerAdmin("All Orders");
         ?>
         
         

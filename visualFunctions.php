@@ -133,7 +133,7 @@ function headerMember($pageName){
 	$menuebarImage = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNzUycHQiIGhlaWdodD0iNzUycHQiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDc1MiA3NTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiA8cGF0aCBkPSJtMTk4LjQxIDE2OC44MWMtMTYuMzQ4IDAtMjkuNTk4IDEzLjI1LTI5LjU5OCAyOS41OTh2NTkuMTk5YzAgMTYuMzQ4IDEzLjI1IDI5LjU5OCAyOS41OTggMjkuNTk4aDM1NS4xOGMxNi4zNDggMCAyOS41OTgtMTMuMjUgMjkuNTk4LTI5LjU5OHYtNTkuMTk5YzAtMTYuMzQ0LTEzLjI1LTI5LjU5OC0yOS41OTgtMjkuNTk4em0wIDE0Ny45OWMtMTYuMzQ4IDAtMjkuNTk4IDEzLjI1LTI5LjU5OCAyOS41OTh2NTkuMTk5YzAgMTYuMzQ4IDEzLjI1IDI5LjU5OCAyOS41OTggMjkuNTk4bDM1NS4xOCAwLjAwMzkwN2MxNi4zNDggMCAyOS41OTgtMTMuMjUgMjkuNTk4LTI5LjU5OHYtNTkuMTk5YzAtMTYuMzQ4LTEzLjI1LTI5LjU5OC0yOS41OTgtMjkuNTk4em0wIDE0Ny45OWMtMTYuMzQ4IDAtMjkuNTk4IDEzLjI1LTI5LjU5OCAyOS41OTh2NTkuMTk5YzAgMTYuMzQ4IDEzLjI1IDI5LjU5OCAyOS41OTggMjkuNTk4bDM1NS4xOCAwLjAwMzkwNmMxNi4zNDggMCAyOS41OTgtMTMuMjUgMjkuNTk4LTI5LjU5OHYtNTkuMTk5YzAtMTYuMzQ4LTEzLjI1LTI5LjU5OC0yOS41OTgtMjkuNTk4eiIvPgo8L3N2Zz4K"; // https://thenounproject.com/icon/menu-bar-2321499/
 
 
-	echo "<header class=header>";
+	echo "<header class=header style=\"position: sticky;\">";
 		echo "<div class=centerYInHeader>";
 
 
@@ -194,7 +194,7 @@ function headerNotLoggedIn($pageName){
 
 	$menuebarImage = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNzUycHQiIGhlaWdodD0iNzUycHQiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDc1MiA3NTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiA8cGF0aCBkPSJtMTk4LjQxIDE2OC44MWMtMTYuMzQ4IDAtMjkuNTk4IDEzLjI1LTI5LjU5OCAyOS41OTh2NTkuMTk5YzAgMTYuMzQ4IDEzLjI1IDI5LjU5OCAyOS41OTggMjkuNTk4aDM1NS4xOGMxNi4zNDggMCAyOS41OTgtMTMuMjUgMjkuNTk4LTI5LjU5OHYtNTkuMTk5YzAtMTYuMzQ0LTEzLjI1LTI5LjU5OC0yOS41OTgtMjkuNTk4em0wIDE0Ny45OWMtMTYuMzQ4IDAtMjkuNTk4IDEzLjI1LTI5LjU5OCAyOS41OTh2NTkuMTk5YzAgMTYuMzQ4IDEzLjI1IDI5LjU5OCAyOS41OTggMjkuNTk4bDM1NS4xOCAwLjAwMzkwN2MxNi4zNDggMCAyOS41OTgtMTMuMjUgMjkuNTk4LTI5LjU5OHYtNTkuMTk5YzAtMTYuMzQ4LTEzLjI1LTI5LjU5OC0yOS41OTgtMjkuNTk4em0wIDE0Ny45OWMtMTYuMzQ4IDAtMjkuNTk4IDEzLjI1LTI5LjU5OCAyOS41OTh2NTkuMTk5YzAgMTYuMzQ4IDEzLjI1IDI5LjU5OCAyOS41OTggMjkuNTk4bDM1NS4xOCAwLjAwMzkwNmMxNi4zNDggMCAyOS41OTgtMTMuMjUgMjkuNTk4LTI5LjU5OHYtNTkuMTk5YzAtMTYuMzQ4LTEzLjI1LTI5LjU5OC0yOS41OTgtMjkuNTk4eiIvPgo8L3N2Zz4K"; // https://thenounproject.com/icon/menu-bar-2321499/
 
-	echo "<header class=header>";
+	echo "<header class=header style=\"position: sticky;\">";
 		echo "<div class=centerYInHeader>";
 
 
@@ -237,7 +237,7 @@ function headerDistributer($pageName){
 
 	$menuebarImage = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNzUycHQiIGhlaWdodD0iNzUycHQiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDc1MiA3NTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiA8cGF0aCBkPSJtMTk4LjQxIDE2OC44MWMtMTYuMzQ4IDAtMjkuNTk4IDEzLjI1LTI5LjU5OCAyOS41OTh2NTkuMTk5YzAgMTYuMzQ4IDEzLjI1IDI5LjU5OCAyOS41OTggMjkuNTk4aDM1NS4xOGMxNi4zNDggMCAyOS41OTgtMTMuMjUgMjkuNTk4LTI5LjU5OHYtNTkuMTk5YzAtMTYuMzQ0LTEzLjI1LTI5LjU5OC0yOS41OTgtMjkuNTk4em0wIDE0Ny45OWMtMTYuMzQ4IDAtMjkuNTk4IDEzLjI1LTI5LjU5OCAyOS41OTh2NTkuMTk5YzAgMTYuMzQ4IDEzLjI1IDI5LjU5OCAyOS41OTggMjkuNTk4bDM1NS4xOCAwLjAwMzkwN2MxNi4zNDggMCAyOS41OTgtMTMuMjUgMjkuNTk4LTI5LjU5OHYtNTkuMTk5YzAtMTYuMzQ4LTEzLjI1LTI5LjU5OC0yOS41OTgtMjkuNTk4em0wIDE0Ny45OWMtMTYuMzQ4IDAtMjkuNTk4IDEzLjI1LTI5LjU5OCAyOS41OTh2NTkuMTk5YzAgMTYuMzQ4IDEzLjI1IDI5LjU5OCAyOS41OTggMjkuNTk4bDM1NS4xOCAwLjAwMzkwNmMxNi4zNDggMCAyOS41OTgtMTMuMjUgMjkuNTk4LTI5LjU5OHYtNTkuMTk5YzAtMTYuMzQ4LTEzLjI1LTI5LjU5OC0yOS41OTgtMjkuNTk4eiIvPgo8L3N2Zz4K";  // https://thenounproject.com/icon/menu-bar-2321499/
 
-	echo "<header class=header>";
+	echo "<header class=header style=\"position: sticky;\">";
 		echo "<div class=centerYInHeader>";
 
 
@@ -284,7 +284,7 @@ function headerAdmin($pageName){
 
 	$menuebarImage = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNzUycHQiIGhlaWdodD0iNzUycHQiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDc1MiA3NTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiA8cGF0aCBkPSJtMTk4LjQxIDE2OC44MWMtMTYuMzQ4IDAtMjkuNTk4IDEzLjI1LTI5LjU5OCAyOS41OTh2NTkuMTk5YzAgMTYuMzQ4IDEzLjI1IDI5LjU5OCAyOS41OTggMjkuNTk4aDM1NS4xOGMxNi4zNDggMCAyOS41OTgtMTMuMjUgMjkuNTk4LTI5LjU5OHYtNTkuMTk5YzAtMTYuMzQ0LTEzLjI1LTI5LjU5OC0yOS41OTgtMjkuNTk4em0wIDE0Ny45OWMtMTYuMzQ4IDAtMjkuNTk4IDEzLjI1LTI5LjU5OCAyOS41OTh2NTkuMTk5YzAgMTYuMzQ4IDEzLjI1IDI5LjU5OCAyOS41OTggMjkuNTk4bDM1NS4xOCAwLjAwMzkwN2MxNi4zNDggMCAyOS41OTgtMTMuMjUgMjkuNTk4LTI5LjU5OHYtNTkuMTk5YzAtMTYuMzQ4LTEzLjI1LTI5LjU5OC0yOS41OTgtMjkuNTk4em0wIDE0Ny45OWMtMTYuMzQ4IDAtMjkuNTk4IDEzLjI1LTI5LjU5OCAyOS41OTh2NTkuMTk5YzAgMTYuMzQ4IDEzLjI1IDI5LjU5OCAyOS41OTggMjkuNTk4bDM1NS4xOCAwLjAwMzkwNmMxNi4zNDggMCAyOS41OTgtMTMuMjUgMjkuNTk4LTI5LjU5OHYtNTkuMTk5YzAtMTYuMzQ4LTEzLjI1LTI5LjU5OC0yOS41OTgtMjkuNTk4eiIvPgo8L3N2Zz4K"; // https://thenounproject.com/icon/menu-bar-2321499/
 
-	echo "<header class=header>";
+	echo "<header class=header style=\"position: sticky;\">";
 		echo "<div class=centerYInHeader>";
 
 
@@ -331,18 +331,20 @@ function headerAdmin($pageName){
 
 
 function footer(){
-	echo "<footer style=\" width: 100%; height: 100px; background-color: #2D4263; position: absolute; text-align: bottom; \" >";
+	/*
+	echo "<footer style=\" width: 100%; height: 100px;  background-color: #2D4263; position: fixed; bottom: 0;  \" >";
 
-		echo "<span style=\"color: #ECDBBA; display: inline-block; padding-top: 25px; padding-bottom: 25px; text-align: left; font-weight: 900; font-size: 20px;\">";
+		echo "<span style=\"color: #ECDBBA; width:100%;  display: inline-block; padding-top: 25px; padding-bottom: 25px; text-align: center; font-weight: 100; font-size: 20px;\">";
 			
-			echo "this company have existed since 1854 and proude to sell safe ketchup";
+			echo "This company have existed since 1854 and proud to sell safe ketchup";
 			echo "<br>";
-			echo "safe products for eating";
+			echo "Safe products for eating";
 
 
 		echo "</span>";
 
 	echo "</footer>";
+	*/
 }
 
 

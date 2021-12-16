@@ -125,6 +125,8 @@ $('[data-toggle="tooltip"]').tooltip();
 </head>
 <body class=bodyClass>
 
+
+
 <?php
     headerMember("Support");
 ?>
@@ -223,7 +225,6 @@ $('[data-toggle="tooltip"]').tooltip();
 
 </table>
 </div>
-
   <div class="discount"><h3>Discounts</h3>
 <table class='table table-bordered table-striped' style="color: #ECDBBA;">
     <tr>
@@ -321,27 +322,12 @@ disconnect();
 
 </table>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
 </div>
 </div>
 </div>
+
 </body>
-
 </html>
+
 

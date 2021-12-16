@@ -7,7 +7,7 @@ function paymentFunc($conn, $userId, $orderId, $adress,$totalCost, $discount){
 $conn->autocommit(FALSE);
 
 	// Order message
-	$message = "";
+	$message = " ";
 	// Store errors
 	$error = array();
 
@@ -97,7 +97,9 @@ if (mysqli_num_rows($itemQuery) > 0) {
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 	// Creates the order table
 
-	$sqlOrder = "INSERT INTO `orders` (`orderId`, `userId`,`totalCost`, `adress`, `status`, `message`) VALUES ('$orderId', '$userId', '$totalCost','$adress', '1', '$message')";
+	$orderState= 1;
+	$sqlOrder = "INSERT INTO `orders` (`orderId`, `userId`,`totalCost`, `adress`, `status`, `message`) VALUES ('$orderId', '$userId', '$totalCost','$adress', '$orderState', '$message')";
+
 	$updateOrder = mysqli_query($conn, $sqlOrder);
 
 	// ERROR HANDELING

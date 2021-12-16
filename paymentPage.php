@@ -222,7 +222,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $adress = $_POST["name"];
         $discount = $_POST["discount"];
 
-    paymentFunc($conn, $userId, $orderId, $adress,$totalCost, $discount);
+        echo "$totalCost";
+        echo "$adress";
+        echo "$discount";
+
+        paymentFunc($conn, $userId, $orderId, $adress,$totalCost, $discount);
 
         // Move to next page
         echo "<script>window.location.href = '/memberOrders.php';</script>";
@@ -252,5 +256,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 disconnect($conn);
 ?>
 
+<?php
+    footer();
+?>
 </body>
 </html>

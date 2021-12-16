@@ -82,6 +82,9 @@
         showProductsBetter($conn,$numberOfColumns,$sqlForProducts,$booleanIsLoggedIn,$booleanShowCart,$userId,$orderId,$redirectToString);
     ?>
 
+<?php
+    footer();
+?>
     </body>
 </html>
 

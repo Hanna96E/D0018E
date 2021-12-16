@@ -72,13 +72,13 @@ switch(userType) {
         }
 
         textarea {
-          width: 30%;
+          width: 60%;
           height: 170px;
           padding: 12px 20px;
           box-sizing: border-box;
           border: 2px solid #ccc;
           border-radius: 4px;
-          background-color: #FFFFFF;
+          background-color: #ECDBBA;;
           font-size: 16px;
           resize: none;
         }
@@ -193,8 +193,7 @@ echo "<form method=\"POST\" action=\"giveReview.php?productId=$productId\">";
 ?> 
 <label for="reviewText">Thoughts? </label><br><br>
 
-<textarea id="reviewText" name="reviewText" rows="10" cols="50"
- placeholder="What did you think?" style="background-color:#ECDBBA;"></textarea>
+<textarea id="reviewText" name="reviewText" placeholder="What did you think?"></textarea>
 <br>
 <br><span> <?php echo $reviewErr;?></span>
 
@@ -261,5 +260,8 @@ if (mysqli_query($conn, $sql)) {
 </table>
 </div>
 
+<?php
+    footer();
+?>
 </body>
 </html>
