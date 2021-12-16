@@ -22,7 +22,6 @@ switch(userType) {
 
     default:
         window.location.replace("/");
-
 }
 
 </script>
@@ -87,10 +86,10 @@ switch(userType) {
 
         div.prod {
           position: absolute;
-          left: 10%;
+          left: 25%;
           top: 20%;
           background-color: #2D4263;
-          width: 10%;
+          width: 50%;
           
           border: 10px solid #C84B31;
           padding: 10px;
@@ -117,23 +116,20 @@ switch(userType) {
           background-color: #191919;
         }
 
-        .dropdown {
-          position: relative;
-          display: inline-block;
-        }
 
-        .dropdown-content {
-          display: none;
-          position: absolute;
-          background-color: #f9f9f9;
-          min-width: 160px;
-          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-          z-index: 1;
-        }
+    .button {
+      background-color: #C84B31; 
+      position: relative;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+    }
 
-        .dropdown:hover .dropdown-content {
-          display: block;
-        }
+
 
     </style>
 
@@ -152,8 +148,13 @@ switch(userType) {
 ?>
 
 <body>
+    <br><br>
+    <a href="/productsForMember.php" class="button">Browse</a>
+    <br><br>
+
+    <div class="prod">
     <table>
-    <td>
+        <td>
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -164,6 +165,7 @@ switch(userType) {
 // So that when POST is sent we can handle it
 
 $productId = $_REQUEST['productId'];
+
 $numStar = $_POST["star"];
 $reviewErr = "";
 $reviewText = $_POST["reviewText"];
@@ -179,29 +181,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
    if($reviewErr == ""){
    	insertReview($conn, $productId, $userId, $reviewText, $numStar);
-    echo "<form method=\"POST\" action=\"productReview.php?productId=$productId\">";
-    echo "</form><td>";
-    
+
     // Move to next page
-    echo "<script>window.location.href = '/productReviews.php';</script>";
+    echo "<script>window.location.href = '/productsForMember.php';</script>";
   }
 }
 //Set the outlook of page
 ?>
 <?php
-    //<p class="error">* required field</p>
-	// So that we send the values to the same page
-/*
-action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"
-*/
 echo "<form method=\"POST\" action=\"giveReview.php?productId=$productId\">";
 ?> 
 <label for="reviewText">Thoughts? </label><br><br>
 
 <textarea id="reviewText" name="reviewText" rows="10" cols="50"
- placeholder="What did you think?"></textarea>
+ placeholder="What did you think?" style="background-color:#ECDBBA;"></textarea>
 <br>
 <br><span> <?php echo $reviewErr;?></span>
+
+
+
 
 <!--<p>Please select star ranking of the product:</p>-->
     <br><br>
@@ -260,8 +258,8 @@ if (mysqli_query($conn, $sql)) {
 }
 ?>
 
-</td>
 </table>
+</div>
 
 </body>
 </html>

@@ -130,12 +130,12 @@ tr:nth-child(even) {
   background-color: #191919;
 }
 
-.dropdown {
+.dropdown1 {
   position: relative;
   display: inline-block;
 }
 
-.dropdown-content {
+.dropdown1-content {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
@@ -144,17 +144,13 @@ tr:nth-child(even) {
   z-index: 1;
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown1:hover .dropdown-content {
   display: block;
 }
 
     </style>
 
 </head>
-
-<?php
-//include "styleHeader.php" 
-?>
 
 <body class=bodyClass>
 
@@ -191,21 +187,12 @@ while($cartInfo = mysqli_fetch_array($items)) {
         <td><?php echo $cartInfo["amount"]; ?></td>
 	<td>
 
-        <div class="dropdown">
+        <div class="dropdown1">
              <img src="<?php echo $row["image"]; ?>" width="50" height="50">
-             <div class="dropdown-content">
+             <div class="dropdown1-content">
              <img src="<?php echo $row["image"]; ?>" width="160" height="160">
              </div></div>
     </td>
-
-
-
-
-
-
-
-
-
 	</tr>
 <?php
 }

@@ -72,6 +72,7 @@ input[type=text], input[type=number], input[type=email], input[type=password] {
 
 /*https://www.w3schools.com/howto/howto_css_dropdown.asp*/
 
+
 /* The container <div> - needed to position the dropdown content */ /*https://www.w3schools.com/howto/howto_css_dropdown.asp*/
 .dropdown {
   display: inline-block;
