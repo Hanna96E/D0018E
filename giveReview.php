@@ -119,6 +119,8 @@ switch(userType) {
 
     .button {
       background-color: #C84B31; 
+      margin-left: 15%;
+      margin-top: 2%;
       position: relative;
       border: none;
       color: white;
@@ -141,11 +143,6 @@ switch(userType) {
     ?>
         </style>
 </head>
-<?php
-	// Formating (can be removed, but looks bad)
-        include "headerTabular.php";
-    // Dont forget 5 div at the end
-?>
 
 <body>
     <br><br>
