@@ -22,8 +22,8 @@ $valueToAddOrRemove = 1;
 $targetTableName = "itemList";
 $targetColumn = "amount";
 $targetSqlCondition =  "userId = $userId And orderId = $orderId And productId = $productIdValue";
-$columnsUsedInSqlForInsert = "(userId, orderId, productId, amount)";
-$valuesUsedInSqlForInsert = "($userId, $orderId, $productIdValue, $valueToAddOrRemove)";
+$columnsUsedInSqlForInsert = "(userId, orderId, productId, amount,price)";
+$valuesUsedInSqlForInsert = "($userId, $orderId, $productIdValue, $valueToAddOrRemove,700)";
 
 
 
