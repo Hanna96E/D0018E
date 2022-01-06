@@ -155,8 +155,12 @@ tr:nth-child(even) {
 <body class=bodyClass>
 
 <?php
+// Note: Update price to match current
+
+
+
 // Tell of what products are in the shoping cart
-$sqlItems = "SELECT `productId`, `amount` FROM `itemList` WHERE `orderId`=$orderId AND `userId`=$userId";
+$sqlItems = "SELECT `productId`, `amount`, `price` FROM `itemList` WHERE `orderId`=$orderId AND `userId`=$userId";
 $items = mysqli_query($conn,$sqlItems); //Items in cart
 ?>
 
@@ -174,16 +178,16 @@ while($cartInfo = mysqli_fetch_array($items)) {
 
     //Call for each product
     $prodId = $cartInfo["productId"];
-    $prodInfo = mysqli_query($conn,"SELECT `name`,`price`,`image` FROM `products` WHERE `productId`=$prodId");
+    $prodInfo = mysqli_query($conn,"SELECT `name`,`image` FROM `products` WHERE `productId`=$prodId");
 	
     $row = mysqli_fetch_array($prodInfo);
 
-	$totalCost = $totalCost + $row["price"]*$cartInfo["amount"];
+	$totalCost = $totalCost + $cartInfo["price"]*$cartInfo["amount"];
 
     //Print out in table
 ?>	<tr>
 	<td><?php echo $row["name"]; ?></td>
-	<td><?php echo $row["price"]; ?></td>
+	<td><?php echo $cartInfo["price"]; ?></td>
         <td><?php echo $cartInfo["amount"]; ?></td>
 	<td>
 

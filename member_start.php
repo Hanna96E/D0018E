@@ -288,7 +288,7 @@ $('[data-toggle="tooltip"]').tooltip();
 			$price = $row['price'];
 			$image = $row['image'];?>
 			<div class= "grid-item">
-				<a href="/productsForMember"><div class="dropdown1">
+				<a href="/productsForMember.php"><div class="dropdown1">
                     <img src="<?=$image?>" width="150" height="150">
                     <div class="dropdown1-content">
                     <img src="<?=$image?>" width="350" height="350">

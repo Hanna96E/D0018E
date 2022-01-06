@@ -150,6 +150,32 @@ $sqlHasProd = "SELECT `userId` FROM `itemList` WHERE `userId`=$userId AND `produ
             echo "</form><td>";?>
         </tr></table><br><br>
         </div>
+
+
+
+        <div class="prod">
+    
+        <form method="post" action="manage_products.php?action=change&id=<?=$id?>">
+
+        <?php 
+        $info = "information";
+        ?>         
+
+        <td><textarea name="info" id = "info" rows="3" cols="30"><?=$info?></textarea></td>
+
+        <td>
+        <input type="submit" name="submit" value="Submit changes" style="padding: 5px;">
+        </td>
+        
+        <br><br>
+        </form>
+    
+        </div>
+
+
+
+
+
 <?php  
         }
 ?>

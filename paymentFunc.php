@@ -16,7 +16,7 @@ $conn->autocommit(FALSE);
 	*   Alter the database to have the correct amount of products
 	*   Gives productId and amount of the users "shopping cart"
 	*/
-	$sqlItems = "SELECT `productId`, `amount` FROM `itemList` WHERE `orderId`=$orderId AND `userId`=$userId";
+	$sqlItems = "SELECT `productId`, `amount`, `price`  FROM `itemList` WHERE `orderId`=$orderId AND `userId`=$userId";
 	$itemQuery = mysqli_query($conn, $sqlItems);
 
 if (mysqli_num_rows($itemQuery) > 0) {
@@ -25,7 +25,7 @@ if (mysqli_num_rows($itemQuery) > 0) {
 
 	while($itemArray = mysqli_fetch_array($itemQuery)) {
 		// Gets the current amount of specifide product
-		$sqlProd  = "SELECT `amount`,`price` FROM `products` WHERE `productId`= $itemArray[productId] ";
+		$sqlProd  = "SELECT `amount` FROM `products` WHERE `productId`= $itemArray[productId] ";
 		$amountProd = mysqli_query($conn, $sqlProd);
 		$amountProd = mysqli_fetch_array($amountProd);
 
@@ -38,10 +38,10 @@ if (mysqli_num_rows($itemQuery) > 0) {
 			// And makes the total cost reflect this
 			$message = "One or more products where reduced as they are out of stock";
 		
-			$totalCost = $totalCost + ($newAmount)*$amountProd[price];
+			$totalCost = $totalCost + ($newAmount)*$itemQuery[price];
 			$newAmount = 0;
 
-			$sqlErrorFix = "UPDATE `itemList` SET `amount` = $amountProd[amount] WHERE `orderId`=$orderId AND `userId`=$userId";
+			$sqlErrorFix = "UPDATE `itemList` SET `amount` = $itemQuery[amount] WHERE `orderId`=$orderId AND `userId`=$userId";
 			$updateItem = mysqli_query($conn, $sqlErrorFix);
 			
 			// ERROR HANDELING

@@ -344,7 +344,7 @@ function changeOrderMessage($conn,$orderId,$userId,$redirectToString,$message){
 function showReviews($conn,$productId){
 
     $textOnShowReviewButton = "show review";
-    $Reviews = "productReviews.php";
+    $Reviews = "review.php";
     echo "<form method=\"POST\" action=\"$Reviews?productId=$productId\">";
         echo "<input type=\"submit\" name=\"";
         echo $textOnShowReviewButton;
