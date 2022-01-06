@@ -14,8 +14,7 @@ $orderId = $_REQUEST['orderId'];
 $productIdValue = $_REQUEST['productIdValue'];
 $amountInCart = $_REQUEST['amountInCart'];
 
-$amountInNumberBox = $_POST["amountInNumberBox"];
-$amountInNumberBox = hannnas_test_input($amountInNumberBox);
+
 
 
 
@@ -37,7 +36,7 @@ if($rowTmp = mysqli_fetch_assoc($sqlQueryResult))
 }
 
 if(0<$amount){
-    if($formEnum == 0){
+    if($formEnum == 0){ // add button
         if(0<$amountInCart){
             if(($amountInCart+$valueToAddOrRemove)<=$amount){
                 $sql = "UPDATE $targetTableName SET $targetColumn = $targetColumn + $valueToAddOrRemove WHERE ".$targetSqlCondition.";";
@@ -57,7 +56,12 @@ if(0<$amount){
             }
         }
     }
-    elseif($formEnum == 1){
+    elseif($formEnum == 1){ // number box
+
+        $amountInNumberBox = $_POST["amountInNumberBox"];
+        $amountInNumberBox = hannnas_test_input($amountInNumberBox);
+
+
         if(0<$amountInNumberBox){
             if(0<$amountInCart){
                 if($amount<=$amountInNumberBox){
@@ -82,7 +86,7 @@ if(0<$amount){
             $sql = "DELETE FROM $targetTableName WHERE ".$targetSqlCondition.";";    
         }
     }
-    elseif($formEnum == 2){
+    elseif($formEnum == 2){ // romove button
         if($valueToAddOrRemove<$amountInCart){
             if($amount<($amountInCart-$valueToAddOrRemove)){
                 $sql = "UPDATE $targetTableName SET $targetColumn = $amount WHERE ".$targetSqlCondition.";";    
