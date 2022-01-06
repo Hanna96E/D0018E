@@ -23,7 +23,7 @@ $targetTableName = "itemList";
 $targetColumn = "amount";
 $targetSqlCondition =  "userId = $userId And orderId = $orderId And productId = $productIdValue";
 $columnsUsedInSqlForInsert = "(userId, orderId, productId, amount,price)";
-$valuesUsedInSqlForInsert = "($userId, $orderId, $productIdValue, $valueToAddOrRemove,700)";
+$valuesUsedInSqlForInsert = "($userId, $orderId, $productIdValue, $valueToAddOrRemove,1)";
 
 
 
