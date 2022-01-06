@@ -178,16 +178,16 @@ while($cartInfo = mysqli_fetch_array($items)) {
 
     //Call for each product
     $prodId = $cartInfo["productId"];
-    $prodInfo = mysqli_query($conn,"SELECT `name`,`image` FROM `products` WHERE `productId`=$prodId");
+    $prodInfo = mysqli_query($conn,"SELECT `name`,`image`,`price` FROM `products` WHERE `productId`=$prodId");
 	
     $row = mysqli_fetch_array($prodInfo);
 
-	$totalCost = $totalCost + $cartInfo["price"]*$cartInfo["amount"];
+	$totalCost = $totalCost + $row["price"]*$cartInfo["amount"];
 
     //Print out in table
 ?>	<tr>
 	<td><?php echo $row["name"]; ?></td>
-	<td><?php echo $cartInfo["price"]; ?></td>
+	<td><?php echo $row["price"]; ?></td>
         <td><?php echo $cartInfo["amount"]; ?></td>
 	<td>
 
@@ -199,6 +199,14 @@ while($cartInfo = mysqli_fetch_array($items)) {
     </td>
 	</tr>
 <?php
+    // Update price for item
+    // So that No one can save a chep price in cart
+    $price = $row["price"];
+    $sqlItemListUpdate = "UPDATE `itemList` SET `price`= $price WHERE `userId`=$userId AND `productId` =$prodId AND `orderId`=$orderId";
+    mysqli_query($conn,$sqlItemListUpdate);
+
+
+
 }
 // END OF WHILE LOOP
 ?>
