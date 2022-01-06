@@ -440,7 +440,7 @@ function showProductsBetter($conn,$numberOfColumns,$sqlForProducts,$booleanIsLog
 
 
 
-function showOrdersViaTable($conn, $tableClassForVisual, $redirectToString, $booleanShowOrdersForAllUsers, $userId, $booleanShowBigStatusHeader, $booleanShowStatusOnOrder, $booleanShowPrice, $booleanShowOrderId, $booleanShowUserId, $booleanShowUserName, $booleanShowUserEmail,$booleanShowAdress,$booleanShowChangeOrderStatus,$booleanShowChangeOrderMessage,$booleanShowProducts,$booleanShowProductId,$booleanShowProductImage,$booleanShowProductName,$booleanShowProductAmount){
+function showOrdersViaTable($conn, $tableClassForVisual, $redirectToString, $booleanShowOrdersForAllUsers, $userId, $booleanShowBigStatusHeader, $booleanShowStatusOnOrder, $booleanShowTotalPrice, $booleanShowOrderId, $booleanShowUserId, $booleanShowUserName, $booleanShowUserEmail,$booleanShowAdress,$booleanShowChangeOrderStatus,$booleanShowChangeOrderMessage,$booleanShowProducts,$booleanShowProductId,$booleanShowProductImage,$booleanShowProductName,$booleanShowProductPrice,$booleanShowProductAmount){
 
     echo "<div style=\" width: 90%; margin-left: 5%; margin-right 5%; background-color: #C84B31; margin-bottom: 100px; margin-top: 100px; overflow-x: scroll; padding-top: 25px; padding-bottom: 25px;\">";
 
@@ -492,7 +492,7 @@ function showOrdersViaTable($conn, $tableClassForVisual, $redirectToString, $boo
                                     echo $tmp;
                                 echo "</td>";
                             }
-                            if($booleanShowPrice==true){
+                            if($booleanShowTotalPrice==true){
                                 echo "<td>";
                                     echo "<span style=\" background-color: #ECDBBA; color: black; padding-right: 10px; padding-left: 10px; display: inline-block;  text-align: left;\">";
                                         echo "total cost: ";
@@ -591,7 +591,14 @@ function showOrdersViaTable($conn, $tableClassForVisual, $redirectToString, $boo
                                 echo "<span style=\" background-color: #ECDBBA; color: black; padding-right: 10px; padding-left: 10px; display: inline-block;  text-align: left;\">";
                                     echo "product name ";
                                 echo "</span>";
+                            echo "</td>";
+                        }
+                        if($booleanShowProductPrice==true){
                             echo "<td>";
+                                echo "<span style=\" background-color: #ECDBBA; color: black; padding-right: 10px; padding-left: 10px; display: inline-block;  text-align: left;\">";
+                                    echo "product price ";
+                                echo "</span>";
+                            echo "</td>";
                         }
                         if($booleanShowProductAmount==true){
                             echo "<td>";
@@ -627,6 +634,11 @@ function showOrdersViaTable($conn, $tableClassForVisual, $redirectToString, $boo
                                 if($booleanShowProductName==true){
                                     echo "<td>";
                                         echo $productRow["name"];
+                                    echo "<td>";
+                                }
+                                if($booleanShowProductPrice==true){
+                                    echo "<td>";
+                                        echo $productRow["price"];
                                     echo "<td>";
                                 }
                                 if($booleanShowProductAmount==true){
