@@ -243,7 +243,7 @@ function addOrRemove1ToCartForMember($conn,$redirectToString,$userId,$orderId,$r
     $textOnNumberSubmitButton = "change";
     
     $productIdValue = $row["productId"];
-
+    
 
       echo "<form method=\"POST\" action=\"actionAddOrRemove1ToCartForMember.php?redirectToString=$redirectToString&formEnum=0&orderId=$orderId&userId=$userId&productIdValue=$productIdValue&amountInCart=$amountInCart\">";
 
@@ -634,12 +634,12 @@ function showOrdersViaTable($conn, $tableClassForVisual, $redirectToString, $boo
                                 if($booleanShowProductName==true){
                                     echo "<td>";
                                         echo $productRow["name"];
-                                    echo "<td>";
+                                    echo "</td>";
                                 }
                                 if($booleanShowProductPrice==true){
                                     echo "<td>";
                                         echo $productRow["price"];
-                                    echo "<td>";
+                                    echo "</td>";
                                 }
                                 if($booleanShowProductAmount==true){
                                     echo "<td>";
@@ -681,7 +681,7 @@ function showOrdersViaTableAdmin($conn, $tableClassForVisual, $redirectToString)
     $booleanShowProductPrice = true;
     $booleanShowProductAmount = true;
 
-    showOrdersViaTable($conn, $tableClassForVisual, $redirectToString, $booleanShowOrdersForAllUsers, $userId, $booleanShowBigStatusHeader, $booleanShowStatusOnOrder, $booleanShowPrice, $booleanShowOrderId, $booleanShowUserId, $booleanShowUserName, $booleanShowUserEmail,$booleanShowAdress,$booleanShowChangeOrderStatus,$booleanShowChangeOrderMessage,$booleanShowProducts,$booleanShowProductId,$booleanShowProductImage,$booleanShowProductName,$booleanShowProductAmount);
+    showOrdersViaTable($conn, $tableClassForVisual, $redirectToString, $booleanShowOrdersForAllUsers, $userId, $booleanShowBigStatusHeader, $booleanShowStatusOnOrder, $booleanShowTotalPrice, $booleanShowOrderId, $booleanShowUserId, $booleanShowUserName, $booleanShowUserEmail,$booleanShowAdress,$booleanShowChangeOrderStatus,$booleanShowChangeOrderMessage,$booleanShowProducts,$booleanShowProductId,$booleanShowProductImage,$booleanShowProductName,$booleanShowProductPrice,$booleanShowProductAmount);
 
 }
 
@@ -708,7 +708,7 @@ function showOrdersViaTableDistributer($conn, $tableClassForVisual, $redirectToS
     $booleanShowProductPrice = true;
     $booleanShowProductAmount = true;
 
-    showOrdersViaTable($conn, $tableClassForVisual, $redirectToString, $booleanShowOrdersForAllUsers, $userId, $booleanShowBigStatusHeader, $booleanShowStatusOnOrder, $booleanShowPrice, $booleanShowOrderId, $booleanShowUserId, $booleanShowUserName, $booleanShowUserEmail,$booleanShowAdress,$booleanShowChangeOrderStatus,$booleanShowChangeOrderMessage,$booleanShowProducts,$booleanShowProductId,$booleanShowProductImage,$booleanShowProductName,$booleanShowProductAmount);
+    showOrdersViaTable($conn, $tableClassForVisual, $redirectToString, $booleanShowOrdersForAllUsers, $userId, $booleanShowBigStatusHeader, $booleanShowStatusOnOrder, $booleanShowTotalPrice, $booleanShowOrderId, $booleanShowUserId, $booleanShowUserName, $booleanShowUserEmail,$booleanShowAdress,$booleanShowChangeOrderStatus,$booleanShowChangeOrderMessage,$booleanShowProducts,$booleanShowProductId,$booleanShowProductImage,$booleanShowProductName,$booleanShowProductPrice,$booleanShowProductAmount);
 }
 
 function showOrdersViaTableMember($conn, $tableClassForVisual, $redirectToString,$userId){
@@ -734,7 +734,7 @@ function showOrdersViaTableMember($conn, $tableClassForVisual, $redirectToString
     $booleanShowProductPrice = true;
     $booleanShowProductAmount = true;
 
-    showOrdersViaTable($conn, $tableClassForVisual, $redirectToString, $booleanShowOrdersForAllUsers, $userId, $booleanShowBigStatusHeader, $booleanShowStatusOnOrder,$booleanShowPrice, $booleanShowOrderId, $booleanShowUserId, $booleanShowUserName, $booleanShowUserEmail,$booleanShowAdress,$booleanShowChangeOrderStatus,$booleanShowChangeOrderMessage,$booleanShowProducts,$booleanShowProductId,$booleanShowProductImage,$booleanShowProductName,$booleanShowProductAmount);
+    showOrdersViaTable($conn, $tableClassForVisual, $redirectToString, $booleanShowOrdersForAllUsers, $userId, $booleanShowBigStatusHeader, $booleanShowStatusOnOrder,$booleanShowTotalPrice, $booleanShowOrderId, $booleanShowUserId, $booleanShowUserName, $booleanShowUserEmail,$booleanShowAdress,$booleanShowChangeOrderStatus,$booleanShowChangeOrderMessage,$booleanShowProducts,$booleanShowProductId,$booleanShowProductImage,$booleanShowProductName,$booleanShowProductPrice,$booleanShowProductAmount);
 }
 
 
